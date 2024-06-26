@@ -15,7 +15,15 @@ export default jsxRenderer(({ children, title }) => {
           type="font/woff2"
           crossorigin=""
         />
+        <link
+          rel="preload"
+          href="/static/fonts/Inter.woff2"
+          as="font"
+          type="font/woff2"
+          crossorigin=""
+        />
       </head>
+
       <body>{children}</body>
     </html>
   );
