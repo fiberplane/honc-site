@@ -19,3 +19,5 @@ pages_build_output_dir = "./dist"
 
 # [ai]
 # binding = "AI"
+compatibility_flags = [ "nodejs_compat" ]
+compatibility_date = "2022-04-05"
