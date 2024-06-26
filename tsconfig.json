@@ -10,5 +10,8 @@
     "jsx": "react-jsx",
     "jsxImportSource": "hono/jsx",
     "noEmit": true
+  },
+  "mdx": {
+    "checkMdx": true
   }
 }
