@@ -11,5 +11,15 @@ export default defineConfig({
     ssrEmitAssets: true,
     target: "esnext",
   },
-  plugins: [honox(), build(), ssg({ entry })],
+  plugins: [
+    honox({
+      client: {
+        assetsDir: "static",
+        jsxImportSource: "hono/jsx",
+        input: ["/app/style.css"],
+      },
+    }),
+    build(),
+    ssg({ entry }),
+  ],
 });

@@ -1,0 +1,92 @@
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400 800;
+  src: local("Inter"), url("/static/fonts/Inter.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Silkscreen";
+  font-style: bold;
+  font-weight: 700;
+  src: local("Silkscreen"),
+    url("/static/fonts/Silkscreen-Bold.woff2") format("woff2");
+  font-display: swap;
+}
+
+:root {
+  --font-body-l-medium: 500 1rem / 1.75 Inter;
+  --font-body-l-regular: 400 1rem / 1.75 Inter;
+  --font-body-md-medium: 500 0.875rem / 1.71 Inter;
+  --font-body-md-regular: 400 0.875rem / 1.71 Inter;
+  --font-body-sm-medium: 500 0.75rem / 1.67 Inter;
+  --font-body-sm-regular: 400 0.75rem / 1.67 Inter;
+  --font-headings-h1: 800 1.875rem / 1.33 Silkscreen;
+  --font-headings-h2: 700 1.5rem / 1.33 Inter;
+  --font-headings-h3: 600 1.25rem / 1.2 Inter;
+  --font-headings-h4: 500 1rem / 1.25 Inter;
+  --font-headings-h5: 500 0.875rem / 1.2 Inter;
+  --font-headings-h6: 500 0.75rem / 1.14 Inter;
+}
+
+*,
+:before,
+:after {
+  box-sizing: border-box;
+  border-width: 0;
+  border-style: solid;
+  margin: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font: var(--font-body-l-regular);
+  margin: 0;
+}
+
+p {
+  font: var(--font-body-lg-regular);
+  margin-block: 1em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-block: 1.5em 0.75em;
+}
+
+h1 {
+  font: var(--font-headings-h1);
+}
+
+h2 {
+  font: var(--font-headings-h2);
+}
+
+h3 {
+  font: var(--font-headings-h3);
+}
+
+h4 {
+  font: var(--font-headings-h4);
+}
+
+h5 {
+  font: var(--font-headings-h5);
+}
+
+h6 {
+  font: var(--font-headings-h6);
+}
+
+a {
+  text-decoration: none;
+}
