@@ -24,6 +24,7 @@
   --font-h2: 500 34px / 40px Inter;
   --font-h3: 800 26px / 40px Inter;
   --foreground: #1c1612;
+  --mid-background: #4c413b;
   --prime: #f15f29;
   --secondary: #37a0da;
   /* ======================================================================== */
@@ -42,6 +43,8 @@
   --color-fg-secondary: var(--secondary);
 
   --color-anchor: var(--color-fg-primary);
+
+  --color-border-secondary: var(--mid-background);
 }
 
 *,

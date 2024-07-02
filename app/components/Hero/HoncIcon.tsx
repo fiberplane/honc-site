@@ -276,6 +276,7 @@ export function HoncIcon() {
         d="M108.155 80.606H102.146V86.4067H108.155V80.606Z"
         fill="#F15B2B"
       />
+      {/* top mouth thing */}
       <path
         d="M123.724 86.3926H102.146V92.4248H123.724V86.3926Z"
         fill="#AF344E"
