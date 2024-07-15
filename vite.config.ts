@@ -1,5 +1,6 @@
 import build from "@hono/vite-cloudflare-pages";
 import ssg from "@hono/vite-ssg";
+import mdx from "@mdx-js/rollup";
 import honox from "honox/vite";
 import { defineConfig } from "vite";
 
@@ -21,5 +22,6 @@ export default defineConfig({
     }),
     build(),
     ssg({ entry }),
+    mdx({ jsxImportSource: "hono/jsx" }),
   ],
 });
