@@ -2,9 +2,15 @@ import build from "@hono/vite-cloudflare-pages";
 import ssg from "@hono/vite-ssg";
 import mdx from "@mdx-js/rollup";
 import honox from "honox/vite";
+import rehypeExternalLinks, { type Options } from "rehype-external-links";
 import { defineConfig } from "vite";
 
 const entry = "./app/server.ts";
+
+const rehypeExternalLinksOptions: Options = {
+  target: "_blank",
+  rel: ["noopener", "noreferrer"],
+};
 
 export default defineConfig({
   build: {
@@ -22,6 +28,9 @@ export default defineConfig({
     }),
     build(),
     ssg({ entry }),
-    mdx({ jsxImportSource: "hono/jsx" }),
+    mdx({
+      jsxImportSource: "hono/jsx",
+      rehypePlugins: [[rehypeExternalLinks, rehypeExternalLinksOptions]],
+    }),
   ],
 });

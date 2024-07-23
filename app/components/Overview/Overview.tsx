@@ -12,7 +12,7 @@ export function Overview({ children }: PropsWithChildren) {
 }
 
 const sectionClass = css`
-  max-width: 880px;
+  max-width: 55rem;
   margin-inline: auto;
 
   h1 {

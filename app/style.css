@@ -96,4 +96,9 @@ h3 {
 
 a {
   text-decoration: none;
+  color: var(--color-fg-primary);
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
