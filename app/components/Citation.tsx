@@ -40,9 +40,8 @@ export function Citation() {
 const blockQuoteClass = css`
   display: grid;
   gap: .5rem;
-  max-width: 50ch;
   margin: 0 auto;
-  margin-block: 4rem;
+  /* margin-block: 4rem; */
 
   background: var(--color-bg-elevated);
   padding: 1em 2em;

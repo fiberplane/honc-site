@@ -6,6 +6,6 @@ export function Wrapper({ children }: PropsWithChildren) {
 }
 
 const wrapperClass = css`
-  width: min(calc(100% - 2rem), 1024px);
+  width: min(calc(100% - 4rem), 1200px);
   margin-inline: auto;
 `;
