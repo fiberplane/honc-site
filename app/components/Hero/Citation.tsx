@@ -14,18 +14,29 @@ export function Citation() {
       </p>
 
       <ul>
+        {/* The ids are based on the OverviewItem's IconType */}
         <li>
-          <b>H</b>: <span class={emphasisClass}>H</span>ono
+          <a href="#hono">
+            <b>H</b>: <span class={emphasisClass}>H</span>ono
+          </a>
         </li>
 
         <li>
-          <b>O</b>: Drizzle <span class={emphasisClass}>O</span>RM
+          <a href="#orm">
+            <b>O</b>: Drizzle <span class={emphasisClass}>O</span>RM
+          </a>
         </li>
+
         <li>
-          <b>N</b>: <span class={emphasisClass}>N</span>eon
+          <a href="#db">
+            <b>N</b>: <span class={emphasisClass}>N</span>eon
+          </a>
         </li>
+
         <li>
-          <b>C</b>: <span class={emphasisClass}>C</span>loudflare
+          <a href="#cloud">
+            <b>C</b>: <span class={emphasisClass}>C</span>loudflare
+          </a>
         </li>
       </ul>
 

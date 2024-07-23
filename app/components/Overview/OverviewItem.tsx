@@ -15,7 +15,7 @@ export function OverviewItem({ iconType, title, children }: OverviewItemProps) {
 
   return (
     <li class={OverviewItemClass}>
-      <header>
+      <header id={iconType}>
         <Icon />
         <h3>{title}</h3>
       </header>
