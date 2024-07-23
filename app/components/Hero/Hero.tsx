@@ -27,19 +27,20 @@ export function Hero({ children, title }: HeroProps) {
 
 const heroContentGrid = css`
   display: grid;
-  grid: auto / repeat(2, 1fr);
+  grid: auto / 1fr;
+  gap: 2rem;
 `;
 
 const headingClass = css`
-  padding-inline-end: 2rem;
+  padding: 0;
 
   h1 {
-    margin-block: 0 0.5em;
-    font-size: 4rem;
+    text-align: center;
   }
 
   p {
-    margin-block-end: 0;
+    margin-inline: auto;
+    max-width: 54ch;
   }
 `;
 
@@ -54,19 +55,21 @@ const heroGrid = css`
     justify-self: center;
   }
 
-  @container (width <= 840px) {
+  @container (width >= 840px) {
     ${heroContentGrid} {
-      grid: auto / 1fr;
-      gap: 4rem;
+      grid: auto / repeat(2, 1fr);
+      gap: 0rem;
 
       ${headingClass} {
-        padding: 0;
-        
+        padding-inline-end: 2rem;
+
         h1 {
-          text-align: center;
+          margin-block: 0 0.5em;
+          font-size: 4rem;
         }
 
         p {
+          margin-block-end: 0;
           margin-inline: auto;
           max-width: 54ch;
         }
