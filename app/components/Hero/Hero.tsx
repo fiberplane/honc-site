@@ -15,15 +15,8 @@ export function Hero({ children, title }: HeroProps) {
 
       <div class={heroContentGrid}>
         <header class={headingClass}>
-          <h1>Honc honc</h1>
-          <p>
-            Today defining a stack for a new project is not easy, because there
-            are a lot of different tools to choose from. With HONC we present an
-            opinionated stack for Typescript development. HONC combines four
-            components: H(ono), O(RM Drizzle), N(eon), C(loudflare). The stack
-            helps to kick off projects quickly and ensures fast development
-            cycles.
-          </p>
+          <h1>{title}</h1>
+          <p>{children}</p>
         </header>
 
         <Citation />
@@ -35,10 +28,11 @@ export function Hero({ children, title }: HeroProps) {
 const heroContentGrid = css`
   display: grid;
   grid: auto / repeat(2, 1fr);
-  gap: 4rem;
 `;
 
 const headingClass = css`
+  padding-inline-end: 2rem;
+
   h1 {
     margin-block: 0 0.5em;
     font-size: 4rem;
@@ -65,8 +59,17 @@ const heroGrid = css`
       grid: auto / 1fr;
       gap: 4rem;
 
-      ${headingClass} h1 {
-        text-align: center;
+      ${headingClass} {
+        padding: 0;
+        
+        h1 {
+          text-align: center;
+        }
+
+        p {
+          margin-inline: auto;
+          max-width: 54ch;
+        }
       }
     }
   }

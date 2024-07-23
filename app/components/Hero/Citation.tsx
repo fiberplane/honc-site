@@ -52,11 +52,13 @@ const blockQuoteClass = css`
   display: grid;
   gap: .5rem;
   margin: 0 auto;
+  max-width: 54ch;
   background: var(--color-bg-elevated);
-  padding: 1em 2em;
+  padding: 1rem 2rem;
   border-left: 4px solid var(--color-border-secondary);
   border-top-right-radius: 1rem;
   border-bottom-right-radius: 1rem;
+  align-self: center;
 
   header {
     h3 {
