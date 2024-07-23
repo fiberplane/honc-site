@@ -2,7 +2,7 @@ import { css } from "hono/css";
 import type { PropsWithChildren } from "hono/jsx";
 
 import { HoncIcon } from "./HoncIcon";
-import { Citation } from "../Citation";
+import { Citation } from "./Citation";
 
 type HeroProps = PropsWithChildren<{
   title: string;
@@ -35,26 +35,7 @@ export function Hero({ children, title }: HeroProps) {
 const heroContentGrid = css`
   display: grid;
   grid: auto / repeat(2, 1fr);
-  gap: 2rem;
-`;
-
-const heroGrid = css`
-  display: grid;
-  grid-auto-flow: row;
-  gap: 2rem;
-  margin-block-start: 4rem;
-  container-type: inline-size;
-
-  svg {
-    justify-self: center;
-  }
-
-  @container (width <= 840px) {
-    ${heroContentGrid} {
-      grid: auto / 1fr;
-      gap: 4rem;
-    }
-  }
+  gap: 4rem;
 `;
 
 const headingClass = css`
@@ -65,5 +46,28 @@ const headingClass = css`
 
   p {
     margin-block-end: 0;
+  }
+`;
+
+const heroGrid = css`
+  display: grid;
+  grid-auto-flow: row;
+  gap: 4rem;
+  margin-block: 4rem;
+  container-type: inline-size;
+
+  svg {
+    justify-self: center;
+  }
+
+  @container (width <= 840px) {
+    ${heroContentGrid} {
+      grid: auto / 1fr;
+      gap: 4rem;
+
+      ${headingClass} h1 {
+        text-align: center;
+      }
+    }
   }
 `;
