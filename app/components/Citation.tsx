@@ -41,8 +41,6 @@ const blockQuoteClass = css`
   display: grid;
   gap: .5rem;
   margin: 0 auto;
-  /* margin-block: 4rem; */
-
   background: var(--color-bg-elevated);
   padding: 1em 2em;
   border-left: 4px solid var(--color-border-secondary);

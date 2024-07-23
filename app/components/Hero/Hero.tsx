@@ -32,21 +32,29 @@ export function Hero({ children, title }: HeroProps) {
   );
 }
 
+const heroContentGrid = css`
+  display: grid;
+  grid: auto / repeat(2, 1fr);
+  gap: 2rem;
+`;
+
 const heroGrid = css`
   display: grid;
   grid-auto-flow: row;
   gap: 2rem;
   margin-block-start: 4rem;
+  container-type: inline-size;
 
   svg {
     justify-self: center;
   }
-`;
 
-const heroContentGrid = css`
-  display: grid;
-  grid: auto / repeat(2, 1fr);
-  gap: 2rem;
+  @container (width <= 840px) {
+    ${heroContentGrid} {
+      grid: auto / 1fr;
+      gap: 4rem;
+    }
+  }
 `;
 
 const headingClass = css`
