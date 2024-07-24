@@ -34,8 +34,8 @@ export function Footer() {
           </span>
         </div>
 
-        <GrassLeftIcon width={260} className={grassLeftIconClass} />
-        <GrassRightIcon width={220} className={grassRightIconClass} />
+        <GrassLeftIcon width={280} className={grassLeftIconClass} />
+        <GrassRightIcon width={240} className={grassRightIconClass} />
       </Wrapper>
     </footer>
   );
@@ -92,6 +92,23 @@ const wrapperClass = css`
 const footerClass = css`
   background-color: var(--color-bg-secondary);
   margin-top: 10rem;
+  position: relative;
+
+  container-type: inline-size;
+  @container (width >= 700px) {
+
+    &::after {
+      content: "";
+      display: block;
+      height: 3rem;
+      width: 50%;
+      background-color: var(--color-bg-default);
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
+
 `;
 
 const iconWrapper = css`
