@@ -1,8 +1,12 @@
-import { css } from "hono/css";
+import { css, cx } from "hono/css";
 import type { PropsWithChildren } from "hono/jsx";
 
-export function Wrapper({ children }: PropsWithChildren) {
-  return <div class={wrapperClass}>{children}</div>;
+type WrapperProps = PropsWithChildren<{
+  className?: ReturnType<typeof css>;
+}>;
+
+export function Wrapper({ children, className }: WrapperProps) {
+  return <div class={cx(wrapperClass, className)}>{children}</div>;
 }
 
 const wrapperClass = css`

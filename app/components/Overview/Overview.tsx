@@ -14,14 +14,13 @@ export function Overview({ children }: PropsWithChildren) {
 const sectionClass = css`
   max-width: 55rem;
   margin-inline: auto;
-  
-  
+
   h1 {
     margin-block-start: 0;
     text-align: center;
-    font-size: clamp(2.5rem, 12vw, 5rem);
+    font-size: clamp(2.5rem, 12lvw, 5rem);
   }
-  
+
   ul {
     display: grid;
     gap: 4rem;

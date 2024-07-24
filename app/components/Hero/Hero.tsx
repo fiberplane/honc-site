@@ -66,6 +66,7 @@ const heroGrid = css`
         h1 {
           margin-block: 0 0.5em;
           font-size: 4rem;
+          text-align: left;
         }
 
         p {
