@@ -41,7 +41,6 @@
   --font-headings-h1: var(--font-h1);
   --font-headings-h2: var(--font-h2);
   --font-headings-h3: var(--font-h3);
-  --font-code: var(--font-code);
 
   --color-bg-default: var(--background);
   --color-bg-elevated: var(--foreground);

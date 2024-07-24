@@ -1,15 +1,14 @@
 import { css } from "hono/css";
 
-import { GooseIcon } from "../icons";
 import { Wrapper } from "../Wrapper";
-import { GithubIcon, HeartIcon } from "./icons";
+import { GithubIcon, HeartIcon, WaterGooseIcon } from "./icons";
 
 export function Footer() {
   return (
     <footer class={footerClass}>
       <Wrapper>
         <div class={iconWrapper}>
-          <GooseIcon width={200} />
+          <WaterGooseIcon />
         </div>
 
         <span>
@@ -21,8 +20,10 @@ export function Footer() {
           >
             Fiberplane
           </a>
-          using <GithubIcon />
-          Honox
+          <span>
+            using <GithubIcon />
+            Honox
+          </span>
         </span>
       </Wrapper>
     </footer>
