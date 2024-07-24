@@ -1,6 +1,8 @@
+import type { css } from "hono/css";
+
 type GrassIconProps = {
   width?: number;
-  className?: string;
+  className?: ReturnType<typeof css>;
 };
 
 export function GrassLeftIcon({ width = 621, className }: GrassIconProps) {
@@ -11,6 +13,7 @@ export function GrassLeftIcon({ width = 621, className }: GrassIconProps) {
       width={width}
       height={Math.round(width * (170 / 621))}
       fill="none"
+      class={className}
     >
       <title>Grass icon</title>
       <path
@@ -39,13 +42,15 @@ export function GrassLeftIcon({ width = 621, className }: GrassIconProps) {
   );
 }
 
-export function GrassRightIcon() {
+export function GrassRightIcon({ width = 552, className }: GrassIconProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="552"
-      height="158"
+      viewBox="0 0 552 158"
+      width={width}
+      height={Math.round(width * (158 / 552))}
       fill="none"
+      className={className}
     >
       <title>Grass icon</title>
       <path

@@ -1,7 +1,13 @@
 import { css } from "hono/css";
 
 import { Wrapper } from "../Wrapper";
-import { GithubIcon, GrassLeftIcon, HeartIcon, WaterGooseIcon } from "./icons";
+import {
+  GithubIcon,
+  GrassLeftIcon,
+  GrassRightIcon,
+  HeartIcon,
+  WaterGooseIcon,
+} from "./icons";
 
 export function Footer() {
   return (
@@ -28,16 +34,28 @@ export function Footer() {
           </span>
         </div>
 
-        <GrassLeftIcon width={260} />
+        <GrassLeftIcon width={260} className={grassLeftIconClass} />
+        <GrassRightIcon width={220} className={grassRightIconClass} />
       </Wrapper>
     </footer>
   );
 }
 
+const grassLeftIconClass = css`
+  position: absolute;
+  left: 0;
+  bottom: 0;
+`;
+
+const grassRightIconClass = css`
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: none;
+`;
+
 const footerTextClass = css`
-  padding-block-end: 1.25rem;
-  display: inline-block;
-  margin-inline: auto;
+  translate: 0 -5rem;
 
   span {
     display: flex;
@@ -56,8 +74,19 @@ const footerTextClass = css`
 
 const wrapperClass = css`
   position: relative;
-  isolation: isolate;
-  display: grid;
+  container-type: inline-size;
+
+  @container (width >= 600px) {
+    ${grassRightIconClass} {
+      display: block;
+    }
+  }
+
+  @container (width >= 968px) {
+    ${footerTextClass} {
+      translate: 0 -0.5rem;
+    }
+  }
 `;
 
 const footerClass = css`
