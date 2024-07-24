@@ -13,9 +13,7 @@ export function Footer() {
   return (
     <footer class={footerClass}>
       <Wrapper className={wrapperClass}>
-        <div class={iconWrapper}>
-          <WaterGooseIcon />
-        </div>
+        <WaterGooseIcon className={iconWrapper} />
 
         <div class={footerTextClass}>
           <span>
@@ -41,54 +39,6 @@ export function Footer() {
   );
 }
 
-const grassLeftIconClass = css`
-  position: absolute;
-  left: 0;
-  bottom: 0;
-`;
-
-const grassRightIconClass = css`
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  display: none;
-`;
-
-const footerTextClass = css`
-  translate: 0 -5rem;
-
-  span {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 0.25rem 0.6ch;
-    color: var(--color-bg-default);
-
-    a {
-      color: inherit;
-      text-decoration: underline;
-    }
-  }
-`;
-
-const wrapperClass = css`
-  position: relative;
-  container-type: inline-size;
-
-  @container (width >= 600px) {
-    ${grassRightIconClass} {
-      display: block;
-    }
-  }
-
-  @container (width >= 968px) {
-    ${footerTextClass} {
-      translate: 0 -0.5rem;
-    }
-  }
-`;
-
 const footerClass = css`
   background-color: var(--color-bg-secondary);
   margin-top: 10rem;
@@ -110,9 +60,55 @@ const footerClass = css`
 `;
 
 const iconWrapper = css`
-  width: fit-content;
-  height: fit-content;
-  position: relative;
   margin-inline: auto;
   translate: calc(clamp(0lvw, 10lvw, 8lvw) * -1) -50%;
+`;
+
+const footerTextClass = css`
+  translate: 0 -5rem;
+  font-weight: 400;
+  color: var(--color-bg-default);
+
+  span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.6ch;
+
+    a {
+      color: inherit;
+      text-decoration: underline;
+    }
+  }
+`;
+
+const grassLeftIconClass = css`
+  position: absolute;
+  left: 0;
+  bottom: 0;
+`;
+
+const grassRightIconClass = css`
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: none;
+`;
+
+const wrapperClass = css`
+  position: relative;
+  container-type: inline-size;
+
+  @container (width >= 600px) {
+    ${grassRightIconClass} {
+      display: block;
+    }
+  }
+
+  @container (width >= 968px) {
+    ${footerTextClass} {
+      translate: 0 -0.5rem;
+    }
+  }
 `;

@@ -35,6 +35,7 @@ const headingClass = css`
   padding: 0;
 
   h1 {
+    margin-block-start: 0;
     text-align: center;
   }
 
@@ -64,7 +65,7 @@ const heroGrid = css`
         padding-inline-end: 2rem;
 
         h1 {
-          margin-block: 0 0.5em;
+          margin-block-end: 0.5em;
           font-size: 4rem;
           text-align: left;
         }

@@ -14,6 +14,6 @@
     }
   },
   "files": {
-    "ignore": ["*.d.ts", "dist", "node_modules", "*.toml"]
+    "ignore": ["*.d.ts", "dist", "node_modules", "*.toml", ".wrangler"]
   }
 }

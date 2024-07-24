@@ -10,38 +10,44 @@ import { Footer, Hero, Overview, OverviewItem, Wrapper } from "../components";
   </Hero>
 </Wrapper>
 
-<Wrapper>
-  <Overview>
-    <OverviewItem title="Hono" iconType="hono">
-      [Hono](https://hono.dev) is a web application framework that supports any
-      JavaScript runtime, including Cloudflare, Deno, Bun, Vercel, Netlify,
-      Node.js, and more. The RegExpRouter makes it super fast by avoiding any
-      linear loops. Additionally, it is lightweight (14kB) and uses only the Web
-      Standard API, meaning there are no dependencies. Developers can use
-      built-in middleware or create their own to extend the framework.
-    </OverviewItem>
+<main>
+  <Wrapper>
+    <Overview>
+      <OverviewItem title="Hono" iconType="hono">
+        [Hono](https://hono.dev) is a web application framework that supports
+        any JavaScript runtime, including Cloudflare, Deno, Bun, Vercel,
+        Netlify, Node.js, and more. The RegExpRouter makes it super fast by
+        avoiding any linear loops. Additionally, it is lightweight (14kB) and
+        uses only the Web Standard API, meaning there are no dependencies.
+        Developers can use built-in middleware or create their own to extend the
+        framework.
+      </OverviewItem>
 
-    <OverviewItem title="ORM (Drizzle)" iconType="orm">
-      [Drizzle](https://orm.drizzle.team) is a headless Object Relational Mapper
-      (ORM). It maps the data logic presented in the database with the one in
-      the application code. Drizzle offers both a relational and an SQL-like
-      query API.
-    </OverviewItem>
-    <OverviewItem title="Neon" iconType="db">
-      [Neon](https://neon.tech) provides a serverless PostgreSQL database that
-      supports branching. It is an open-source alternative to AWS Aurora and
-      Google Cloud SQL for PostgreSQL. You can run Neon on-premises or use their
-      managed service in the cloud. Neon separates compute and storage, allowing
-      it to offer features like auto-scaling and branching.
-    </OverviewItem>
-    <OverviewItem title="Cloud (Cloudflare)" iconType="cloud">
-      [Cloudflare](https://cloudflare.com) is a global cloud platform.
-      [Workers](https://workers.cloudflare.com) are serverless applications
-      running on JavaScript edge runtime on globale cloudflare CDN. Cloudflare
-      Workers allow the creation of applications without configuring or
-      maintaining infrastructure. 
-    </OverviewItem>
-  </Overview>
-</Wrapper>
+      <OverviewItem title="ORM (Drizzle)" iconType="orm">
+        [Drizzle](https://orm.drizzle.team) is a headless Object Relational
+        Mapper (ORM). It maps the data logic presented in the database with the
+        one in the application code. Drizzle offers both a relational and an
+        SQL-like query API.
+      </OverviewItem>
+
+      <OverviewItem title="Neon" iconType="db">
+        [Neon](https://neon.tech) provides a serverless PostgreSQL database that
+        supports branching. It is an open-source alternative to AWS Aurora and
+        Google Cloud SQL for PostgreSQL. You can run Neon on-premises or use
+        their managed service in the cloud. Neon separates compute and storage,
+        allowing it to offer features like auto-scaling and branching.
+      </OverviewItem>
+
+      <OverviewItem title="Cloud (Cloudflare)" iconType="cloud">
+        [Cloudflare](https://cloudflare.com) is a global cloud platform.
+        [Workers](https://workers.cloudflare.com) are serverless applications
+        running on JavaScript edge runtime on globale cloudflare CDN. Cloudflare
+        Workers allow the creation of applications without configuring or
+        maintaining infrastructure. 
+      </OverviewItem>
+    </Overview>
+
+  </Wrapper>
+</main>
 
 <Footer />
