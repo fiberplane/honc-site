@@ -93,10 +93,9 @@ const footerClass = css`
   background-color: var(--color-bg-secondary);
   margin-top: 10rem;
   position: relative;
-
   container-type: inline-size;
-  @container (width >= 700px) {
 
+  @container (width >= 700px) {
     &::after {
       content: "";
       display: block;
@@ -108,12 +107,12 @@ const footerClass = css`
       right: 0;
     }
   }
-
 `;
 
 const iconWrapper = css`
   width: fit-content;
   height: fit-content;
   position: relative;
-  translate: 10% -50%;
+  margin-inline: auto;
+  translate: calc(clamp(0lvw, 10lvw, 8lvw) * -1) -50%;
 `;
