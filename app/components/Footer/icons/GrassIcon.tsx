@@ -5,7 +5,7 @@ type GrassIconProps = {
   className?: ReturnType<typeof css>;
 };
 
-export function GrassLeftIcon({ width = 621, className }: GrassIconProps) {
+export function GrassLeftIcon({ width = 280, className }: GrassIconProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -42,7 +42,7 @@ export function GrassLeftIcon({ width = 621, className }: GrassIconProps) {
   );
 }
 
-export function GrassRightIcon({ width = 552, className }: GrassIconProps) {
+export function GrassRightIcon({ width = 240, className }: GrassIconProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

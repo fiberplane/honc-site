@@ -28,7 +28,7 @@ const sectionClass = css`
       background: var(--mid-background);
       padding: 1rem 2rem;
       overflow-x: auto;
-      border-radius: .5rem;
+      border-radius: 0.5rem;
     }
   }
 
