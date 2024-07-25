@@ -1,6 +1,7 @@
 import { css } from "hono/css";
+import type { PropsWithChildren } from "hono/jsx";
 
-export function Citation() {
+export function Citation({ children }: PropsWithChildren) {
   return (
     <blockquote class={blockQuoteClass}>
       <header>
@@ -14,25 +15,33 @@ export function Citation() {
       </p>
 
       <ul>
+        {/* The ids are based on the OverviewItem's IconType */}
         <li>
-          <b>H</b>: <span class={emphasisClass}>H</span>ono
+          <a href="#hono">
+            <b>H</b>: <span class={emphasisClass}>H</span>ono
+          </a>
         </li>
 
         <li>
-          <b>O</b>: Drizzle <span class={emphasisClass}>O</span>RM
+          <a href="#orm">
+            <b>O</b>: Drizzle <span class={emphasisClass}>O</span>RM
+          </a>
         </li>
+
         <li>
-          <b>N</b>: <span class={emphasisClass}>N</span>eon
+          <a href="#db">
+            <b>N</b>: <span class={emphasisClass}>N</span>eon
+          </a>
         </li>
+
         <li>
-          <b>C</b>: <span class={emphasisClass}>C</span>loudflare
+          <a href="#cloud">
+            <b>C</b>: <span class={emphasisClass}>C</span>loudflare
+          </a>
         </li>
       </ul>
 
-      <p className={exampleClass}>
-        "I can't believe I wasn't using <abbr>HONC</abbr> before. I'm finally
-        part of the cool coding kids club now!"
-      </p>
+      <p className={exampleClass}>{children}</p>
     </blockquote>
   );
 }
@@ -40,15 +49,15 @@ export function Citation() {
 const blockQuoteClass = css`
   display: grid;
   gap: .5rem;
-  max-width: 50ch;
   margin: 0 auto;
-  margin-block: 4rem;
-
-  background: var(--color-bg-elevated);
-  padding: 1em 2em;
+  width: 100%;
+  max-width: 54ch;
+  background-color: var(--color-bg-elevated);
+  padding: 1rem 2rem;
   border-left: 4px solid var(--color-border-secondary);
   border-top-right-radius: 1rem;
   border-bottom-right-radius: 1rem;
+  align-self: center;
 
   header {
     h3 {
