@@ -101,3 +101,8 @@ a {
     text-decoration: underline;
   }
 }
+
+pre,
+code {
+  font: var(--font-code);
+}

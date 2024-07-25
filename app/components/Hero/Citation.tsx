@@ -1,6 +1,7 @@
 import { css } from "hono/css";
+import type { PropsWithChildren } from "hono/jsx";
 
-export function Citation() {
+export function Citation({ children }: PropsWithChildren) {
   return (
     <blockquote class={blockQuoteClass}>
       <header>
@@ -40,10 +41,7 @@ export function Citation() {
         </li>
       </ul>
 
-      <p className={exampleClass}>
-        "I can't believe I wasn't using <abbr>HONC</abbr> before. I'm finally
-        part of the cool coding kids club now!"
-      </p>
+      <p className={exampleClass}>{children}</p>
     </blockquote>
   );
 }
@@ -52,8 +50,9 @@ const blockQuoteClass = css`
   display: grid;
   gap: .5rem;
   margin: 0 auto;
+  width: 100%;
   max-width: 54ch;
-  background: var(--color-bg-elevated);
+  background-color: var(--color-bg-elevated);
   padding: 1rem 2rem;
   border-left: 4px solid var(--color-border-secondary);
   border-top-right-radius: 1rem;

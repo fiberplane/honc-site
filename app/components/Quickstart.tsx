@@ -1,12 +1,12 @@
 import { css } from "hono/css";
 import type { PropsWithChildren } from "hono/jsx";
 
-export function Overview({ children }: PropsWithChildren) {
+export function Quickstart({ children }: PropsWithChildren) {
   return (
     <section class={sectionClass}>
-      <h1>Overview</h1>
+      <h1>Quickstart</h1>
 
-      <ul>{children}</ul>
+      <div>{children}</div>
     </section>
   );
 }
@@ -17,20 +17,24 @@ const sectionClass = css`
 
   h1 {
     text-align: center;
-    font-size: clamp(2.5rem, 12lvw, 5rem);
+    font-size: clamp(2.5rem, 10lvw, 5rem);
   }
 
-  ul {
-    display: grid;
-    gap: 4rem;
+  & > div {
     background-color: var(--color-bg-elevated);
-    list-style: none;
     padding: 3rem 2rem;
+
+    pre {
+      background: var(--mid-background);
+      padding: 1rem 2rem;
+      overflow-x: auto;
+      border-radius: .5rem;
+    }
   }
 
   container-type: inline-size;
   @container (width >= 768px) {
-    ul {
+    & > div {
       padding: 3rem 6rem;
     }
   }
