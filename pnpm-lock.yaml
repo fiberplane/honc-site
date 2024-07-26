@@ -33,6 +33,9 @@ importers:
       '@mdx-js/rollup':
         specifier: ^3.0.1
         version: 3.0.1(rollup@4.18.0)
+      posthog-js:
+        specifier: ^1.150.0
+        version: 1.150.0
       rehype-external-links:
         specifier: ^3.0.0
         version: 3.0.0
@@ -973,6 +976,9 @@ packages:
   fastq@1.17.1:
     resolution: {integrity: sha512-sRVD3lWVIXWg6By68ZN7vho9a1pQcN/WBFaAAsDDFzlJjvoGx0P8z7V1t72grFJfJhu3YPZBuu25f7Kaw2jN1w==}
 
+  fflate@0.4.8:
+    resolution: {integrity: sha512-FJqqoDBR00Mdj9ppamLa/Y7vxm+PRmNWA67N846RvsoYVMKB4q3y/de5PA7gUmRMYK/8CMz2GDZQmCRN1wBcWA==}
+
   fill-range@7.1.1:
     resolution: {integrity: sha512-YsGpe3WHLK8ZYi4tWDg2Jy3ebRz2rXowDxnld4bkQB00cc/1Zw9AWnC0i9ztDJitivtQvaI9KaLyKrc+hBW0yg==}
     engines: {node: '>=8'}
@@ -1330,6 +1336,12 @@ packages:
     resolution: {integrity: sha512-Wglpdk03BSfXkHoQa3b/oulrotAkwrlLDRSOb9D0bN86FdRyE9lppSp33aHNPgBa0JKCoB+drFLZkQoRRYae5A==}
     engines: {node: ^10 || ^12 || >=14}
 
+  posthog-js@1.150.0:
+    resolution: {integrity: sha512-oTbMtVX8dsBlZrJ3/6P6l3Ivs14Q3i454Ly1Y0DfZDoxT67OMRc791uQ0rm2VCVxVGwpy7LYz+0VB14/rfrbOw==}
+
+  preact@10.23.1:
+    resolution: {integrity: sha512-O5UdRsNh4vdZaTieWe3XOgSpdMAmkIYBCT3VhQDlKrzyCm8lUYsk0fmVEvoQQifoOjFRTaHZO69ylrzTW2BH+A==}
+
   precinct@12.1.1:
     resolution: {integrity: sha512-Vmmtp0QdtM0Z5NzkRG09AgUgBwOpG0KW9KvG1vkltx+e2zrGCWbM5661f6lf8YjKbJhM39TICA6Wc36ZzX1PqQ==}
     engines: {node: '>=18'}
@@ -1547,6 +1559,9 @@ packages:
         optional: true
       terser:
         optional: true
+
+  web-vitals@4.2.2:
+    resolution: {integrity: sha512-nYfoOqb4EmElljyXU2qdeE76KsvoHdftQKY4DzA9Aw8DervCg2bG634pHLrJ/d6+B4mE3nWTSJv8Mo7B2mbZkw==}
 
   workerd@1.20240620.1:
     resolution: {integrity: sha512-Qoq+RrFNk4pvEO+kpJVn8uJ5TRE9YJx5jX5pC5LjdKlw1XeD8EdXt5k0TbByvWunZ4qgYIcF9lnVxhcDFo203g==}
@@ -2413,6 +2428,8 @@ snapshots:
     dependencies:
       reusify: 1.0.4
 
+  fflate@0.4.8: {}
+
   fill-range@7.1.1:
     dependencies:
       to-regex-range: 5.0.1
@@ -2992,6 +3009,14 @@ snapshots:
       picocolors: 1.0.1
       source-map-js: 1.2.0
 
+  posthog-js@1.150.0:
+    dependencies:
+      fflate: 0.4.8
+      preact: 10.23.1
+      web-vitals: 4.2.2
+
+  preact@10.23.1: {}
+
   precinct@12.1.1:
     dependencies:
       '@dependents/detective-less': 5.0.0
@@ -3248,6 +3273,8 @@ snapshots:
     optionalDependencies:
       '@types/node': 20.14.9
       fsevents: 2.3.3
+
+  web-vitals@4.2.2: {}
 
   workerd@1.20240620.1:
     optionalDependencies:

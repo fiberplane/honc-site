@@ -1,6 +1,7 @@
 import { Style } from "hono/css";
 import { jsxRenderer } from "hono/jsx-renderer";
-import { Link } from "honox/server";
+import { Link, Script } from "honox/server";
+import PostHog from "../islands/postHog";
 
 export default jsxRenderer(({ children, title }) => {
   return (
@@ -46,9 +47,11 @@ export default jsxRenderer(({ children, title }) => {
           crossorigin=""
         />
         <Style />
+        <Script src="/app/client.ts" />
       </head>
 
       <body>{children}</body>
+      <PostHog />
     </html>
   );
 });
