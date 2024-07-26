@@ -5,6 +5,8 @@ import { Link, Script } from "honox/server";
 import PostHog from "../islands/postHog";
 
 export default jsxRenderer(({ children, title }) => {
+  const posthogProjectKey = import.meta.env.VITE_POSTHOG_PROJECT_KEY;
+
   return (
     <html lang="en">
       <head>
@@ -53,7 +55,8 @@ export default jsxRenderer(({ children, title }) => {
       </head>
 
       <body>{children}</body>
-      <PostHog />
+
+      <PostHog projectKey={posthogProjectKey} />
     </html>
   );
 });
