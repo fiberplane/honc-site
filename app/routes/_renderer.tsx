@@ -1,6 +1,7 @@
 import { Style } from "hono/css";
 import { jsxRenderer } from "hono/jsx-renderer";
 import { Link, Script } from "honox/server";
+
 import PostHog from "../islands/postHog";
 
 export default jsxRenderer(({ children, title }) => {
@@ -31,7 +32,6 @@ export default jsxRenderer(({ children, title }) => {
         />
         <link rel="manifest" href="/static/favicon/site.webmanifest" />
 
-        <Link href="/app/style.css" rel="stylesheet" />
         <link
           rel="preload"
           href="/static/fonts/Silkscreen-Bold.woff2"
@@ -46,7 +46,9 @@ export default jsxRenderer(({ children, title }) => {
           type="font/woff2"
           crossorigin=""
         />
+
         <Style />
+        <Link href="/app/style.css" rel="stylesheet" />
         <Script src="/app/client.ts" />
       </head>
 
