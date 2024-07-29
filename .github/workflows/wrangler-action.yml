@@ -21,7 +21,9 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build project
-        run: pnpm build
+        env:
+          VITE_POSTHOG_PROJECT_KEY: ${{ secrets.VITE_POSTHOG_PROJECT_KEY }}
+        run: VITE_POSTHOG_PROJECT_KEY=$VITE_POSTHOG_PROJECT_KEY pnpm build
 
       - name: Deploy
         uses: cloudflare/wrangler-action@v3
