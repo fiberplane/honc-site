@@ -8,7 +8,8 @@
     "deploy": "$npm_execpath run build && wrangler pages deploy",
     "lint": "biome lint",
     "format": "biome format --write",
-    "type-check": "tsc"
+    "type-check": "tsc",
+    "ci:format": "biome format"
   },
   "dependencies": {
     "hono": "^4.4.2",
