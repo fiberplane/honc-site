@@ -60,7 +60,7 @@ export default jsxRenderer(({ children, title }) => {
         {children}
       </body>
 
-      <PostHog projectKey={posthogProjectKey} />
+      {import.meta.env.PROD && <PostHog projectKey={posthogProjectKey} />}
     </html>
   );
 });

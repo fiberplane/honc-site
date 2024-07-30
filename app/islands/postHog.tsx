@@ -10,17 +10,17 @@ type PostHogProps = {
  * therefore we need to create an island to initialise PostHog.
  */
 export default function PostHog({ projectKey }: PostHogProps) {
-  // useEffect(() => {
-  //   if (!projectKey) {
-  //     console.error("PostHog project key is not defined.");
-  //     return;
-  //   }
+  useEffect(() => {
+    if (!projectKey) {
+      console.error("PostHog project key is not defined.");
+      return;
+    }
 
-  //   posthog.init(projectKey, {
-  //     api_host: "https://us.i.posthog.com",
-  //     person_profiles: "identified_only",
-  //   });
-  // }, [projectKey]);
+    posthog.init(projectKey, {
+      api_host: "https://us.i.posthog.com",
+      person_profiles: "identified_only",
+    });
+  }, [projectKey]);
 
   return <Fragment />;
 }

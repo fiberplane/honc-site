@@ -23,6 +23,10 @@ export function Nav() {
     for (const element of elements) {
       observer.observe(element);
     }
+
+    return () => {
+      observer.disconnect();
+    };
   }, []);
 
   const getActiveClass = (id: string) => (activeId === id ? "active" : "");
