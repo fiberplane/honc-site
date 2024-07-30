@@ -17,11 +17,10 @@ import {
       </>
     }
   >
-    Today defining a stack for a new project is not easy, because there are a
-    lot of different tools to choose from. With <abbr>HONC</abbr> we present an
-    opinionated stack for Typescript development. <abbr>HONC</abbr> combines
-    four components: H(ono), O(RM Drizzle), N(eon), C(loudflare). The stack
-    helps to kick off projects quickly and ensures fast development cycles.
+  Welcome to the HONC stack, the new kid on the block that's making waves in the web development world. It's like the cool cousin of the MEAN stack who went backpacking through Europe and came back with a taste for artisanal code and craft databases. HONC stands for Hono, ORM (we're partial to Drizzle), Neon (or any other hip Postgres-based database), and Cloudflare (because who doesn't love a good cloud these days?).
+<br />
+  Buckle up, buttercup – we're about to take a wild ride through the land of lightning-fast routing, headless ORMs, databases that do everything but your laundry, and clouds that are more than just rain machines. 
+
   </Hero>
 </Wrapper>
 
@@ -29,36 +28,19 @@ import {
   <Wrapper>
     <Overview title="Overview">
       <OverviewItem title="Hono" iconType="hono">
-        [Hono](https://hono.dev) is a web application framework that supports
-        any JavaScript runtime, including Cloudflare, Deno, Bun, Vercel,
-        Netlify, Node.js, and more. The RegExpRouter makes it super fast by
-        avoiding any linear loops. Additionally, it is lightweight (14kB) and
-        uses only the Web Standard API, meaning there are no dependencies.
-        Developers can use built-in middleware or create their own to extend the
-        framework.
+        [Hono](https://hono.dev) is your fast and furious api framework, supporting every JavaScript runtime you can dream of—Cloudflare, Deno, Bun, Vercel, Netlify, Node.js, and more. It’s lean and mean at just 14kB, with no dependencies, and powered by the Web Standard API.
       </OverviewItem>
 
       <OverviewItem title="ORM (Drizzle)" iconType="orm">
-        [Drizzle](https://orm.drizzle.team) is a headless Object Relational
-        Mapper (ORM). It maps the data logic presented in the database with the
-        one in the application code. Drizzle offers both a relational and an
-        SQL-like query API.
+        [Drizzle](https://orm.drizzle.team) is a headless Object Relational Mapper (ORM). It maps the data logic presented in the database with the one in the application code. It’s like a matchmaker for your data. Drizzle offers both a relational and an SQL-like query API. And hey, we’re also big fans of Prisma, another fantastic ORM that brings its own flair to the table with real-time subscriptions and blazingly fast performance.
       </OverviewItem>
 
       <OverviewItem title="Neon" iconType="db">
-        [Neon](https://neon.tech) provides a serverless PostgreSQL database that
-        supports branching. It is an open-source alternative to AWS Aurora and
-        Google Cloud SQL for PostgreSQL. You can run Neon on-premises or use
-        their managed service in the cloud. Neon separates compute and storage,
-        allowing it to offer features like auto-scaling and branching.
+        Postgres is eating the world, one feature at a time! Need vector storage for your AI apps? Check. Need to stash some JSON blobs? Done. And for everything else, there’s an extension. [Neon](https://neon.tech) is a serverless Postgres database that branches like a pro and scales right along with your app. We also like Supabase, which throws in real-time updates, authentication and an edge runtime for good measure. It’s like the Swiss Army knife of databases—minus the corkscrew.
       </OverviewItem>
 
       <OverviewItem title="Cloud (Cloudflare)" iconType="cloud">
-        [Cloudflare](https://cloudflare.com) is a global cloud platform.
-        [Workers](https://workers.cloudflare.com) are serverless applications
-        running on JavaScript edge runtime on globale cloudflare CDN. Cloudflare
-        Workers allow the creation of applications without configuring or
-        maintaining infrastructure. 
+        We need a place to run our app, and unless you're nostalgic for the good ol' days of server-hugging (or enjoy the soothing hum of a dust-collecting machine in your basement), the cloud is where it's at. [Cloudflare Workers](https://workers.cloudflare.com)  loves Hono as much as we do, and it’s got your back for Python and Rust applications too.
       </OverviewItem>
     </Overview>
 
