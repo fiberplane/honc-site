@@ -1,12 +1,13 @@
 import { css, cx } from "hono/css";
 import { useEffect, useState } from "hono/jsx";
 
+import { GithubIcon } from "../components";
 import { anchorIds } from "../constants";
 
 export function Nav() {
   const [activeId, setActiveId] = useState<string | undefined>();
 
-  const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+  const handleIntersection = (entries: Array<IntersectionObserverEntry>) => {
     for (const entry of entries) {
       if (entry.isIntersecting) {
         setActiveId(entry.target.id);
@@ -29,7 +30,8 @@ export function Nav() {
     };
   }, []);
 
-  const getActiveClass = (id: string) => (activeId === id ? "active" : "");
+  const getActiveClass = (id: string) =>
+    activeId === id ? "active" : undefined;
 
   return (
     <nav class={navClass}>
@@ -46,13 +48,13 @@ export function Nav() {
           <a href={`#${anchorIds.quickstart}`}>Quickstart</a>
         </li>
 
-        {/* TODO: Set `active` class when CTA is not intersecting */}
         <li class="example">
           <a
             href="https://github.com/fiberplane/goose-quotes"
             rel="noreferrer noopener"
           >
             Sample API
+            <GithubIcon />
           </a>
         </li>
       </ul>
@@ -72,35 +74,53 @@ const anchorSelectors = Object.values(anchorIds)
 
 const navClass = css`
   height: var(--spacing-nav-size);
+  background-color: var(--color-bg-elevated);
+  position: fixed;
+  z-index: 1;
+  width: 100%;
 
   /* TODO: container query 680px for mobile */
   ul {
     list-style: none;
     padding: 0;
-    display: flex;
+    display: grid;
+    grid-auto-flow: column;
     gap: 1.5rem;
     justify-content: center;
-    position: fixed;
-    z-index: 1;
-    width: 100%;
-    top: 1rem;
+    align-items: center;
+    height: 100%;
 
     li {
       padding: 0.5rem 1.25rem;
       background-color: var(--color-bg-elevated);
       font: var(--font-code);
-
+      transition: background-color 0.2s ease-in-out;
+      border-radius: 0.25em;
+      
       a {
         transition: color 0.2s ease-in-out;
         color: var(--color-fg-default);
+        height: 100%;
       }
 
       &.active:not(.example) a {
         color: var(--color-fg-primary);
       }
 
-      &.example.active {
+      &.example {
         background-color: var(--color-bg-secondary);
+
+        a {
+          display: flex;
+          align-items: center;
+          gap: 0.5em;
+
+          svg {
+            height: 1em;
+            width: 1em;
+          }
+        }
+
       }
     }
   }
