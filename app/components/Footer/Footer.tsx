@@ -1,8 +1,8 @@
 import { css } from "hono/css";
 
 import { Wrapper } from "../Wrapper";
+import { GithubIcon } from "../icons";
 import {
-  GithubIcon,
   GrassLeftIcon,
   GrassRightIcon,
   HeartIcon,
