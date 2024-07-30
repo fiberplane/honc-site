@@ -1,10 +1,14 @@
 import { css } from "hono/css";
 import type { PropsWithChildren } from "hono/jsx";
 
-export function Overview({ children }: PropsWithChildren) {
+type OverviewProps = PropsWithChildren<{
+  title: string;
+}>;
+
+export function Overview({ children, title }: OverviewProps) {
   return (
     <section class={sectionClass}>
-      <h1>Overview</h1>
+      <h1>{title}</h1>
 
       <ul>{children}</ul>
     </section>
