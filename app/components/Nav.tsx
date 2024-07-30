@@ -4,10 +4,26 @@ export function Nav() {
   return (
     <nav class={navClass}>
       <ul>
-        <li class="active">Intro</li>
-        <li>Overview</li>
-        <li>Quickstart</li>
-        <li class="example">Example API</li>
+        <li class="active">
+          <a href="#intro">Intro</a>
+        </li>
+
+        <li>
+          <a href="#overview">Overview</a>
+        </li>
+
+        <li>
+          <a href="#quickstart">Overview</a>
+        </li>
+
+        <li class="example active">
+          <a
+            href="https://github.com/fiberplane/goose-quotes"
+            rel="noreferrer noopener"
+          >
+            Sample API
+          </a>
+        </li>
       </ul>
     </nav>
   );
@@ -33,11 +49,15 @@ const navClass = css`
       background-color: var(--color-bg-elevated);
       font: var(--font-code);
 
-      &.active {
+      a {
+        color: var(--color-fg-default);
+      }
+
+      &.active:not(.example) a {
         color: var(--color-fg-primary);
       }
 
-      &.example {
+      &.example.active {
         background-color: var(--color-bg-secondary);
       }
     }

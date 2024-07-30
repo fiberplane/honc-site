@@ -11,7 +11,7 @@ type HeroProps = PropsWithChildren<{
 
 export function Hero({ children, citation, title }: HeroProps) {
   return (
-    <div class={heroGrid}>
+    <div class={heroGrid} id="intro">
       <HoncIcon />
 
       <div class={heroContentGrid}>

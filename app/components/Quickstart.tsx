@@ -7,7 +7,7 @@ type QuickStartProps = PropsWithChildren<{
 
 export function Quickstart({ children, title }: QuickStartProps) {
   return (
-    <section class={sectionClass}>
+    <section class={sectionClass} id="quickstart">
       <h1>{title}</h1>
 
       <div>{children}</div>

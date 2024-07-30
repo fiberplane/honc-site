@@ -7,7 +7,7 @@ type OverviewProps = PropsWithChildren<{
 
 export function Overview({ children, title }: OverviewProps) {
   return (
-    <section class={sectionClass}>
+    <section id="overview" class={sectionClass}>
       <h1>{title}</h1>
 
       <ul>{children}</ul>
