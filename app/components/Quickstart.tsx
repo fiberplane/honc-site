@@ -1,10 +1,14 @@
 import { css } from "hono/css";
 import type { PropsWithChildren } from "hono/jsx";
 
-export function Quickstart({ children }: PropsWithChildren) {
+type QuickStartProps = PropsWithChildren<{
+  title: string;
+}>;
+
+export function Quickstart({ children, title }: QuickStartProps) {
   return (
     <section class={sectionClass}>
-      <h1>Quickstart</h1>
+      <h1>{title}</h1>
 
       <div>{children}</div>
     </section>
