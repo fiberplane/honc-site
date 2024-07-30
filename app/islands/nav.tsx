@@ -42,7 +42,8 @@ export function Nav() {
           <a href={`#${anchorIds.quickstart}`}>Quickstart</a>
         </li>
 
-        <li class="example active">
+        {/* TODO: Set `active` class when CTA is not intersecting */}
+        <li class="example">
           <a
             href="https://github.com/fiberplane/goose-quotes"
             rel="noreferrer noopener"
@@ -86,6 +87,7 @@ const navClass = css`
       font: var(--font-code);
 
       a {
+        transition: color 0.2s ease-in-out;
         color: var(--color-fg-default);
       }
 
