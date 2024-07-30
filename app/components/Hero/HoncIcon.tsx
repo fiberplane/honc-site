@@ -331,12 +331,15 @@ export function HoncIcon() {
 
 const rollInKeyframes = keyframes`
   0% {
-    translate: 0 50%;
     opacity: 0;
+    scale: 1;
+  }
+  75% {
+    scale: 1.05;
   }
   100% {
-    translate: 1;
     opacity: 1;
+    scale: 1;
   }
 `;
 
@@ -344,10 +347,10 @@ const textClass = css`
   --animation-delay: 0.1s;
 
   path {
-    transform-origin: center;
+    transform-origin: top center;
     opacity: 0;
     animation-name: ${rollInKeyframes};
-    animation-duration: 0.4s;
+    animation-duration: 0.3s;
     animation-fill-mode: forwards;
     animation-timing-function: cubic-bezier(0.11, 1.22, 0.79, 1.43);
   }
@@ -365,6 +368,6 @@ const textClass = css`
   }
 
   path:nth-of-type(5) {
-    animation-delay: calc(var(--animation-delay) * 8);
+    animation-delay: calc(var(--animation-delay) * 7);
   }
 `;
