@@ -3,6 +3,7 @@ import { jsxRenderer } from "hono/jsx-renderer";
 import { Link, Script } from "honox/server";
 
 import PostHog from "../islands/postHog";
+import { Nav } from "../islands/nav";
 
 export default jsxRenderer(({ children, title }) => {
   const posthogProjectKey = import.meta.env.VITE_POSTHOG_PROJECT_KEY;
@@ -54,7 +55,10 @@ export default jsxRenderer(({ children, title }) => {
         <Script src="/app/client.ts" />
       </head>
 
-      <body class={globalVariables}>{children}</body>
+      <body class={globalVariables}>
+        <Nav />
+        {children}
+      </body>
 
       <PostHog projectKey={posthogProjectKey} />
     </html>
