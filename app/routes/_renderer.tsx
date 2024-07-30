@@ -1,4 +1,4 @@
-import { Style } from "hono/css";
+import { css, Style } from "hono/css";
 import { jsxRenderer } from "hono/jsx-renderer";
 import { Link, Script } from "honox/server";
 
@@ -54,9 +54,18 @@ export default jsxRenderer(({ children, title }) => {
         <Script src="/app/client.ts" />
       </head>
 
-      <body>{children}</body>
+      <body class={globalVariables}>{children}</body>
 
       <PostHog projectKey={posthogProjectKey} />
     </html>
   );
 });
+
+// https://hono.dev/docs/helpers/css#global-styles
+const globalVariables = css`
+  :-hono-global {
+    :root {
+      --spacing-nav-size: 4rem;
+    }
+  }
+`;
