@@ -17,7 +17,7 @@ const sectionClass = css`
 
   h1 {
     text-align: center;
-    font-size: clamp(2.5rem, 10lvw, 5rem);
+    font-size: clamp(2.5rem, 12lvw, 5rem);
   }
 
   & > div {
