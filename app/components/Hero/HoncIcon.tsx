@@ -1,3 +1,5 @@
+import { css, keyframes } from "hono/css";
+
 export function HoncIcon() {
   return (
     <svg
@@ -300,26 +302,69 @@ export function HoncIcon() {
         d="M80.8551 91.823V122.683H76.1674C76.1445 112.537 76.1674 91.823 76.1674 91.823H80.8551Z"
         fill="#808EA2"
       />
-      <path
-        d="M21.6943 165.454V143.378H30.5485V152.206H34.9756V143.378H43.8298V165.454H34.9756V156.626H30.5485V165.454H21.6943Z"
-        fill="black"
-      />
-      <path
-        d="M50.744 165.454V161.04H46.3169V147.792H50.744V143.378H64.0306V147.792H68.4576V161.04H64.0306V165.454H50.744ZM55.1711 160.865H59.5981V147.973H55.1711V160.865Z"
-        fill="black"
-      />
-      <path
-        d="M71.6506 165.454V143.378H80.5048V147.792H84.9319V152.206H89.359V143.378H98.2131V165.454H89.359V161.04H84.9319V156.626H80.5048V165.454H71.6506Z"
-        fill="black"
-      />
-      <path
-        d="M105.127 165.454V161.04H100.7V147.792H105.127V143.378H118.413V147.792H122.84V152.206H113.986V147.792H109.559V161.04H113.986V156.626H122.84V161.04H118.413V165.454H105.127Z"
-        fill="black"
-      />
-      <path
-        d="M125.104 156.626V143.378H133.959V156.626H125.104ZM125.104 165.454V161.04H133.959V165.454H125.104Z"
-        fill="black"
-      />
+      <g class={textClass}>
+        <path
+          d="M21.6943 165.454V143.378H30.5485V152.206H34.9756V143.378H43.8298V165.454H34.9756V156.626H30.5485V165.454H21.6943Z"
+          fill="black"
+          data-id="1"
+        />
+        <path
+          d="M50.744 165.454V161.04H46.3169V147.792H50.744V143.378H64.0306V147.792H68.4576V161.04H64.0306V165.454H50.744ZM55.1711 160.865H59.5981V147.973H55.1711V160.865Z"
+          fill="black"
+        />
+        <path
+          d="M71.6506 165.454V143.378H80.5048V147.792H84.9319V152.206H89.359V143.378H98.2131V165.454H89.359V161.04H84.9319V156.626H80.5048V165.454H71.6506Z"
+          fill="black"
+        />
+        <path
+          d="M105.127 165.454V161.04H100.7V147.792H105.127V143.378H118.413V147.792H122.84V152.206H113.986V147.792H109.559V161.04H113.986V156.626H122.84V161.04H118.413V165.454H105.127Z"
+          fill="black"
+        />
+        <path
+          d="M125.104 156.626V143.378H133.959V156.626H125.104ZM125.104 165.454V161.04H133.959V165.454H125.104Z"
+          fill="black"
+        />
+      </g>
     </svg>
   );
 }
+
+const rollInKeyframes = keyframes`
+  0% {
+    translate: 0 50%;
+    opacity: 0;
+  }
+  100% {
+    translate: 1;
+    opacity: 1;
+  }
+`;
+
+const textClass = css`
+  --animation-delay: 0.1s;
+
+  path {
+    transform-origin: center;
+    opacity: 0;
+    animation-name: ${rollInKeyframes};
+    animation-duration: 0.4s;
+    animation-fill-mode: forwards;
+    animation-timing-function: cubic-bezier(0.11, 1.22, 0.79, 1.43);
+  }
+
+  path:nth-of-type(2) {
+    animation-delay: var(--animation-delay);
+  }
+
+  path:nth-of-type(3) {
+    animation-delay: calc(var(--animation-delay) * 2);
+  }
+
+  path:nth-of-type(4) {
+    animation-delay: calc(var(--animation-delay) * 3);
+  }
+
+  path:nth-of-type(5) {
+    animation-delay: calc(var(--animation-delay) * 8);
+  }
+`;
