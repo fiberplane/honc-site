@@ -1,7 +1,7 @@
 import { css } from "hono/css";
 import { useEffect, useState } from "hono/jsx";
 
-import { GithubIcon } from "../components";
+import { GithubIcon, Wrapper } from "../components";
 import { anchorIds } from "../constants";
 
 export function Nav() {
@@ -35,29 +35,31 @@ export function Nav() {
 
   return (
     <nav class={navClass}>
-      <ul>
-        <li class={getActiveClass(anchorIds.intro)}>
-          <a href={`#${anchorIds.intro}`}>Intro</a>
-        </li>
+      <Wrapper>
+        <ul>
+          <li class={getActiveClass(anchorIds.intro)}>
+            <a href={`#${anchorIds.intro}`}>Intro</a>
+          </li>
 
-        <li class={getActiveClass(anchorIds.overview)}>
-          <a href={`#${anchorIds.overview}`}>Overview</a>
-        </li>
+          <li class={getActiveClass(anchorIds.overview)}>
+            <a href={`#${anchorIds.overview}`}>Overview</a>
+          </li>
 
-        <li class={getActiveClass(anchorIds.quickstart)}>
-          <a href={`#${anchorIds.quickstart}`}>Quickstart</a>
-        </li>
+          <li class={getActiveClass(anchorIds.quickstart)}>
+            <a href={`#${anchorIds.quickstart}`}>Quickstart</a>
+          </li>
 
-        <li class="example">
-          <a
-            href="https://github.com/fiberplane/goose-quotes"
-            rel="noreferrer noopener"
-          >
-            Sample API
-            <GithubIcon />
-          </a>
-        </li>
-      </ul>
+          <li class="example">
+            <a
+              href="https://github.com/fiberplane/goose-quotes"
+              rel="noreferrer noopener"
+            >
+              Sample API
+              <GithubIcon />
+            </a>
+          </li>
+        </ul>
+      </Wrapper>
     </nav>
   );
 }
@@ -79,6 +81,8 @@ const navClass = css`
   z-index: 1;
   width: 100%;
   border-bottom: 1px solid var(--color-bg-default);
+  display: grid;
+  align-items: center;
 
   /* TODO: container query 720px for mobile */
   ul {
@@ -86,9 +90,7 @@ const navClass = css`
     padding: 0;
     display: grid;
     grid-auto-flow: column;
-    place-items: center;
     gap: 2rem;
-    height: 100%;
     width: fit-content;
     margin-inline: auto;
 
@@ -106,6 +108,7 @@ const navClass = css`
         display: grid;
         grid-auto-flow: column;
         align-items: center;
+        justify-content: center;
         gap: 0.5rem;
         transition: color 0.2s ease-in-out;
         color: var(--color-fg-default);
@@ -123,6 +126,29 @@ const navClass = css`
           width: 1.25em;
         }
       }
+    }
+  }
+
+  container-type: inline-size;
+  @container (width <= 720px) {
+    & {
+      position: relative;
+      isolation: isolate;
+      z-index: 90;
+    }
+
+    ul {
+      grid-auto-flow: row;
+      justify-items: stretch;
+      position: absolute;
+      right: 0;
+      top: var(--spacing-nav-size);
+      z-index: 1;
+      background-color: rgb(from var(--color-bg-elevated) r g b / 95%);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 2rem 1rem rgb(from var(--color-bg-elevated) r g b / 50%);
+      width: 100%;
+      padding: 2rem;
     }
   }
 `;
