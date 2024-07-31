@@ -1,4 +1,4 @@
-import { css, keyframes } from "hono/css";
+import { css, cx, keyframes } from "hono/css";
 import { useEffect, useState } from "hono/jsx";
 
 import { GithubIcon, HamburgerIcon, Wrapper } from "../components";
@@ -6,7 +6,7 @@ import { anchorIds } from "../constants";
 
 export function Nav() {
   const [activeId, setActiveId] = useState<string>(anchorIds.intro);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [shouldShowMenu, setShouldShowMenu] = useState(false);
 
   const handleIntersection = (entries: Array<IntersectionObserverEntry>) => {
     for (const entry of entries) {
@@ -17,49 +17,44 @@ export function Nav() {
   };
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
+    const intersectionObserver = new IntersectionObserver(
       handleIntersection,
-      observerOptions
+      observerOptions,
     );
     const elements = document.querySelectorAll(anchorSelectors);
     for (const element of elements) {
-      observer.observe(element);
+      intersectionObserver.observe(element);
     }
 
     return () => {
-      observer.disconnect();
+      intersectionObserver.disconnect();
     };
   }, []);
-
-  const getActiveClass = (id: string) =>
-    activeId === id ? "active" : undefined;
 
   return (
     <nav class={navClass}>
       <Wrapper>
         <ul
-          class={menuOpen ? "open" : ""}
+          class={cx(shouldShowMenu && "open")}
           id="menu"
           role="menu"
           aria-labelledby="menubutton"
         >
-          <li class={getActiveClass(anchorIds.intro)} role="presentation">
-            <a href={`#${anchorIds.intro}`} role="menuitem">
-              Intro
-            </a>
-          </li>
-
-          <li class={getActiveClass(anchorIds.overview)} role="presentation">
-            <a href={`#${anchorIds.overview}`} role="menuitem">
-              Overview
-            </a>
-          </li>
-
-          <li class={getActiveClass(anchorIds.quickstart)} role="presentation">
-            <a href={`#${anchorIds.quickstart}`} role="menuitem">
-              Quickstart
-            </a>
-          </li>
+          {menuItems.map(({ anchorId, title }) => (
+            <li
+              key={title}
+              class={cx(activeId === anchorId && "active")}
+              role="presentation"
+            >
+              <a
+                href={`#${anchorId}`}
+                onClick={() => setShouldShowMenu(false)}
+                role="menuitem"
+              >
+                {title}
+              </a>
+            </li>
+          ))}
 
           <li class="example" role="presentation">
             <a
@@ -75,11 +70,11 @@ export function Nav() {
 
         {/* TODO: Remove WIP grid spacer */}
         <div />
+        {/* TODO: Conditionally render & animate when logo is out of view */}
         <span class={titleClass}>HONC</span>
 
         <button
-          onClick={() => setMenuOpen((opened) => !opened)}
-          data-button
+          onClick={() => setShouldShowMenu((opened) => !opened)}
           id="menubutton"
           aria-haspopup="true"
           aria-controls="menu"
@@ -101,6 +96,12 @@ const observerOptions: IntersectionObserverInit = {
 const anchorSelectors = Object.values(anchorIds)
   .map((id) => `#${id}`)
   .join(", ");
+
+const menuItems: Array<{ anchorId: string; title: string }> = [
+  { anchorId: anchorIds.intro, title: "Intro" },
+  { anchorId: anchorIds.overview, title: "Overview" },
+  { anchorId: anchorIds.quickstart, title: "Quickstart" },
+];
 
 const menuOpenAnimation = keyframes`
   to {
@@ -141,7 +142,7 @@ const navClass = css`
 
       a {
         padding-inline: 1.25rem;
-        height: 40px;
+        height: 2.5rem;
         line-height: 1;
         display: grid;
         grid-auto-flow: column;
@@ -167,9 +168,12 @@ const navClass = css`
     }
   }
 
+  /*
+    Hide narrow screen elements
+    TODO: Handle the grid spacing <div /> element
+  */
   div[data-wrapper] {
-    & > span,
-    & > button {
+    & > span {
       display: none;
     }
   }
