@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "hono/jsx";
 
 import { GithubIcon, HamburgerIcon, Wrapper } from "../components";
 import { anchorIds } from "../constants";
+import { createPortal } from "hono/jsx/dom";
 
 export function Nav() {
   const navRef = useRef<HTMLElement>(null);
@@ -21,10 +22,12 @@ export function Nav() {
   useEffect(() => {
     if (showMenu) {
       setShouldShowMenu(true);
+      document.body.style.overflow = "hidden";
       return;
     }
 
     setShouldAnimateExit(true);
+    document.body.style.overflow = "";
 
     return () => {
       setShouldAnimateExit(false);
@@ -72,59 +75,63 @@ export function Nav() {
   }, []);
 
   return (
-    <nav class={navClass} ref={navRef}>
-      <Wrapper>
-        <ul
-          class={cx(shouldShowMenu && "open", shouldAnimateExit && "close")}
-          id="menu"
-          role="menu"
-          aria-labelledby="menubutton"
-          onAnimationEnd={handleAnimationEnd}
-        >
-          {menuItems.map(({ anchorId, title }) => (
-            <li
-              key={title}
-              class={cx(activeId === anchorId && "active")}
-              role="presentation"
-            >
+    <>
+      <nav class={navClass} ref={navRef}>
+        <Wrapper>
+          <ul
+            class={cx(shouldShowMenu && "open", shouldAnimateExit && "close")}
+            id="menu"
+            role="menu"
+            aria-labelledby="menubutton"
+            onAnimationEnd={handleAnimationEnd}
+          >
+            {menuItems.map(({ anchorId, title }) => (
+              <li
+                key={title}
+                class={cx(activeId === anchorId && "active")}
+                role="presentation"
+              >
+                <a
+                  href={`#${anchorId}`}
+                  onClick={() => setShowMenu(false)}
+                  role="menuitem"
+                >
+                  {title}
+                </a>
+              </li>
+            ))}
+
+            <li class="example" role="presentation">
               <a
-                href={`#${anchorId}`}
-                onClick={() => setShowMenu(false)}
+                href="https://github.com/fiberplane/goose-quotes"
+                rel="noreferrer noopener"
                 role="menuitem"
               >
-                {title}
+                Sample API
+                <GithubIcon />
               </a>
             </li>
-          ))}
+          </ul>
 
-          <li class="example" role="presentation">
-            <a
-              href="https://github.com/fiberplane/goose-quotes"
-              rel="noreferrer noopener"
-              role="menuitem"
-            >
-              Sample API
-              <GithubIcon />
-            </a>
-          </li>
-        </ul>
+          {/* TODO: Remove WIP grid spacer */}
+          <div />
+          {/* TODO: Conditionally render & animate when logo is out of view */}
+          <span class={titleClass}>HONC</span>
 
-        {/* TODO: Remove WIP grid spacer */}
-        <div />
-        {/* TODO: Conditionally render & animate when logo is out of view */}
-        <span class={titleClass}>HONC</span>
+          <button
+            onClick={() => setShowMenu((opened) => !opened)}
+            type="button"
+            id="menubutton"
+            aria-haspopup="true"
+            aria-controls="menu"
+          >
+            <HamburgerIcon />
+          </button>
+        </Wrapper>
+      </nav>
 
-        <button
-          onClick={() => setShowMenu((opened) => !opened)}
-          type="button"
-          id="menubutton"
-          aria-haspopup="true"
-          aria-controls="menu"
-        >
-          <HamburgerIcon />
-        </button>
-      </Wrapper>
-    </nav>
+      {showMenu && createPortal(<div class={overlayClass} />, document.body)}
+    </>
   );
 }
 
@@ -160,6 +167,12 @@ const menuCloseAnimation = keyframes`
     opacity: 0;
     translate: 0 -2rem;
   }
+`;
+
+const overlayClass = css`
+  position: absolute;
+  inset: 0;
+  background-color: rgb(from var(--color-bg-default) r g b / 60%);
 `;
 
 const navClass = css`
@@ -252,7 +265,7 @@ const navClass = css`
         position: absolute;
         right: 0;
         top: var(--spacing-nav-size);
-        background-color: rgb(from var(--color-bg-elevated) r g b / 95%);
+        background-color: rgb(from var(--color-bg-elevated) r g b / 88%);
         backdrop-filter: blur(10px);
         /* TODO: Look into PostCSS autoprefixer */
         -webkit-backdrop-filter: blur(10px);
