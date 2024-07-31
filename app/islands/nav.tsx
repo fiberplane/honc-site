@@ -5,9 +5,32 @@ import { GithubIcon, HamburgerIcon, Wrapper } from "../components";
 import { anchorIds } from "../constants";
 
 export function Nav() {
-  const [activeId, setActiveId] = useState<string>(anchorIds.intro);
-  const [shouldShowMenu, setShouldShowMenu] = useState(false);
   const navRef = useRef<HTMLElement>(null);
+  const [activeId, setActiveId] = useState<string>(anchorIds.intro);
+  const [showMenu, setShowMenu] = useState(false);
+  const [shouldShowMenu, setShouldShowMenu] = useState(false);
+  const [shouldAnimateExit, setShouldAnimateExit] = useState(false);
+
+  const handleAnimationEnd = () => {
+    if (!showMenu && shouldShowMenu) {
+      setShouldShowMenu(false);
+      setShouldAnimateExit(false);
+    }
+  };
+
+  useEffect(() => {
+    if (showMenu) {
+      setShouldShowMenu(true);
+      return;
+    }
+
+    setShouldAnimateExit(true);
+
+    return () => {
+      setShouldAnimateExit(false);
+      setShouldShowMenu(showMenu);
+    };
+  }, [showMenu]);
 
   const handleIntersection = (entries: Array<IntersectionObserverEntry>) => {
     for (const entry of entries) {
@@ -20,6 +43,7 @@ export function Nav() {
   const handleResize = (entries: Array<ResizeObserverEntry>) => {
     for (const entry of entries) {
       if (entry.contentRect.width >= 720) {
+        setShowMenu(false);
         setShouldShowMenu(false);
       }
     }
@@ -39,10 +63,11 @@ export function Nav() {
       return;
     }
     const resizeObserver = new ResizeObserver(handleResize);
-    resizeObserver.observe(navRef.current, { box: "border-box" });
+    resizeObserver.observe(navRef.current);
 
     return () => {
       intersectionObserver.disconnect();
+      resizeObserver.disconnect();
     };
   }, []);
 
@@ -50,10 +75,11 @@ export function Nav() {
     <nav class={navClass} ref={navRef}>
       <Wrapper>
         <ul
-          class={cx(shouldShowMenu && "open")}
+          class={cx(shouldShowMenu && "open", shouldAnimateExit && "close")}
           id="menu"
           role="menu"
           aria-labelledby="menubutton"
+          onAnimationEnd={handleAnimationEnd}
         >
           {menuItems.map(({ anchorId, title }) => (
             <li
@@ -63,7 +89,7 @@ export function Nav() {
             >
               <a
                 href={`#${anchorId}`}
-                onClick={() => setShouldShowMenu(false)}
+                onClick={() => setShowMenu(false)}
                 role="menuitem"
               >
                 {title}
@@ -89,11 +115,11 @@ export function Nav() {
         <span class={titleClass}>HONC</span>
 
         <button
-          onClick={() => setShouldShowMenu((opened) => !opened)}
+          onClick={() => setShowMenu((opened) => !opened)}
+          type="button"
           id="menubutton"
           aria-haspopup="true"
           aria-controls="menu"
-          type="button"
         >
           <HamburgerIcon />
         </button>
@@ -122,6 +148,17 @@ const menuOpenAnimation = keyframes`
   to {
     opacity: 1;
     translate: 0 0;
+  }
+`;
+
+const menuCloseAnimation = keyframes`
+  from {
+      opacity: 1;
+      translate: 0 0;
+  }
+  to {
+    opacity: 0;
+    translate: 0 -2rem;
   }
 `;
 
@@ -226,6 +263,11 @@ const navClass = css`
         display: grid;
         animation: ${menuOpenAnimation} 0.3s
           cubic-bezier(0.37, 0.85, 0.17, 1.12) forwards;
+
+        &.close {
+          animation: ${menuCloseAnimation} 0.4s
+            cubic-bezier(0.37, 0.85, 0.17, 1.12) forwards;
+        }
       }
     }
 
