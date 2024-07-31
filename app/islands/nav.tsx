@@ -19,7 +19,7 @@ export function Nav() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       handleIntersection,
-      observerOptions,
+      observerOptions
     );
     const elements = document.querySelectorAll(anchorSelectors);
     for (const element of elements) {
@@ -72,18 +72,22 @@ export function Nav() {
             </a>
           </li>
         </ul>
-      </Wrapper>
 
-      <button
-        onClick={() => setMenuOpen((opened) => !opened)}
-        data-button
-        id="menubutton"
-        aria-haspopup="true"
-        aria-controls="menu"
-        type="button"
-      >
-        <HamburgerIcon />
-      </button>
+        {/* TODO: Remove WIP grid spacer */}
+        <div />
+        <span class={titleClass}>HONC</span>
+
+        <button
+          onClick={() => setMenuOpen((opened) => !opened)}
+          data-button
+          id="menubutton"
+          aria-haspopup="true"
+          aria-controls="menu"
+          type="button"
+        >
+          <HamburgerIcon />
+        </button>
+      </Wrapper>
     </nav>
   );
 }
@@ -114,6 +118,10 @@ const navClass = css`
   border-bottom: 1px solid var(--color-bg-default);
   display: grid;
   align-items: center;
+
+  button#menubutton {
+    display: none;
+  }
 
   ul {
     list-style: none;
@@ -159,38 +167,43 @@ const navClass = css`
     }
   }
 
-  button#menubutton {
-    display: none;
+  div[data-wrapper] {
+    & > span,
+    & > button {
+      display: none;
+    }
   }
 
   container-type: inline-size;
   @container (width <= 720px) {
-    & {
-      position: relative;
-      isolation: isolate;
-      z-index: 90;
-      align-items: unset;
+    div[data-wrapper] {
+      display: grid;
+      grid-template-columns: 2rem 1fr 2rem;
+      place-items: center;
+
+      & > span {
+        display: block;
+      }
     }
 
     ul {
       display: none;
       opacity: 0;
-      grid-auto-flow: row;
-      justify-items: stretch;
-      position: absolute;
-      right: 0;
-      top: var(--spacing-nav-size);
-      z-index: 1;
-      background-color: rgb(from var(--color-bg-elevated) r g b / 95%);
-      backdrop-filter: blur(10px);
-      /* TODO: Look into PostCSS autoprefixer */
-      -webkit-backdrop-filter: blur(10px);
-      box-shadow: 0 0 2rem 1rem rgb(from var(--color-bg-elevated) r g b / 50%);
-      width: 100%;
-      padding: 2rem;
-      translate: 0 -50%;
 
       &.open {
+        grid-auto-flow: row;
+        justify-items: stretch;
+        position: absolute;
+        right: 0;
+        top: var(--spacing-nav-size);
+        background-color: rgb(from var(--color-bg-elevated) r g b / 95%);
+        backdrop-filter: blur(10px);
+        /* TODO: Look into PostCSS autoprefixer */
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: 0 0 2rem 1rem rgb(from var(--color-bg-elevated) r g b / 50%);
+        width: 100%;
+        padding: 2rem;
+        translate: 0 -50%;
         display: grid;
         animation: ${menuOpenAnimation} 0.3s
           cubic-bezier(0.37, 0.85, 0.17, 1.12) forwards;
@@ -200,22 +213,25 @@ const navClass = css`
     button#menubutton {
       display: grid;
       place-content: center;
-      justify-self: end;
       background: none;
       border: none;
       padding: 0.5rem;
       cursor: pointer;
-      transition: background-color 0.2s ease-in-out;
       color: var(--color-fg-default);
-
-      &:hover {
-        background-color: var(--color-bg-secondary);
-      }
 
       &,
       svg {
         aspect-ratio: 1;
+        width: 2rem;
       }
     }
   }
+`;
+
+const titleClass = css`
+  font: var(--font-headings-h1);
+  font-size: 1.75rem;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
 `;
