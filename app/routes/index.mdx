@@ -12,38 +12,35 @@ import {
     title="Honc Honc"
     citation={
       <>
-        "If a goose can migrate every season, you should be able to, too."
+        HONC is a modular collection of choices for building lightweight, type-safe, edge-enabled data apis that scale seamlessly to their demand.
       </>
     }
   >
-  <i>"I'm building a data API and I'm using TypeScript. What do I use?"</i>
-  <pre>
+  <i>"It's 2024, I'm building a data API and I'm using TypeScript. What do I use?"</i>
 
+  <pre style={{fontFamily: 'Arial, sans-serif', whiteSpace: 'pre-wrap'}}>
 ┏┓
 ┃┃╱╲ In this
 ┃╱╱╲╲ house
 ╱╱╭╮╲╲ we love
 ▔▏┗┛▕▔ & appreciate
 ╱▔▔▔▔▔▔▔▔▔▔╲
-                 JSON
+{"       "}JSON
 ╱╱┏┳┓╭╮┏┳┓ ╲╲
 ▔▏┗┻┛┃┃┗┻┛▕▔
 </pre>
-Most of the talk about the "best stack" in the TypeScript/JavaScript world is about "server components", "partial hydrations" and mayyyybe SPAs (if you're like from 2016).
 
-But what if you need a simple backend to offload some work from your main application, power your 3rd-party integrations, run a background job, serve as an interaction layer for ✨AI✨? In other words: something to receive some JSON, store it, process it, and return it.
+Most of the talk about the "best stack" in the TypeScript world is about "server components", "partial hydrations" and maybe SPAs.
 
-To create a data API you will need:
-A database (duh)
-An ORM layer
-A router/middleware framework to help you wire it all together
-Someone else's computer to deploy it all on
-Probably 10,000 other libraries for validation, processing etc. but the above 4 will get you started.
+What if you need a simple backend to run a background job, or power your third-party integrations (✨AI✨)? In other words: something to receive some JSON, store it, process it, and return it.
 
-<br />
-
-  HONC is a loosey-goosey collection of technology choices, shoehorned into an acronym that would justify plastering an image of pixelated waterfowl all over the internet.
-
+To create a data API you will need: 
+<ul>
+  <li>🪿 A database (duh)</li>
+  <li>🪿 An ORM layer</li>
+  <li>🪿 A router/middleware framework to help you wire it all together</li>
+  <li>🪿 Someone else's computer to deploy it all on</li>
+</ul>
   </Hero>
 </Wrapper>
 
@@ -55,16 +52,15 @@ Probably 10,000 other libraries for validation, processing etc. but the above 4 
       </OverviewItem>
 
       <OverviewItem title="ORM (Drizzle)" iconType="orm">
-         Someone on the Internet once said: <i>“In Typescript you want type safety between your database and your application.</i> Wise words. Do you need a traditional ORM for this? No, you do not. But we really wanted to put an O in HONC. And [Drizzle](https://orm.drizzle.team) ORM (our tool of choice)has a typesafe query builder for tons of relational databases.
-         In the end: you either use an ORM or end up building one yourself. 
+        You either use an ORM or you live long enough to build one yourself. Typescript apis need some sort of contract between the data and the application code. Do you need a traditional ORM for this? No, you do not. But we really wanted to put an O in HONC. And [Drizzle](https://orm.drizzle.team) ORM (our tool of choice) has a typesafe query builder for tons of relational databases.
       </OverviewItem>
 
       <OverviewItem title="Neon" iconType="db">
-        Postgres is eating the world, one feature at a time! Need vector storage for your AI apps? Check. Need to stash some JSON blobs? Done. And for everything else, there’s an extension. [Neon](https://neon.tech) is a serverless Postgres database that branches like a pro and scales right along with your app. We also like Supabase, which throws in real-time updates, authentication and an edge runtime for good measure. It’s like the Swiss Army knife of databases—minus the corkscrew.
+       Postgres is bopping these days. Need vector storage for your AI apps? Check. Need to stash some JSON blobs? Done. And for everything else, there’s an extension. [Neon](https://neon.tech) is a serverless Postgres database that grows right along with your app, no AWS certification needed. We also like Supabase, which throws in real-time updates, authentication and an edge runtime for good measure. Just use Postgres.
       </OverviewItem>
 
       <OverviewItem title="Cloud (Cloudflare)" iconType="cloud">
-        We need a place to run our app, and unless you're nostalgic for the good ol' days of server-hugging (or enjoy the soothing hum of a dust-collecting machine in your basement), the cloud is where it's at. [Cloudflare Workers](https://workers.cloudflare.com)  loves Hono as much as we do, and it’s got your back for Python and Rust applications too.
+        We need a place to run our app, and unless you're nostalgic for the soothing hum of a box in your basement, the cloud is where it's at. [Cloudflare Workers](https://workers.cloudflare.com)  loves Hono as much as we do.
       </OverviewItem>
     </Overview>
 
