@@ -1,5 +1,5 @@
 import { css, cx, keyframes } from "hono/css";
-import { useEffect, useState } from "hono/jsx";
+import { useEffect, useRef, useState } from "hono/jsx";
 
 import { GithubIcon, HamburgerIcon, Wrapper } from "../components";
 import { anchorIds } from "../constants";
@@ -7,11 +7,20 @@ import { anchorIds } from "../constants";
 export function Nav() {
   const [activeId, setActiveId] = useState<string>(anchorIds.intro);
   const [shouldShowMenu, setShouldShowMenu] = useState(false);
+  const navRef = useRef<HTMLElement>(null);
 
   const handleIntersection = (entries: Array<IntersectionObserverEntry>) => {
     for (const entry of entries) {
       if (entry.isIntersecting) {
         setActiveId(entry.target.id);
+      }
+    }
+  };
+
+  const handleResize = (entries: Array<ResizeObserverEntry>) => {
+    for (const entry of entries) {
+      if (entry.contentRect.width >= 720) {
+        setShouldShowMenu(false);
       }
     }
   };
@@ -26,13 +35,19 @@ export function Nav() {
       intersectionObserver.observe(element);
     }
 
+    if (!navRef.current) {
+      return;
+    }
+    const resizeObserver = new ResizeObserver(handleResize);
+    resizeObserver.observe(navRef.current, { box: "border-box" });
+
     return () => {
       intersectionObserver.disconnect();
     };
   }, []);
 
   return (
-    <nav class={navClass}>
+    <nav class={navClass} ref={navRef}>
       <Wrapper>
         <ul
           class={cx(shouldShowMenu && "open")}
