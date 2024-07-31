@@ -56,13 +56,4 @@ const OverviewItemClass = css`
   header h3 {
     margin: 0;
   }
-
-  /*
-    HACK: MDX is rendering empty <p> elements - which gives the empty elements
-    a height of 0, but still takes up space as the grid container has a gap
-    applied. This fixes the issue by hiding the empty <p> elements.
-  */
-  p:empty {
-    display: none;
-  }
 `;

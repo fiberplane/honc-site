@@ -5,7 +5,7 @@ import { GithubIcon } from "../components";
 import { anchorIds } from "../constants";
 
 export function Nav() {
-  const [activeId, setActiveId] = useState<string | undefined>();
+  const [activeId, setActiveId] = useState<string>(anchorIds.intro);
 
   const handleIntersection = (entries: Array<IntersectionObserverEntry>) => {
     for (const entry of entries) {
@@ -85,7 +85,7 @@ const navClass = css`
     list-style: none;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(4, auto);
+    grid-auto-flow: column;
     place-items: center;
     gap: 2rem;
     height: 100%;
@@ -97,11 +97,16 @@ const navClass = css`
       font: var(--font-code);
       transition: background-color 0.2s ease-in-out;
       border-radius: 0.25em;
-      padding: 0.5rem 1.25rem;
-
       background-color: var(--color-bg-default);
 
       a {
+        padding-inline: 1.25rem;
+        height: 40px;
+        line-height: 1;
+        display: grid;
+        grid-auto-flow: column;
+        align-items: center;
+        gap: 0.5rem;
         transition: color 0.2s ease-in-out;
         color: var(--color-fg-default);
       }
@@ -113,15 +118,9 @@ const navClass = css`
       &.example {
         background-color: var(--color-bg-secondary);
 
-        a {
-          display: flex;
-          align-items: center;
-          gap: 0.5em;
-
-          svg {
-            height: 1em;
-            width: 1em;
-          }
+        a svg {
+          height: 1.25em;
+          width: 1.25em;
         }
       }
     }
