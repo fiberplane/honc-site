@@ -49,6 +49,13 @@ export default jsxRenderer(({ children, title }) => {
           type="font/woff2"
           crossorigin=""
         />
+        <link
+          rel="preload"
+          href="/static/fonts/FiraCode.woff2"
+          as="font"
+          type="font/woff2"
+          crossorigin=""
+        />
 
         <Style />
         <Link href="/app/style.css" rel="stylesheet" />

@@ -1,6 +1,7 @@
 import { css } from "hono/css";
 import type { Child, PropsWithChildren } from "hono/jsx";
 
+import { anchorIds } from "../../constants";
 import { GithubIcon } from "../icons";
 import { Citation } from "./Citation";
 import { HoncIcon } from "./HoncIcon";
@@ -12,12 +13,12 @@ type HeroProps = PropsWithChildren<{
 
 export function Hero({ children, citation, title }: HeroProps) {
   return (
-    <div class={heroGrid} id="intro">
+    <div class={heroGrid}>
       <HoncIcon />
 
       <div class={heroContentGrid}>
         <header class={headingClass}>
-          <h1>{title}</h1>
+          <h1 id={anchorIds.intro}>{title}</h1>
           <p>{children}</p>
 
           <a

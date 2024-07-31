@@ -80,7 +80,7 @@ const navClass = css`
   width: 100%;
   border-bottom: 1px solid var(--color-bg-default);
 
-  /* TODO: container query 800px for mobile */
+  /* TODO: container query 720px for mobile */
   ul {
     list-style: none;
     padding: 0;
