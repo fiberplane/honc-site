@@ -1,11 +1,12 @@
-import { css } from "hono/css";
+import { css, keyframes } from "hono/css";
 import { useEffect, useState } from "hono/jsx";
 
-import { GithubIcon, Wrapper } from "../components";
+import { GithubIcon, HamburgerIcon, Wrapper } from "../components";
 import { anchorIds } from "../constants";
 
 export function Nav() {
   const [activeId, setActiveId] = useState<string>(anchorIds.intro);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const handleIntersection = (entries: Array<IntersectionObserverEntry>) => {
     for (const entry of entries) {
@@ -36,23 +37,35 @@ export function Nav() {
   return (
     <nav class={navClass}>
       <Wrapper>
-        <ul>
-          <li class={getActiveClass(anchorIds.intro)}>
-            <a href={`#${anchorIds.intro}`}>Intro</a>
+        <ul
+          class={menuOpen ? "open" : ""}
+          id="menu"
+          role="menu"
+          aria-labelledby="menubutton"
+        >
+          <li class={getActiveClass(anchorIds.intro)} role="presentation">
+            <a href={`#${anchorIds.intro}`} role="menuitem">
+              Intro
+            </a>
           </li>
 
-          <li class={getActiveClass(anchorIds.overview)}>
-            <a href={`#${anchorIds.overview}`}>Overview</a>
+          <li class={getActiveClass(anchorIds.overview)} role="presentation">
+            <a href={`#${anchorIds.overview}`} role="menuitem">
+              Overview
+            </a>
           </li>
 
-          <li class={getActiveClass(anchorIds.quickstart)}>
-            <a href={`#${anchorIds.quickstart}`}>Quickstart</a>
+          <li class={getActiveClass(anchorIds.quickstart)} role="presentation">
+            <a href={`#${anchorIds.quickstart}`} role="menuitem">
+              Quickstart
+            </a>
           </li>
 
-          <li class="example">
+          <li class="example" role="presentation">
             <a
               href="https://github.com/fiberplane/goose-quotes"
               rel="noreferrer noopener"
+              role="menuitem"
             >
               Sample API
               <GithubIcon />
@@ -60,6 +73,17 @@ export function Nav() {
           </li>
         </ul>
       </Wrapper>
+
+      <button
+        onClick={() => setMenuOpen((opened) => !opened)}
+        data-button
+        id="menubutton"
+        aria-haspopup="true"
+        aria-controls="menu"
+        type="button"
+      >
+        <HamburgerIcon />
+      </button>
     </nav>
   );
 }
@@ -74,6 +98,13 @@ const anchorSelectors = Object.values(anchorIds)
   .map((id) => `#${id}`)
   .join(", ");
 
+const menuOpenAnimation = keyframes`
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+`;
+
 const navClass = css`
   height: var(--spacing-nav-size);
   background-color: var(--color-bg-elevated);
@@ -84,7 +115,6 @@ const navClass = css`
   display: grid;
   align-items: center;
 
-  /* TODO: container query 720px for mobile */
   ul {
     list-style: none;
     padding: 0;
@@ -129,15 +159,22 @@ const navClass = css`
     }
   }
 
+  button#menubutton {
+    display: none;
+  }
+
   container-type: inline-size;
   @container (width <= 720px) {
     & {
       position: relative;
       isolation: isolate;
       z-index: 90;
+      align-items: unset;
     }
 
     ul {
+      display: none;
+      opacity: 0;
       grid-auto-flow: row;
       justify-items: stretch;
       position: absolute;
@@ -146,9 +183,39 @@ const navClass = css`
       z-index: 1;
       background-color: rgb(from var(--color-bg-elevated) r g b / 95%);
       backdrop-filter: blur(10px);
+      /* TODO: Look into PostCSS autoprefixer */
+      -webkit-backdrop-filter: blur(10px);
       box-shadow: 0 0 2rem 1rem rgb(from var(--color-bg-elevated) r g b / 50%);
       width: 100%;
       padding: 2rem;
+      translate: 0 -50%;
+
+      &.open {
+        display: grid;
+        animation: ${menuOpenAnimation} 0.3s
+          cubic-bezier(0.37, 0.85, 0.17, 1.12) forwards;
+      }
+    }
+
+    button#menubutton {
+      display: grid;
+      place-content: center;
+      justify-self: end;
+      background: none;
+      border: none;
+      padding: 0.5rem;
+      cursor: pointer;
+      transition: background-color 0.2s ease-in-out;
+      color: var(--color-fg-default);
+
+      &:hover {
+        background-color: var(--color-bg-secondary);
+      }
+
+      &,
+      svg {
+        aspect-ratio: 1;
+      }
     }
   }
 `;
