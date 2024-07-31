@@ -12,14 +12,37 @@ import {
     title="Honc Honc"
     citation={
       <>
-        "I can't believe I wasn't using <abbr>HONC</abbr> before. I'm finally
-        part of the cool coding kids club now!"
+        "If a goose can migrate every season, you should be able to, too."
       </>
     }
   >
-  Welcome to the HONC stack, the new kid on the block that's making waves in the web development world. It's like the cool cousin of the MEAN stack who went backpacking through Europe and came back with a taste for artisanal code and craft databases. HONC stands for Hono, ORM (we're partial to Drizzle), Neon (or any other hip Postgres-based database), and Cloudflare (because who doesn't love a good cloud these days?).
+  <i>"I'm building a data API and I'm using TypeScript. What do I use?"</i>
+  <pre>
+
+┏┓
+┃┃╱╲ In this
+┃╱╱╲╲ house
+╱╱╭╮╲╲ we love
+▔▏┗┛▕▔ & appreciate
+╱▔▔▔▔▔▔▔▔▔▔╲
+                 JSON
+╱╱┏┳┓╭╮┏┳┓ ╲╲
+▔▏┗┻┛┃┃┗┻┛▕▔
+</pre>
+Most of the talk about the "best stack" in the TypeScript/JavaScript world is about "server components", "partial hydrations" and mayyyybe SPAs (if you're like from 2016).
+
+But what if you need a simple backend to offload some work from your main application, power your 3rd-party integrations, run a background job, serve as an interaction layer for ✨AI✨? In other words: something to receive some JSON, store it, process it, and return it.
+
+To create a data API you will need:
+A database (duh)
+An ORM layer
+A router/middleware framework to help you wire it all together
+Someone else's computer to deploy it all on
+Probably 10,000 other libraries for validation, processing etc. but the above 4 will get you started.
+
 <br />
-  Buckle up, buttercup – we're about to take a wild ride through the land of lightning-fast routing, headless ORMs, databases that do everything but your laundry, and clouds that are more than just rain machines. 
+
+  HONC is a loosey-goosey collection of technology choices, shoehorned into an acronym that would justify plastering an image of pixelated waterfowl all over the internet.
 
   </Hero>
 </Wrapper>
@@ -28,11 +51,12 @@ import {
   <Wrapper>
     <Overview title="Overview">
       <OverviewItem title="Hono" iconType="hono">
-        [Hono](https://hono.dev) is your fast and furious api framework, supporting every JavaScript runtime you can dream of—Cloudflare, Deno, Bun, Vercel, Netlify, Node.js, and more. It’s lean and mean at just 14kB, with no dependencies, and powered by the Web Standard API.
+        [Hono](https://hono.dev). So hot right now. Hono is a Typescript framework for apis (and more!) that looks a lot like Express, except it’s smaller <i>(14kB smoll)</i>, lighter, faster, and runs anywhere that supports Web Standards. We’re talking Cloudflare, Deno, Bun, Vercel, Netlify, Node, and more. It has a bunch of helpful middleware to get you going, and a friendly and helpful community.
       </OverviewItem>
 
       <OverviewItem title="ORM (Drizzle)" iconType="orm">
-        [Drizzle](https://orm.drizzle.team) is a headless Object Relational Mapper (ORM). It maps the data logic presented in the database with the one in the application code. It’s like a matchmaker for your data. Drizzle offers both a relational and an SQL-like query API. And hey, we’re also big fans of Prisma, another fantastic ORM that brings its own flair to the table with real-time subscriptions and blazingly fast performance.
+         Someone on the Internet once said: <i>“In Typescript you want type safety between your database and your application.</i> Wise words. Do you need a traditional ORM for this? No, you do not. But we really wanted to put an O in HONC. And [Drizzle](https://orm.drizzle.team) ORM (our tool of choice)has a typesafe query builder for tons of relational databases.
+         In the end: you either use an ORM or end up building one yourself. 
       </OverviewItem>
 
       <OverviewItem title="Neon" iconType="db">
