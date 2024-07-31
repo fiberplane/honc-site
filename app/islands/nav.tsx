@@ -1,4 +1,4 @@
-import { css, cx } from "hono/css";
+import { css } from "hono/css";
 import { useEffect, useState } from "hono/jsx";
 
 import { GithubIcon } from "../components";
@@ -78,29 +78,32 @@ const navClass = css`
   position: fixed;
   z-index: 1;
   width: 100%;
+  border-bottom: 1px solid var(--color-bg-default);
 
-  /* TODO: container query 680px for mobile */
+  /* TODO: container query 800px for mobile */
   ul {
     list-style: none;
     padding: 0;
     display: grid;
-    grid-auto-flow: column;
-    gap: 1.5rem;
-    justify-content: center;
-    align-items: center;
+    grid-template-columns: repeat(4, auto);
+    place-items: center;
+    gap: 2rem;
     height: 100%;
+    width: fit-content;
+    margin-inline: auto;
 
     li {
-      padding: 0.5rem 1.25rem;
       background-color: var(--color-bg-elevated);
       font: var(--font-code);
       transition: background-color 0.2s ease-in-out;
       border-radius: 0.25em;
-      
+      padding: 0.5rem 1.25rem;
+
+      background-color: var(--color-bg-default);
+
       a {
         transition: color 0.2s ease-in-out;
         color: var(--color-fg-default);
-        height: 100%;
       }
 
       &.active:not(.example) a {
@@ -120,7 +123,6 @@ const navClass = css`
             width: 1em;
           }
         }
-
       }
     }
   }
