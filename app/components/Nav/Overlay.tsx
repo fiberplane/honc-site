@@ -24,12 +24,7 @@ export function Overlay({
     useAnimationState(isActive);
 
   useEffect(() => {
-    if (isActive) {
-      document.body.style.overflow = "hidden";
-      return;
-    }
-
-    document.body.style.overflow = "";
+    document.body.style.overflow = isActive ? "hidden" : "";
 
     return () => {
       document.body.style.overflow = "";
