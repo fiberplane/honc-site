@@ -1,9 +1,15 @@
 import { css, cx, keyframes } from "hono/css";
 import { useEffect, useRef, useState } from "hono/jsx";
 
-import { GithubIcon, HamburgerIcon, Overlay, Wrapper } from "../components";
+import {
+  GithubIcon,
+  HamburgerIcon,
+  Overlay,
+  Title,
+  Wrapper,
+} from "../components";
 import { anchorIds } from "../constants";
-import { useAnimationState } from "../hooks";
+import { useAnimationState, useResizeObserver } from "../hooks";
 
 // TODO:
 // - [ ] Handle focus properly when menu is opened
@@ -41,26 +47,19 @@ export function Nav() {
     }
   };
 
+  useResizeObserver({ handleResize, target: navRef });
+
   useEffect(() => {
     const intersectionObserver = new IntersectionObserver(
       handleIntersection,
-      observerOptions,
+      intersectionObserverOptions,
     );
     const elements = document.querySelectorAll(anchorSelectors);
     for (const element of elements) {
       intersectionObserver.observe(element);
     }
 
-    if (!navRef.current) {
-      return;
-    }
-    const resizeObserver = new ResizeObserver(handleResize);
-    resizeObserver.observe(navRef.current);
-
-    return () => {
-      intersectionObserver.disconnect();
-      resizeObserver.disconnect();
-    };
+    return () => intersectionObserver.disconnect();
   }, []);
 
   return (
@@ -103,7 +102,7 @@ export function Nav() {
           </ul>
 
           <div />
-          <span class={titleClass}>HONC</span>
+          <Title />
 
           <button
             onClick={() => setShowMenu((opened) => !opened)}
@@ -126,7 +125,7 @@ export function Nav() {
   );
 }
 
-const observerOptions: IntersectionObserverInit = {
+const intersectionObserverOptions: IntersectionObserverInit = {
   root: null,
   rootMargin: "0px 0px -100px 0px",
   threshold: 0.5,
@@ -252,7 +251,6 @@ const navClass = css`
         top: var(--spacing-nav-size);
         background-color: rgb(from var(--color-bg-elevated) r g b / 88%);
         backdrop-filter: blur(10px);
-        /* TODO: Look into PostCSS autoprefixer */
         -webkit-backdrop-filter: blur(10px);
         box-shadow: 0 0 2rem 1rem rgb(from var(--color-bg-elevated) r g b / 50%);
         width: 100%;
@@ -285,12 +283,4 @@ const navClass = css`
       }
     }
   }
-`;
-
-const titleClass = css`
-  font: var(--font-headings-h1);
-  font-size: 1.75rem;
-  line-height: 1;
-  margin: 0;
-  padding: 0;
 `;
