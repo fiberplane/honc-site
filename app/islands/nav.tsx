@@ -1,9 +1,10 @@
 import { css, cx, keyframes } from "hono/css";
 import { useEffect, useRef, useState } from "hono/jsx";
+import { createPortal } from "hono/jsx/dom";
 
 import { GithubIcon, HamburgerIcon, Wrapper } from "../components";
 import { anchorIds } from "../constants";
-import { createPortal } from "hono/jsx/dom";
+import { useKeyboardHandler } from "../hooks";
 
 export function Nav() {
   const navRef = useRef<HTMLElement>(null);
@@ -11,6 +12,14 @@ export function Nav() {
   const [showMenu, setShowMenu] = useState(false);
   const [shouldShowMenu, setShouldShowMenu] = useState(false);
   const [shouldAnimateExit, setShouldAnimateExit] = useState(false);
+
+  const handleKeyDown = (event: KeyboardEvent) => {
+    if (event.key === "Escape") {
+      setShowMenu(false);
+    }
+  };
+
+  useKeyboardHandler(handleKeyDown);
 
   const handleAnimationEnd = () => {
     if (!showMenu && shouldShowMenu) {
@@ -130,7 +139,15 @@ export function Nav() {
         </Wrapper>
       </nav>
 
-      {showMenu && createPortal(<div class={overlayClass} />, document.body)}
+      {showMenu &&
+        createPortal(
+          <div
+            class={overlayClass}
+            onClick={() => setShowMenu(false)}
+            onKeyDown={handleKeyDown}
+          />,
+          document.body,
+        )}
     </>
   );
 }
@@ -272,9 +289,9 @@ const navClass = css`
         box-shadow: 0 0 2rem 1rem rgb(from var(--color-bg-elevated) r g b / 50%);
         width: 100%;
         padding: 2rem;
-        translate: 0 -50%;
+        translate: 0 calc(var(--spacing-nav-size) * -1);
         display: grid;
-        animation: ${menuOpenAnimation} 0.3s
+        animation: ${menuOpenAnimation} 0.4s
           cubic-bezier(0.37, 0.85, 0.17, 1.12) forwards;
 
         &.close {
