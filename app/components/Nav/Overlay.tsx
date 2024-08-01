@@ -1,6 +1,7 @@
 import { css, cx, keyframes } from "hono/css";
-import { createPortal, Fragment } from "hono/jsx/dom";
-import { useAnimationState } from "../../hooks";
+import { createPortal, useEffect } from "hono/jsx/dom";
+
+import { useAnimationState, useKeyboardHandler } from "../../hooks";
 
 type OverlayProps = {
   isActive: boolean;
@@ -8,13 +9,32 @@ type OverlayProps = {
   onKeyDownHandler: (event: KeyboardEvent) => void;
 };
 
+/**
+ * Renders a full-screen overlay that can be used to block user interaction with
+ * the rest of the page.
+ */
 export function Overlay({
   isActive,
   onClickHandler,
   onKeyDownHandler,
 }: OverlayProps) {
+  useKeyboardHandler(onKeyDownHandler);
+
   const { handleAnimationEnd, shouldAnimateExit, shouldShow } =
     useAnimationState(isActive);
+
+  useEffect(() => {
+    if (isActive) {
+      document.body.style.overflow = "hidden";
+      return;
+    }
+
+    document.body.style.overflow = "";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isActive]);
 
   if (!shouldShow) {
     return <></>;
@@ -24,7 +44,7 @@ export function Overlay({
     <>
       {createPortal(
         <div
-          class={cx(overlayClass, shouldAnimateExit && "exit")}
+          class={cx(overlayClass, shouldAnimateExit && overlayExitClass)}
           onClick={onClickHandler}
           onKeyDown={onKeyDownHandler}
           onAnimationEnd={handleAnimationEnd}
@@ -54,9 +74,9 @@ const overlayClass = css`
   position: fixed;
   inset: 0;
   background-color: rgb(from var(--color-bg-default) r g b / 60%);
-  animation: ${fadeIn} 0.2s ease-out;
+  animation: ${fadeIn} 0.2s ease-out forwards;
+`;
 
-  &.exit {
-    animation: ${fadeOut} 0.2s ease-out;
-  }
+const overlayExitClass = css`
+  animation: ${fadeOut} 0.2s ease-out forwards;
 `;

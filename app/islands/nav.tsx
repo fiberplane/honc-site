@@ -3,7 +3,13 @@ import { useEffect, useRef, useState } from "hono/jsx";
 
 import { GithubIcon, HamburgerIcon, Overlay, Wrapper } from "../components";
 import { anchorIds } from "../constants";
-import { useAnimationState, useKeyboardHandler } from "../hooks";
+import { useAnimationState } from "../hooks";
+
+// TODO:
+// - [ ] Handle focus properly when menu is opened
+// - [ ] Fix mobile grid setup
+// - [ ] Conditionally render & animate title when logo is out of view
+// - [ ] PostCSS autoprefixer in Honox
 
 export function Nav() {
   const navRef = useRef<HTMLElement>(null);
@@ -18,21 +24,6 @@ export function Nav() {
       setShowMenu(false);
     }
   };
-
-  useKeyboardHandler(handleKeyDown);
-
-  useEffect(() => {
-    if (showMenu) {
-      document.body.style.overflow = "hidden";
-      return;
-    }
-
-    document.body.style.overflow = "";
-
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [showMenu]);
 
   const handleIntersection = (entries: Array<IntersectionObserverEntry>) => {
     for (const entry of entries) {
@@ -111,9 +102,7 @@ export function Nav() {
             </li>
           </ul>
 
-          {/* TODO: Remove WIP grid spacer */}
           <div />
-          {/* TODO: Conditionally render & animate when logo is out of view */}
           <span class={titleClass}>HONC</span>
 
           <button
