@@ -1,7 +1,7 @@
 import { useEffect, useState } from "hono/jsx";
 
 export function useAnimationState(isActive: boolean) {
-  const [shouldShow, setShouldShow] = useState(false);
+  const [shouldShow, setShouldShow] = useState(isActive);
   const [shouldAnimateExit, setShouldAnimateExit] = useState(false);
 
   const handleAnimationEnd = () => {

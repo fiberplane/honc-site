@@ -1,8 +1,7 @@
 import { css, cx, keyframes } from "hono/css";
 import { useEffect, useRef, useState } from "hono/jsx";
-import { createPortal } from "hono/jsx/dom";
 
-import { GithubIcon, HamburgerIcon, Wrapper } from "../components";
+import { GithubIcon, HamburgerIcon, Overlay, Wrapper } from "../components";
 import { anchorIds } from "../constants";
 import { useAnimationState, useKeyboardHandler } from "../hooks";
 
@@ -129,15 +128,11 @@ export function Nav() {
         </Wrapper>
       </nav>
 
-      {showMenu &&
-        createPortal(
-          <div
-            class={overlayClass}
-            onClick={() => setShowMenu(false)}
-            onKeyDown={handleKeyDown}
-          />,
-          document.body,
-        )}
+      <Overlay
+        isActive={showMenu}
+        onClickHandler={() => setShowMenu(false)}
+        onKeyDownHandler={handleKeyDown}
+      />
     </>
   );
 }
@@ -174,12 +169,6 @@ const menuCloseAnimation = keyframes`
     opacity: 0;
     translate: 0 -2rem;
   }
-`;
-
-const overlayClass = css`
-  position: absolute;
-  inset: 0;
-  background-color: rgb(from var(--color-bg-default) r g b / 60%);
 `;
 
 const navClass = css`
