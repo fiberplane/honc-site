@@ -4,14 +4,15 @@ import { createPortal } from "hono/jsx/dom";
 
 import { GithubIcon, HamburgerIcon, Wrapper } from "../components";
 import { anchorIds } from "../constants";
-import { useKeyboardHandler } from "../hooks";
+import { useAnimationState, useKeyboardHandler } from "../hooks";
 
 export function Nav() {
   const navRef = useRef<HTMLElement>(null);
   const [activeId, setActiveId] = useState<string>(anchorIds.intro);
   const [showMenu, setShowMenu] = useState(false);
-  const [shouldShowMenu, setShouldShowMenu] = useState(false);
-  const [shouldAnimateExit, setShouldAnimateExit] = useState(false);
+
+  const { handleAnimationEnd, shouldAnimateExit, shouldShow } =
+    useAnimationState(showMenu);
 
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === "Escape") {
@@ -21,26 +22,16 @@ export function Nav() {
 
   useKeyboardHandler(handleKeyDown);
 
-  const handleAnimationEnd = () => {
-    if (!showMenu && shouldShowMenu) {
-      setShouldShowMenu(false);
-      setShouldAnimateExit(false);
-    }
-  };
-
   useEffect(() => {
     if (showMenu) {
-      setShouldShowMenu(true);
       document.body.style.overflow = "hidden";
       return;
     }
 
-    setShouldAnimateExit(true);
     document.body.style.overflow = "";
 
     return () => {
-      setShouldAnimateExit(false);
-      setShouldShowMenu(showMenu);
+      document.body.style.overflow = "";
     };
   }, [showMenu]);
 
@@ -56,7 +47,6 @@ export function Nav() {
     for (const entry of entries) {
       if (entry.contentRect.width >= 720) {
         setShowMenu(false);
-        setShouldShowMenu(false);
       }
     }
   };
@@ -88,7 +78,7 @@ export function Nav() {
       <nav class={navClass} ref={navRef}>
         <Wrapper>
           <ul
-            class={cx(shouldShowMenu && "open", shouldAnimateExit && "close")}
+            class={cx(shouldShow && "open", shouldAnimateExit && "close")}
             id="menu"
             role="menu"
             aria-labelledby="menubutton"
