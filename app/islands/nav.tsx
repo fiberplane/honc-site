@@ -1,11 +1,12 @@
 import { css, cx, keyframes } from "hono/css";
-import { useEffect, useRef, useState } from "hono/jsx";
+import { Fragment, useEffect, useRef, useState } from "hono/jsx";
 
 import {
+  CtaMenuItem,
   GithubIcon,
   HamburgerIcon,
+  MenuItem,
   Overlay,
-  Title,
   Wrapper,
 } from "../components";
 import { anchorIds } from "../constants";
@@ -74,35 +75,25 @@ export function Nav() {
             onAnimationEnd={handleAnimationEnd}
           >
             {menuItems.map(({ anchorId, title }) => (
-              <li
-                key={title}
-                class={cx(activeId === anchorId && "active")}
-                role="presentation"
-              >
-                <a
-                  href={`#${anchorId}`}
-                  onClick={() => setShowMenu(false)}
-                  role="menuitem"
+              <Fragment key={title}>
+                <MenuItem
+                  isActive={activeId === anchorId}
+                  anchorId={anchorId}
+                  onClickHandler={() => setShowMenu(false)}
                 >
                   {title}
-                </a>
-              </li>
+                </MenuItem>
+              </Fragment>
             ))}
 
-            <li class="example" role="presentation">
-              <a
-                href="https://github.com/fiberplane/goose-quotes"
-                rel="noreferrer noopener"
-                role="menuitem"
-              >
-                Sample API
-                <GithubIcon />
-              </a>
-            </li>
+            <CtaMenuItem href="https://github.com/fiberplane/goose-quotes">
+              Sample API
+              <GithubIcon />
+            </CtaMenuItem>
           </ul>
 
           <div />
-          <Title />
+          <span>HONC</span>
 
           <button
             onClick={() => setShowMenu((opened) => !opened)}
@@ -181,40 +172,6 @@ const navClass = css`
     gap: 2rem;
     width: fit-content;
     margin-inline: auto;
-
-    li {
-      background-color: var(--color-bg-elevated);
-      font: var(--font-code);
-      transition: background-color 0.2s ease-in-out;
-      border-radius: 0.25em;
-      background-color: var(--color-bg-default);
-
-      a {
-        padding-inline: 1.25rem;
-        height: 2.5rem;
-        line-height: 1;
-        display: grid;
-        grid-auto-flow: column;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
-        transition: color 0.2s ease-in-out;
-        color: var(--color-fg-default);
-      }
-
-      &.active:not(.example) a {
-        color: var(--color-fg-primary);
-      }
-
-      &.example {
-        background-color: var(--color-bg-secondary);
-
-        a svg {
-          height: 1.25em;
-          width: 1.25em;
-        }
-      }
-    }
   }
 
   /*
