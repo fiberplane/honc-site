@@ -55,8 +55,8 @@ const blockQuoteClass = css`
   background-color: var(--color-bg-elevated);
   padding: 1rem 2rem;
   border-left: 4px solid var(--color-border-secondary);
-  border-top-right-radius: 1rem;
-  border-bottom-right-radius: 1rem;
+  border-top-right-radius: 2rem;
+  /* border-bottom-right-radius: 2rem; */
   align-self: center;
 
   header {
