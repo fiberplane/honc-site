@@ -7,6 +7,7 @@ import {
   HamburgerIcon,
   MenuItem,
   Overlay,
+  Title,
   Wrapper,
 } from "../components";
 import { anchorIds } from "../constants";
@@ -15,7 +16,7 @@ import { useAnimationState, useResizeObserver } from "../hooks";
 // TODO:
 // - [ ] Handle focus properly when menu is opened
 // - [ ] Fix mobile grid setup
-// - [ ] Conditionally render & animate title when logo is out of view
+// - [x] Conditionally render & animate title when logo is out of view
 // - [ ] PostCSS autoprefixer in Honox
 
 export function Nav() {
@@ -92,8 +93,8 @@ export function Nav() {
             </CtaMenuItem>
           </ul>
 
-          <div />
-          <span>HONC</span>
+          <div data-icon />
+          <Title isMenuOpen={showMenu} data-title />
 
           <button
             onClick={() => setShowMenu((opened) => !opened)}
@@ -102,7 +103,7 @@ export function Nav() {
             aria-haspopup="true"
             aria-controls="menu"
           >
-            <HamburgerIcon />
+            <HamburgerIcon isOpened={showMenu} />
           </button>
         </Wrapper>
       </nav>
@@ -179,7 +180,7 @@ const navClass = css`
     TODO: Handle the grid spacing <div /> element
   */
   div[data-wrapper] {
-    & > span {
+    & > header[data-title] {
       display: none;
     }
   }
@@ -189,10 +190,12 @@ const navClass = css`
     div[data-wrapper] {
       display: grid;
       grid-template-columns: 2rem 1fr 2rem;
+      grid-template-areas: "icon title button";
       place-items: center;
 
-      & > span {
+      & > header[data-title] {
         display: block;
+        grid-area: title;
       }
     }
 
@@ -226,6 +229,7 @@ const navClass = css`
 
     button#menubutton {
       display: grid;
+      grid-area: button;
       place-content: center;
       background: none;
       border: none;

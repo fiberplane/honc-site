@@ -1,5 +1,7 @@
 import { css, keyframes } from "hono/css";
 
+import { anchorIds } from "../../constants";
+
 export function HoncIcon() {
   return (
     <svg
@@ -8,6 +10,7 @@ export function HoncIcon() {
       height="180"
       viewBox="0 0 156 180"
       fill="none"
+      id={anchorIds.honcIcon}
     >
       <title>Honc icon logo</title>
       <rect

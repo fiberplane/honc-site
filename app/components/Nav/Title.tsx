@@ -1,67 +1,63 @@
-import { css, keyframes } from "hono/css";
-import { memo } from "hono/jsx";
+import { css, cx } from "hono/css";
+import { useEffect, useState } from "hono/jsx";
 
-export const Title = memo(function Title() {
-  const title = "HONC";
+import { anchorIds } from "../../constants";
 
-  console.log("render?");
+type TitleProps = {
+  className?: ReturnType<typeof css>;
+  isMenuOpen: boolean;
+};
+
+export const Title = function Title({ className, isMenuOpen }: TitleProps) {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const handleIntersection = (entries: Array<IntersectionObserverEntry>) => {
+      for (const entry of entries) {
+        setIsVisible(!entry.isIntersecting);
+      }
+    };
+
+    const intersectionObserver = new IntersectionObserver(
+      handleIntersection,
+      options,
+    );
+
+    const element = document.getElementById(anchorIds.honcIcon);
+    if (!element) {
+      return;
+    }
+
+    intersectionObserver.observe(element);
+
+    return () => intersectionObserver.disconnect();
+  }, []);
 
   return (
-    <header class={headerClass}>
-      <span class={spanClass}>HI</span>
-
-      {/* {[...title].map((l, i) => {
-        const spanClass = getSpanClass(i);
-        return (
-          <span class={spanClass} key={{ i: l }}>
-            {l}
-          </span>
-        );
-      })} */}
+    <header
+      data-title
+      class={cx(headerClass, className, (isVisible || isMenuOpen) && "visible")}
+    >
+      <span>HONC</span>
     </header>
   );
-});
+};
 
-function getSpanClass(i: number) {
-  return css`
-    &:nth-child(${i + 1}) {
-      animation-delay: calc(var(--animation-delay) * ${i});
-    }
-  `;
-}
-
-const spanClass = css`
-  animation-delay: var(--animation-delay);
-`;
-
-const rollInKeyframes = keyframes`
-  0% {
-    opacity: 0;
-    scale: 1;
-  }
-  75% {
-    scale: 1.05;
-  }
-  100% {
-    opacity: 1;
-    scale: 1;
-  }
-`;
+const options: IntersectionObserverInit = {
+  root: null,
+  rootMargin: "48px 0px 0px 0px",
+  threshold: 0.5,
+};
 
 const headerClass = css`
-  --animation-delay: 0.1s;
-
   font: var(--font-headings-h1);
   font-size: 1.75rem;
   line-height: 1;
   margin: 0;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
 
-  span {
-    opacity: 0;
-    transform-origin: top center;
-    animation-name: ${rollInKeyframes};
-    animation-duration: 0.3s;
-    animation-fill-mode: forwards;
-    animation-timing-function: cubic-bezier(0.11, 1.22, 0.79, 1.43);
+  &.visible {
+    opacity: 1;
   }
 `;
