@@ -1,7 +1,7 @@
 import { css, cx } from "hono/css";
 import { useEffect, useState } from "hono/jsx";
 
-import { anchorIds } from "../../constants";
+import { honcIconId } from "../../constants";
 
 type TitleProps = {
   className?: ReturnType<typeof css>;
@@ -23,7 +23,7 @@ export const Title = function Title({ className, isMenuOpen }: TitleProps) {
       options,
     );
 
-    const element = document.getElementById(anchorIds.honcIcon);
+    const element = document.getElementById(honcIconId);
     if (!element) {
       return;
     }
