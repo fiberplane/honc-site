@@ -73,6 +73,15 @@ body {
 
 p {
   margin-block: 1em;
+
+  /*
+    HACK: MDX is rendering empty <p> elements - which gives the empty elements
+    a height of 0, but still takes up space as it has a margin applied. It
+    also takes up space in grid containers with gap values applied.
+  */
+  &:empty {
+    display: none;
+  }
 }
 
 h1,

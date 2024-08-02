@@ -1,6 +1,8 @@
 import { css } from "hono/css";
 import type { PropsWithChildren } from "hono/jsx";
 
+import { anchorIds } from "../../constants";
+
 type OverviewProps = PropsWithChildren<{
   title: string;
 }>;
@@ -8,7 +10,7 @@ type OverviewProps = PropsWithChildren<{
 export function Overview({ children, title }: OverviewProps) {
   return (
     <section class={sectionClass}>
-      <h1>{title}</h1>
+      <h1 id={anchorIds.overview}>{title}</h1>
 
       <ul>{children}</ul>
     </section>

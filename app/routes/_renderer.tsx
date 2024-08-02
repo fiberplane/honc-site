@@ -1,8 +1,9 @@
-import { Style } from "hono/css";
+import { css, Style } from "hono/css";
 import { jsxRenderer } from "hono/jsx-renderer";
 import { Link, Script } from "honox/server";
 
 import PostHog from "../islands/postHog";
+import { Nav } from "../islands/nav";
 
 export default jsxRenderer(({ children, title }) => {
   const posthogProjectKey = import.meta.env.VITE_POSTHOG_PROJECT_KEY;
@@ -48,15 +49,34 @@ export default jsxRenderer(({ children, title }) => {
           type="font/woff2"
           crossorigin=""
         />
+        <link
+          rel="preload"
+          href="/static/fonts/FiraCode.woff2"
+          as="font"
+          type="font/woff2"
+          crossorigin=""
+        />
 
         <Style />
         <Link href="/app/style.css" rel="stylesheet" />
         <Script src="/app/client.ts" />
       </head>
 
-      <body>{children}</body>
+      <body class={globalVariables}>
+        <Nav />
+        {children}
+      </body>
 
-      <PostHog projectKey={posthogProjectKey} />
+      {import.meta.env.PROD && <PostHog projectKey={posthogProjectKey} />}
     </html>
   );
 });
+
+// https://hono.dev/docs/helpers/css#global-styles
+const globalVariables = css`
+  :-hono-global {
+    :root {
+      --spacing-nav-size: 4rem;
+    }
+  }
+`;

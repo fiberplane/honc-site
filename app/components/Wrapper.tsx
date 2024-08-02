@@ -6,7 +6,11 @@ type WrapperProps = PropsWithChildren<{
 }>;
 
 export function Wrapper({ children, className }: WrapperProps) {
-  return <div class={cx(wrapperClass, className)}>{children}</div>;
+  return (
+    <div data-wrapper class={cx(wrapperClass, className)}>
+      {children}
+    </div>
+  );
 }
 
 const wrapperClass = css`

@@ -1,6 +1,8 @@
 import { css } from "hono/css";
 import type { PropsWithChildren } from "hono/jsx";
 
+import { anchorIds } from "../constants";
+
 type QuickStartProps = PropsWithChildren<{
   title: string;
 }>;
@@ -8,7 +10,7 @@ type QuickStartProps = PropsWithChildren<{
 export function Quickstart({ children, title }: QuickStartProps) {
   return (
     <section class={sectionClass}>
-      <h1>{title}</h1>
+      <h1 id={anchorIds.quickstart}>{title}</h1>
 
       <div>{children}</div>
     </section>
