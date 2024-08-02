@@ -2,76 +2,59 @@ import { css } from "hono/css";
 import type { Child, PropsWithChildren } from "hono/jsx";
 
 import { anchorIds } from "../../constants";
-import { GithubIcon } from "../icons";
 import { Citation } from "./Citation";
 import { HoncIcon } from "./HoncIcon";
 
 type HeroProps = PropsWithChildren<{
   citation: Child;
-  title: string;
+  quote: Child;
+  intro: Child;
 }>;
 
-export function Hero({ children, citation, title }: HeroProps) {
+export function Hero({
+  children,
+  citation,
+  intro,
+  quote /* , title */,
+}: HeroProps) {
   return (
-    <div class={heroGrid}>
+    <div class={heroGrid} id={anchorIds.intro}>
       <HoncIcon />
 
-      <div class={heroContentGrid}>
-        <header class={headingClass}>
-          <h1 id={anchorIds.intro}>{title}</h1>
-          <p>{children}</p>
+      <blockquote>"{quote}"</blockquote>
 
-          <a
-            href="https://github.com/fiberplane/goose-quotes"
-            rel="noreferrer noopener"
-            class={ctaClass}
-          >
-            Check out the sample API
-            <GithubIcon />
-          </a>
-        </header>
-
+      <div class={visualGrid}>
+        {children}
         <Citation>{citation}</Citation>
       </div>
+
+      <div class={introClass}>{intro}</div>
     </div>
   );
 }
 
-const ctaClass = css`
-  display: inline-flex;
-  gap: 0.75rem;
-  align-content: center;
-  padding: 0.5rem 1rem;
-  border-radius: 0.25rem;
-  font: var(--font-code);
-  background-color: var(--color-bg-secondary);
-  color: var(--color-fg-default);
-
-  svg {
-    height: 1.25em;
-    width: 1.25em;
-  }
+const introClass = css`
+  max-width: 62ch;
+  margin-inline: auto;
 `;
 
-const heroContentGrid = css`
+const visualGrid = css`
   display: grid;
-  grid: auto / 1fr;
+  grid-template-columns: 1fr;
   gap: 2rem;
-`;
 
-const headingClass = css`
-  padding: 0;
-
-  h1 {
-    margin-block-start: 0;
-    text-align: center;
-  }
-
-  p {
-    margin-inline: auto;
-    max-width: 54ch;
+  pre {
+    letter-spacing: 0.25em;
+    display: inline-block;
+    /* justify-self: center; */
   }
 `;
+
+// const heroContentGrid = css`
+//   display: grid;
+//   grid: auto / 1fr;
+//   gap: 2rem;
+// `;
 
 const heroGrid = css`
   display: grid;
@@ -81,30 +64,24 @@ const heroGrid = css`
   margin-block-end: 4rem;
   container-type: inline-size;
 
+  /* HONC icon */
   svg {
     justify-self: center;
   }
 
+  & > blockquote {
+    font: var(--font-headings-h2);
+    font-style: italic;
+    background-color: var(--color-bg-elevated);
+    padding: 4rem;
+    max-width: 40ch;
+    margin-inline: auto;
+  }
+
   @container (width >= 840px) {
-    ${heroContentGrid} {
+    ${visualGrid} {
       grid: auto / repeat(2, 1fr);
       gap: 0rem;
-
-      ${headingClass} {
-        padding-inline-end: 2rem;
-
-        h1 {
-          margin-block-end: 0.5em;
-          font-size: 4rem;
-          text-align: left;
-        }
-
-        p {
-          margin-block-end: 0;
-          margin-inline: auto;
-          max-width: 54ch;
-        }
-      }
     }
   }
 `;
