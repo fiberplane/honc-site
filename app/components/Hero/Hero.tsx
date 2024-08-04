@@ -1,7 +1,6 @@
 import { css } from "hono/css";
 import type { Child, PropsWithChildren } from "hono/jsx";
 
-import { anchorIds } from "../../constants";
 import { Citation } from "./Citation";
 import { HoncIcon } from "./HoncIcon";
 
@@ -19,34 +18,48 @@ export function Hero({
 }: HeroProps) {
   return (
     <div class={heroClass}>
-      <div class={honcDefinitionClass}>
-        <HoncIcon />
-        <Citation>{citation}</Citation>
-      </div>
+      <div class={bentoGrid}>
+        <div
+          style={{
+            backgroundColor: "var(--color-bg-secondary)",
+            borderTopLeftRadius: "2rem",
+          }}
+        >
+          <HoncIcon />
+        </div>
 
-      <blockquote>{quote}</blockquote>
+        <Citation>{citation}</Citation>
+        <blockquote class={quoteClass}>
+          <q>{quote}</q>
+        </blockquote>
+      </div>
     </div>
   );
 }
 
-const heroClass = css`
-  max-width: 860px;
-  margin-inline: auto;
+const quoteClass = css`
+  font: var(--font-headings-h2);
+  font-style: italic;
+  background-color: var(--color-bg-elevated);
+  padding: 4rem;
+  border-bottom-left-radius: 2rem;
+  border-bottom-right-radius: 2rem;
 
-  & > blockquote {
-    font: var(--font-headings-h2);
-    font-style: italic;
-    background-color: var(--color-bg-elevated);
-    padding: 4rem;
-    border-bottom-left-radius: 2rem;
-    border-bottom-right-radius: 2rem;
-    margin-top: 2rem;
+  /* workaround for the citation block */
+  && {
+    grid-column: 1 / -1;
   }
 `;
 
-const honcDefinitionClass = css`
+const heroClass = css`
+  max-width: 55rem;
+  margin-inline: auto;
+`;
+
+const bentoGrid = css`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto auto;
   padding-block-start: calc(var(--spacing-nav-size) * 2);
   gap: 2rem;
 

@@ -57,7 +57,7 @@ const blockQuoteClass = css`
   border-left: 4px solid var(--color-border-secondary);
   border-top-right-radius: 2rem;
   /* border-bottom-right-radius: 2rem; */
-  align-self: center;
+  /* align-self: center; */
 
   header {
     h3 {
