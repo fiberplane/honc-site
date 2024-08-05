@@ -1,10 +1,10 @@
 import { css } from "hono/css";
 import type { Child, PropsWithChildren } from "hono/jsx";
 
+import AsciiArt from "../../islands/asciiArt";
 import { Wrapper } from "../Wrapper";
 import { Citation } from "./Citation";
 import { HoncIcon } from "./HoncIcon";
-import AsciiArt from "../../islands/asciiArt";
 
 type HeroProps = PropsWithChildren<{
   citation: Child;
@@ -40,12 +40,26 @@ export function Hero({ children, citation, quote }: HeroProps) {
 
 const introGrid = css`
   display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 4rem;
+  gap: 2rem;
   margin-top: 4rem;
-  padding: 2rem 4rem;;
-  background-color: var(--color-bg-elevated);
   border-radius: 2rem;
+  overflow: hidden;
+
+  span p {
+    margin-block-start: 0;
+  }
+
+  & > * {
+    padding: 3rem 4rem;
+    padding-inline: calc(var(--spacing-wrapper) * 2);
+    background-color: var(--color-bg-elevated);
+  }
+
+  /* Center the ACII art element island in the DOM */
+  & > *:nth-child(2) {
+    display: grid;
+    place-content: center;
+  }
 `;
 
 const quoteClass = css`
@@ -55,6 +69,7 @@ const quoteClass = css`
   font-size: 1.5rem;
   padding: 2rem;
   margin-inline: calc(var(--spacing-wrapper) * -2);
+  padding-inline: calc(var(--spacing-wrapper) * 3);
 `;
 
 const iconContainer = css`
@@ -84,6 +99,7 @@ const container = css`
 
       svg {
         grid-row: 1 / 2;
+        align-self: center;
         width: 100%;
         height: auto;
       }
@@ -106,6 +122,10 @@ const container = css`
       font-style: italic;
       border-bottom-left-radius: 2rem;
       border-bottom-right-radius: 2rem;
+    }
+
+    ${introGrid} {
+      grid-template-columns: 1fr auto;
     }
   }
 `;

@@ -1,30 +1,41 @@
 import { css } from "hono/css";
 import { useEffect, useRef } from "hono/jsx";
 
+import { useIntersectionObserver } from "../hooks";
+
 export default function AsciiArt() {
   const preRef = useRef<HTMLPreElement>(null);
+  const isIntersecting = useRef(false);
+
+  const intersectionObserverCallback = (
+    entries: Array<IntersectionObserverEntry>,
+    observer: IntersectionObserver,
+  ) => {
+    for (const element of entries) {
+      const refElement = element.target;
+      if (!refElement) {
+        continue;
+      }
+
+      if (element.isIntersecting) {
+        isIntersecting.current = true;
+        observer.unobserve(refElement);
+        observer.disconnect();
+      }
+    }
+  };
+
+  // As, apparently, `document` can't be accessed anywhere else than in
+  // useEffect, we need to store the elements in a ref to be able to access them
+  useIntersectionObserver(preRef, intersectionObserverCallback, {
+    rootMargin: "0px 0px -70% 0px",
+  });
 
   useEffect(() => {
     const pre = preRef.current;
     if (!pre) {
       return;
     }
-
-    let isIntersecting = false;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const element of entries) {
-          if (element.isIntersecting) {
-            isIntersecting = true;
-            observer.unobserve(pre);
-            observer.disconnect();
-          }
-        }
-      },
-      { rootMargin: "0px 0px -200px 0px" },
-    );
-
-    observer.observe(pre);
 
     let chance = 0.05;
 
@@ -39,7 +50,7 @@ export default function AsciiArt() {
 
       pre.textContent = newMatrix;
 
-      if (isIntersecting) {
+      if (isIntersecting.current) {
         chance += 0.03;
       }
 
@@ -74,12 +85,14 @@ const asciiArt = `
 
 const art = asciiArt.split("\n");
 const columnCount = art.reduce((a, r) => (r.length > a ? r.length : a), 0);
-const matrix = art.map((row) => {
-  if (row.length < columnCount) {
-    return row + " ".repeat(columnCount - row.length);
-  }
-  return row;
-});
+const matrix = art
+  .map((row) => {
+    if (row.length < columnCount) {
+      return row + " ".repeat(columnCount - row.length);
+    }
+    return row;
+  })
+  .filter((row) => new Set(row).size > 1);
 
 function getRandomChar() {
   const characters =
@@ -87,10 +100,6 @@ function getRandomChar() {
 
   return characters.charAt(Math.floor(Math.random() * characters.length));
 }
-
-const wrapperClass = css`
-  display: grid;
-`;
 
 const preClass = css`
   white-space: pre;

@@ -2,6 +2,7 @@ import { css } from "hono/css";
 import type { PropsWithChildren } from "hono/jsx";
 
 import { anchorIds } from "../../constants";
+import { Wrapper } from "../Wrapper";
 
 type OverviewProps = PropsWithChildren<{
   title: string;
@@ -9,35 +10,34 @@ type OverviewProps = PropsWithChildren<{
 
 export function Overview({ children, title }: OverviewProps) {
   return (
-    <section class={sectionClass}>
-      <h1 id={anchorIds.overview}>{title}</h1>
+    <Wrapper narrow>
+      <section class={sectionClass}>
+        <h1 id={anchorIds.overview}>{title}</h1>
 
-      <ul>{children}</ul>
-    </section>
+        <ul>{children}</ul>
+      </section>
+    </Wrapper>
   );
 }
 
 const sectionClass = css`
-  max-width: 55rem;
-  margin-inline: auto;
-
   h1 {
     text-align: center;
     font-size: clamp(2.5rem, 14lvw, 5rem);
   }
-
+  
   ul {
+    border-radius: 2rem;
+    overflow: hidden;
     display: grid;
-    gap: 4rem;
-    background-color: var(--color-bg-elevated);
+    gap: 2rem;
     list-style: none;
-    padding: 3rem 2rem;
-  }
-
-  container-type: inline-size;
-  @container (width >= 768px) {
-    ul {
-      padding: 3rem 6rem;
+    padding: 0;
+    
+    & > li {
+      padding: 3rem 2rem;
+      width: 100%;
+      background-color: var(--color-bg-elevated);
     }
   }
 `;

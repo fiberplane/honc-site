@@ -11,7 +11,11 @@ import {
   Wrapper,
 } from "../components";
 import { anchorIds } from "../constants";
-import { useAnimationState, useResizeObserver } from "../hooks";
+import {
+  useAnimationState,
+  useIntersectionObserver,
+  useResizeObserver,
+} from "../hooks";
 
 // TODO:
 // - [ ] Handle focus properly when menu is opened
@@ -23,6 +27,7 @@ export function Nav() {
   const navRef = useRef<HTMLElement>(null);
   const [activeId, setActiveId] = useState<string>(anchorIds.intro);
   const [showMenu, setShowMenu] = useState(false);
+  const elements = useRef<NodeListOf<Element>>(null);
 
   const { handleAnimationEnd, shouldAnimateExit, shouldShow } =
     useAnimationState(showMenu);
@@ -49,20 +54,18 @@ export function Nav() {
     }
   };
 
-  useResizeObserver({ handleResize, target: navRef });
-
+  // As, apparently, `document` can't be accessed anywhere else than in
+  // useEffect, we need to store the elements in a ref to be able to access them
   useEffect(() => {
-    const intersectionObserver = new IntersectionObserver(
-      handleIntersection,
-      intersectionObserverOptions,
-    );
-    const elements = document.querySelectorAll(anchorSelectors);
-    for (const element of elements) {
-      intersectionObserver.observe(element);
-    }
-
-    return () => intersectionObserver.disconnect();
+    elements.current = document.querySelectorAll(anchorSelectors);
   }, []);
+
+  useResizeObserver({ handleResize, target: navRef });
+  useIntersectionObserver(
+    elements,
+    handleIntersection,
+    intersectionObserverOptions,
+  );
 
   return (
     <>
@@ -153,7 +156,9 @@ const menuCloseAnimation = keyframes`
 
 const navClass = css`
   height: var(--spacing-nav-size);
-  background-color: var(--color-bg-elevated);
+  background-color: rgb(from var(--color-bg-elevated) r g b / 88%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   position: fixed;
   z-index: 1;
   width: 100%;
@@ -214,7 +219,7 @@ const navClass = css`
         -webkit-backdrop-filter: blur(10px);
         box-shadow: 0 0 2rem 1rem rgb(from var(--color-bg-elevated) r g b / 50%);
         width: 100%;
-        padding: 2rem;
+        padding: var(--spacing-wrapper);
         translate: 0 calc(var(--spacing-nav-size) * -1);
         display: grid;
         animation: ${menuOpenAnimation} 0.4s
@@ -229,9 +234,10 @@ const navClass = css`
 
     button#menubutton {
       display: grid;
-      grid-area: button;
       place-content: center;
+      grid-area: button;
       background: none;
+      height: 100%; /* Safari funkiness fix */
       border: none;
       padding: 0.5rem;
       cursor: pointer;
