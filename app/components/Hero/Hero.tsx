@@ -4,17 +4,17 @@ import type { Child, PropsWithChildren } from "hono/jsx";
 import { Wrapper } from "../Wrapper";
 import { Citation } from "./Citation";
 import { HoncIcon } from "./HoncIcon";
+import AsciiArt from "../../islands/asciiArt";
 
 type HeroProps = PropsWithChildren<{
   citation: Child;
   quote: Child;
-  intro: Child;
 }>;
 
-export function Hero({ citation, quote }: HeroProps) {
+export function Hero({ children, citation, quote }: HeroProps) {
   return (
-    <Wrapper narrow>
-      <div class={container}>
+    <div class={container}>
+      <Wrapper narrow>
         <div class={bentoGrid}>
           <div class={iconContainer}>
             <HoncIcon />
@@ -26,10 +26,27 @@ export function Hero({ citation, quote }: HeroProps) {
             <q>{quote}</q>
           </blockquote>
         </div>
-      </div>
-    </Wrapper>
+      </Wrapper>
+
+      <Wrapper>
+        <div className={introGrid}>
+          <span>{children}</span>
+          <AsciiArt />
+        </div>
+      </Wrapper>
+    </div>
   );
 }
+
+const introGrid = css`
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4rem;
+  margin-top: 4rem;
+  padding: 2rem 4rem;;
+  background-color: var(--color-bg-elevated);
+  border-radius: 2rem;
+`;
 
 const quoteClass = css`
   font: var(--font-headings-h2);

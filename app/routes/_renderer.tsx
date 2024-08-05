@@ -64,7 +64,7 @@ export default jsxRenderer(({ children, title }) => {
 
       <body class={globalVariables}>
         <Nav />
-        {children}
+        <main>{children}</main>
       </body>
 
       {import.meta.env.PROD && <PostHog projectKey={posthogProjectKey} />}

@@ -118,10 +118,6 @@ ul {
   padding-inline-start: 0.5rem;
 }
 
-.json-house {
-  letter-spacing: 0.25em;
-}
-
 pre,
 code {
   font: var(--font-code);

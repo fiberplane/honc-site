@@ -1,6 +1,5 @@
 import { css } from "hono/css";
 import { useEffect, useRef } from "hono/jsx";
-import { Wrapper } from "../components";
 
 export default function AsciiArt() {
   const preRef = useRef<HTMLPreElement>(null);
@@ -55,11 +54,9 @@ export default function AsciiArt() {
   }, []);
 
   return (
-    <Wrapper className={wrapperClass}>
-      <pre ref={preRef} class={preClass}>
-        <span>{asciiArt}</span>
-      </pre>
-    </Wrapper>
+    <pre ref={preRef} class={preClass}>
+      <span>{asciiArt}</span>
+    </pre>
   );
 }
 
