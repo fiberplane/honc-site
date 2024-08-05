@@ -1,6 +1,7 @@
 import { css } from "hono/css";
 import type { Child, PropsWithChildren } from "hono/jsx";
 
+import { Wrapper } from "../Wrapper";
 import { Citation } from "./Citation";
 import { HoncIcon } from "./HoncIcon";
 
@@ -10,30 +11,23 @@ type HeroProps = PropsWithChildren<{
   intro: Child;
 }>;
 
-export function Hero({
-  children,
-  citation,
-  intro,
-  quote /* , title */,
-}: HeroProps) {
+export function Hero({ citation, quote }: HeroProps) {
   return (
-    <div class={heroClass}>
-      <div class={bentoGrid}>
-        <div
-          style={{
-            backgroundColor: "var(--color-bg-secondary)",
-            borderTopLeftRadius: "2rem",
-          }}
-        >
-          <HoncIcon />
-        </div>
+    <Wrapper narrow>
+      <div class={container}>
+        <div class={bentoGrid}>
+          <div class={iconContainer}>
+            <HoncIcon />
+          </div>
 
-        <Citation>{citation}</Citation>
-        <blockquote class={quoteClass}>
-          <q>{quote}</q>
-        </blockquote>
+          <Citation>{citation}</Citation>
+
+          <blockquote class={quoteClass}>
+            <q>{quote}</q>
+          </blockquote>
+        </div>
       </div>
-    </div>
+    </Wrapper>
   );
 }
 
@@ -41,83 +35,60 @@ const quoteClass = css`
   font: var(--font-headings-h2);
   font-style: italic;
   background-color: var(--color-bg-elevated);
-  padding: 4rem;
-  border-bottom-left-radius: 2rem;
-  border-bottom-right-radius: 2rem;
-
-  /* workaround for the citation block */
-  && {
-    grid-column: 1 / -1;
-  }
+  font-size: 1.5rem;
+  padding: 2rem;
+  margin-inline: calc(var(--spacing-wrapper) * -2);
 `;
 
-const heroClass = css`
-  max-width: 55rem;
-  margin-inline: auto;
+const iconContainer = css`
+  justify-self: center;
 `;
 
 const bentoGrid = css`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: auto auto;
   padding-block-start: calc(var(--spacing-nav-size) * 2);
   gap: 2rem;
-
-  svg {
-    grid-row: 1 / 2;
-    width: 100%;
-    height: auto;
-  }
-
-  blockquote {
-    grid-column: 2 / -1;
-  }
 `;
 
-const visualGrid = css`
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
+const container = css`
+  container-type: inline-size;
 
-  pre {
-    letter-spacing: 0.25em;
-    display: inline-block;
-    /* justify-self: center; */
+  @container (width >= 720px) {
+    ${quoteClass} {
+      padding: 4rem;
+      font: var(--font-headings-h2);
+    }
+  }
+
+  @container (width >= 800px) {
+    ${bentoGrid} {
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto auto;
+
+      svg {
+        grid-row: 1 / 2;
+        width: 100%;
+        height: auto;
+      }
+
+      div[data-citation] {
+        grid-column: 2 / -1;
+      }
+    }
+
+    ${iconContainer} {
+      background-color: var(--color-bg-secondary);
+      border-top-left-radius: 2rem;
+      width: 100%;
+      display: grid;
+    }
+
+    ${quoteClass} {
+      grid-column: 1 / -1;
+      margin: 0;
+      font-style: italic;
+      border-bottom-left-radius: 2rem;
+      border-bottom-right-radius: 2rem;
+    }
   }
 `;
-
-// const heroContentGrid = css`
-//   display: grid;
-//   grid: auto / 1fr;
-//   gap: 2rem;
-// `;
-
-// const heroGrid = css`
-//   display: grid;
-//   grid-auto-flow: row;
-//   gap: 4rem;
-//   padding-block-start: calc(var(--spacing-nav-size) * 2);
-//   margin-block-end: 4rem;
-//   container-type: inline-size;
-
-//   /* HONC icon */
-//   svg {
-//     justify-self: center;
-//   }
-
-//   & > blockquote {
-//     font: var(--font-headings-h2);
-//     font-style: italic;
-//     background-color: var(--color-bg-elevated);
-//     padding: 4rem;
-//     max-width: 40ch;
-//     margin-inline: auto;
-//   }
-
-//   @container (width >= 840px) {
-//     ${visualGrid} {
-//       grid: auto / repeat(2, 1fr);
-//       gap: 0rem;
-//     }
-//   }
-// `;
