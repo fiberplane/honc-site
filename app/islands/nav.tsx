@@ -219,7 +219,7 @@ const navClass = css`
         -webkit-backdrop-filter: blur(10px);
         box-shadow: 0 0 2rem 1rem rgb(from var(--color-bg-elevated) r g b / 50%);
         width: 100%;
-        padding: 2rem;
+        padding: var(--spacing-wrapper);
         translate: 0 calc(var(--spacing-nav-size) * -1);
         display: grid;
         animation: ${menuOpenAnimation} 0.4s

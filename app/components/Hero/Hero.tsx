@@ -43,7 +43,7 @@ const introGrid = css`
   grid-template-columns: 1fr auto;
   gap: 4rem;
   margin-top: 4rem;
-  padding: 2rem 4rem;;
+  padding: 2rem 4rem;
   background-color: var(--color-bg-elevated);
   border-radius: 2rem;
 `;
@@ -55,6 +55,7 @@ const quoteClass = css`
   font-size: 1.5rem;
   padding: 2rem;
   margin-inline: calc(var(--spacing-wrapper) * -2);
+  padding-inline: calc(var(--spacing-wrapper) * 2);
 `;
 
 const iconContainer = css`

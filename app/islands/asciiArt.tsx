@@ -1,5 +1,6 @@
 import { css } from "hono/css";
 import { useEffect, useRef } from "hono/jsx";
+
 import { useIntersectionObserver } from "../hooks";
 
 export default function AsciiArt() {
@@ -11,13 +12,14 @@ export default function AsciiArt() {
     observer: IntersectionObserver,
   ) => {
     for (const element of entries) {
-      if (!preRef.current) {
+      const refElement = element.target;
+      if (!refElement) {
         continue;
       }
 
       if (element.isIntersecting) {
         isIntersecting.current = true;
-        observer.unobserve(preRef.current);
+        observer.unobserve(refElement);
         observer.disconnect();
       }
     }
@@ -34,22 +36,6 @@ export default function AsciiArt() {
     if (!pre) {
       return;
     }
-
-    // let isIntersecting = false;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const element of entries) {
-          if (element.isIntersecting) {
-            isIntersecting.current = true;
-            observer.unobserve(pre);
-            observer.disconnect();
-          }
-        }
-      },
-      { rootMargin: "0px 0px -200px 0px" },
-    );
-
-    observer.observe(pre);
 
     let chance = 0.05;
 

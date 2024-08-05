@@ -18,6 +18,7 @@ export const useIntersectionObserver: UseIntersectionObserver =
       if (!target) {
         return;
       }
+
       const observer = new IntersectionObserver(callback, options);
 
       const isList = isNodeList(target);
@@ -35,7 +36,8 @@ export const useIntersectionObserver: UseIntersectionObserver =
           return;
         }
 
-        if (isNodeList(currentTarget)) {
+        const isList = isNodeList(currentTarget);
+        if (isList) {
           for (const element of currentTarget) {
             observer.observe(element);
           }
