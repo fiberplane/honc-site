@@ -66,7 +66,7 @@ export default function AsciiArt() {
 
   return (
     <pre ref={preRef} class={preClass}>
-      <span>{asciiArt}</span>
+      <span>{asciiArt.trim()}</span>
     </pre>
   );
 }
