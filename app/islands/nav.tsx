@@ -234,9 +234,10 @@ const navClass = css`
 
     button#menubutton {
       display: grid;
-      grid-area: button;
       place-content: center;
+      grid-area: button;
       background: none;
+      height: 100%; /* Safari funkiness fix */
       border: none;
       padding: 0.5rem;
       cursor: pointer;
