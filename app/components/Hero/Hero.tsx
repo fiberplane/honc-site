@@ -1,10 +1,10 @@
 import { css } from "hono/css";
 import type { Child, PropsWithChildren } from "hono/jsx";
 
+import AsciiArt from "../../islands/asciiArt";
 import { Wrapper } from "../Wrapper";
 import { Citation } from "./Citation";
 import { HoncIcon } from "./HoncIcon";
-import AsciiArt from "../../islands/asciiArt";
 
 type HeroProps = PropsWithChildren<{
   citation: Child;
@@ -51,6 +51,7 @@ const introGrid = css`
 
   & > * {
     padding: 3rem 4rem;
+    padding-inline: calc(var(--spacing-wrapper) * 2);
     background-color: var(--color-bg-elevated);
   }
 

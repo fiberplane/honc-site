@@ -6,7 +6,6 @@ import {
   Quickstart,
   Wrapper,
 } from "../components";
-import AsciiArt from "../islands/asciiArt";
 
 <Hero
   quote="It's 2024, I'm building a data API and I'm using TypeScript. What do I use?"
@@ -36,46 +35,37 @@ import AsciiArt from "../islands/asciiArt";
 
 </Hero>
 
-<main>
-  <Wrapper>
-    <Overview title="Overview">
-      <OverviewItem title="Hono" iconType="hono">
-        [Hono](https://hono.dev). So hot right now. Hono is a Typescript
-        framework for apis (and more!) that looks a lot like Express, except
-        it’s smaller <i>(14kB smoll)</i>, lighter, faster, and runs anywhere
-        that supports Web Standards. We’re talking Cloudflare, Deno, Bun,
-        Vercel, Netlify, Node, and more. It has a bunch of helpful middleware to
-        get you going, and a friendly and helpful community.
-      </OverviewItem>
-
-      <OverviewItem title="ORM (Drizzle)" iconType="orm">
-        You either use an ORM or you live long enough to build one yourself.
-        Typescript apis need some sort of contract between the data and the
-        application code. Do you need a traditional ORM for this? No, you do
-        not. But we really wanted to put an O in HONC. And
-        [Drizzle](https://orm.drizzle.team) ORM (our tool of choice) has a
-        typesafe query builder for tons of relational databases.
-      </OverviewItem>
-
-      <OverviewItem title="Neon" iconType="db">
-       Postgres is bopping these days. Need vector storage for your AI apps?
-       Check. Need to stash some JSON blobs? Done. And for everything else,
-       there’s an extension. [Neon](https://neon.tech) is a serverless Postgres
-       database that grows right along with your app, no AWS certification
-       needed. We also like Supabase, which throws in real-time updates,
-       authentication and an edge runtime for good measure. Just use Postgres.
-      </OverviewItem>
-
-      <OverviewItem title="Cloud (Cloudflare)" iconType="cloud">
-        We need a place to run our app, and unless you're nostalgic for the
-        soothing hum of a box in your basement, the cloud is where it's at.
-        [Cloudflare Workers](https://workers.cloudflare.com)  loves Hono as much
-        as we do.
-      </OverviewItem>
-    </Overview>
-
-  </Wrapper>
-</main>
+<Overview title="Overview">
+  <OverviewItem title="Hono" iconType="hono">
+    [Hono](https://hono.dev). So hot right now. Hono is a Typescript framework
+    for apis (and more!) that looks a lot like Express, except it’s smaller{" "}
+    <i>(14kB smoll)</i>, lighter, faster, and runs anywhere that supports Web
+    Standards. We’re talking Cloudflare, Deno, Bun, Vercel, Netlify, Node, and
+    more. It has a bunch of helpful middleware to get you going, and a friendly
+    and helpful community.
+  </OverviewItem>
+  <OverviewItem title="ORM (Drizzle)" iconType="orm">
+    You either use an ORM or you live long enough to build one yourself.
+    Typescript apis need some sort of contract between the data and the
+    application code. Do you need a traditional ORM for this? No, you do not.
+    But we really wanted to put an O in HONC. And
+    [Drizzle](https://orm.drizzle.team) ORM (our tool of choice) has a typesafe
+    query builder for tons of relational databases.
+  </OverviewItem>
+  <OverviewItem title="Neon" iconType="db">
+    Postgres is bopping these days. Need vector storage for your AI apps? Check.
+    Need to stash some JSON blobs? Done. And for everything else, there’s an
+    extension. [Neon](https://neon.tech) is a serverless Postgres database that
+    grows right along with your app, no AWS certification needed. We also like
+    Supabase, which throws in real-time updates, authentication and an edge
+    runtime for good measure. Just use Postgres.
+  </OverviewItem>
+  <OverviewItem title="Cloud (Cloudflare)" iconType="cloud">
+    We need a place to run our app, and unless you're nostalgic for the soothing
+    hum of a box in your basement, the cloud is where it's at. [Cloudflare
+    Workers](https://workers.cloudflare.com) loves Hono as much as we do.
+  </OverviewItem>
+</Overview>
 
 <Wrapper>
   <Quickstart title="Quickstart">
