@@ -1,110 +1,111 @@
 import { css } from "hono/css";
 import type { Child, PropsWithChildren } from "hono/jsx";
 
-import { anchorIds } from "../../constants";
-import { GithubIcon } from "../icons";
+import { Wrapper } from "../Wrapper";
 import { Citation } from "./Citation";
 import { HoncIcon } from "./HoncIcon";
+import AsciiArt from "../../islands/asciiArt";
 
 type HeroProps = PropsWithChildren<{
   citation: Child;
-  title: string;
+  quote: Child;
 }>;
 
-export function Hero({ children, citation, title }: HeroProps) {
+export function Hero({ children, citation, quote }: HeroProps) {
   return (
-    <div class={heroGrid}>
-      <HoncIcon />
+    <div class={container}>
+      <Wrapper narrow>
+        <div class={bentoGrid}>
+          <div class={iconContainer}>
+            <HoncIcon />
+          </div>
 
-      <div class={heroContentGrid}>
-        <header class={headingClass}>
-          <h1 id={anchorIds.intro}>{title}</h1>
-          <p>{children}</p>
+          <Citation>{citation}</Citation>
 
-          <a
-            href="https://github.com/fiberplane/goose-quotes"
-            rel="noreferrer noopener"
-            class={ctaClass}
-          >
-            Check out the sample API
-            <GithubIcon />
-          </a>
-        </header>
+          <blockquote class={quoteClass}>
+            <q>{quote}</q>
+          </blockquote>
+        </div>
+      </Wrapper>
 
-        <Citation>{citation}</Citation>
-      </div>
+      <Wrapper>
+        <div className={introGrid}>
+          <span>{children}</span>
+          <AsciiArt />
+        </div>
+      </Wrapper>
     </div>
   );
 }
 
-const ctaClass = css`
-  display: inline-flex;
-  gap: 0.75rem;
-  align-content: center;
-  padding: 0.5rem 1rem;
-  border-radius: 0.25rem;
-  font: var(--font-code);
-  background-color: var(--color-bg-secondary);
-  color: var(--color-fg-default);
-
-  svg {
-    height: 1.25em;
-    width: 1.25em;
-  }
+const introGrid = css`
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4rem;
+  margin-top: 4rem;
+  padding: 2rem 4rem;;
+  background-color: var(--color-bg-elevated);
+  border-radius: 2rem;
 `;
 
-const heroContentGrid = css`
+const quoteClass = css`
+  font: var(--font-headings-h2);
+  font-style: italic;
+  background-color: var(--color-bg-elevated);
+  font-size: 1.5rem;
+  padding: 2rem;
+  margin-inline: calc(var(--spacing-wrapper) * -2);
+`;
+
+const iconContainer = css`
+  justify-self: center;
+`;
+
+const bentoGrid = css`
   display: grid;
-  grid: auto / 1fr;
+  padding-block-start: calc(var(--spacing-nav-size) * 2);
   gap: 2rem;
 `;
 
-const headingClass = css`
-  padding: 0;
-
-  h1 {
-    margin-block-start: 0;
-    text-align: center;
-  }
-
-  p {
-    margin-inline: auto;
-    max-width: 54ch;
-  }
-`;
-
-const heroGrid = css`
-  display: grid;
-  grid-auto-flow: row;
-  gap: 4rem;
-  padding-block-start: calc(var(--spacing-nav-size) * 2);
-  margin-block-end: 4rem;
+const container = css`
   container-type: inline-size;
 
-  svg {
-    justify-self: center;
+  @container (width >= 720px) {
+    ${quoteClass} {
+      padding: 4rem;
+      font: var(--font-headings-h2);
+    }
   }
 
-  @container (width >= 840px) {
-    ${heroContentGrid} {
-      grid: auto / repeat(2, 1fr);
-      gap: 0rem;
+  @container (width >= 800px) {
+    ${bentoGrid} {
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto auto;
 
-      ${headingClass} {
-        padding-inline-end: 2rem;
-
-        h1 {
-          margin-block-end: 0.5em;
-          font-size: 4rem;
-          text-align: left;
-        }
-
-        p {
-          margin-block-end: 0;
-          margin-inline: auto;
-          max-width: 54ch;
-        }
+      svg {
+        grid-row: 1 / 2;
+        width: 100%;
+        height: auto;
       }
+
+      div[data-citation] {
+        grid-column: 2 / -1;
+      }
+    }
+
+    ${iconContainer} {
+      background-color: var(--color-bg-secondary);
+      border-top-left-radius: 2rem;
+      width: 100%;
+      display: grid;
+    }
+
+    ${quoteClass} {
+      grid-column: 1 / -1;
+      margin: 0;
+      font-style: italic;
+      border-bottom-left-radius: 2rem;
+      border-bottom-right-radius: 2rem;
     }
   }
 `;

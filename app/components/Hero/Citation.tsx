@@ -3,7 +3,7 @@ import type { PropsWithChildren } from "hono/jsx";
 
 export function Citation({ children }: PropsWithChildren) {
   return (
-    <blockquote class={blockQuoteClass}>
+    <div data-citation class={blockQuoteClass}>
       <header>
         <h3>
           <abbr>HONC</abbr> <span>| hɒŋk |</span>
@@ -42,22 +42,20 @@ export function Citation({ children }: PropsWithChildren) {
       </ul>
 
       <p className={exampleClass}>{children}</p>
-    </blockquote>
+    </div>
   );
 }
 
 const blockQuoteClass = css`
   display: grid;
-  gap: .5rem;
+  gap: 0.5rem;
   margin: 0 auto;
   width: 100%;
   max-width: 54ch;
   background-color: var(--color-bg-elevated);
   padding: 1rem 2rem;
   border-left: 4px solid var(--color-border-secondary);
-  border-top-right-radius: 1rem;
-  border-bottom-right-radius: 1rem;
-  align-self: center;
+  border-top-right-radius: 2rem;
 
   header {
     h3 {
@@ -86,7 +84,7 @@ const blockQuoteClass = css`
   ul {
     list-style: none;
     padding-inline: 1em;
-    font-size: .8em;
+    font-size: 0.8em;
 
     li {
       margin: 0;
@@ -98,7 +96,7 @@ const blockQuoteClass = css`
 const exampleClass = css`
   margin: 0;
   color: lightgrey;
-  font-size: .8em;
+  font-size: 0.9em;
   font-style: italic;
 `;
 

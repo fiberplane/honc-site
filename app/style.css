@@ -112,6 +112,12 @@ a {
   }
 }
 
+ul {
+  list-style: none;
+  padding: 0;
+  padding-inline-start: 0.5rem;
+}
+
 pre,
 code {
   font: var(--font-code);
