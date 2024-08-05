@@ -26,6 +26,12 @@ const scaleAnimation = keyframes`
   }
 `;
 
+const shadowAnimation = keyframes`
+  to {
+    box-shadow: 0 0 2rem 1.75rem rgb(from var(--color-bg-primary) r g b / 0.1);
+  }
+`;
+
 const sectionClass = css`
   h1 {
     text-align: center;
@@ -46,7 +52,7 @@ const sectionClass = css`
     padding: 0;
     padding: var(--gap);
     position: relative;
-    box-shadow: 0 0 2rem 1.75rem rgb(from var(--color-bg-primary) r g b / 0.1);
+    animation: ${shadowAnimation} 0.7s forwards ease-out 1s;
 
     &::before {
       content: "";
@@ -65,7 +71,7 @@ const sectionClass = css`
       scale: 0;
       outline: none;
 
-      animation: ${scaleAnimation} 0.7s forwards;
+      animation: ${scaleAnimation} 0.7s forwards ease-out .7s;
     }
 
     & > li {
