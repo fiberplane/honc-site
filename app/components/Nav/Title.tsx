@@ -1,7 +1,8 @@
 import { css, cx } from "hono/css";
-import { useEffect, useState } from "hono/jsx";
+import { useEffect, useRef, useState } from "hono/jsx";
 
 import { honcIconId } from "../../constants";
+import { useIntersectionObserver } from "../../hooks";
 
 type TitleProps = {
   className?: ReturnType<typeof css>;
@@ -10,28 +11,19 @@ type TitleProps = {
 
 export const Title = function Title({ className, isMenuOpen }: TitleProps) {
   const [isVisible, setIsVisible] = useState(false);
+  const element = useRef<HTMLElement>(null);
+
+  const handleIntersection = (entries: Array<IntersectionObserverEntry>) => {
+    for (const entry of entries) {
+      setIsVisible(!entry.isIntersecting);
+    }
+  };
 
   useEffect(() => {
-    const handleIntersection = (entries: Array<IntersectionObserverEntry>) => {
-      for (const entry of entries) {
-        setIsVisible(!entry.isIntersecting);
-      }
-    };
-
-    const intersectionObserver = new IntersectionObserver(
-      handleIntersection,
-      options,
-    );
-
-    const element = document.getElementById(honcIconId);
-    if (!element) {
-      return;
-    }
-
-    intersectionObserver.observe(element);
-
-    return () => intersectionObserver.disconnect();
+    element.current = document.getElementById(honcIconId);
   }, []);
+
+  useIntersectionObserver(element, handleIntersection, options);
 
   return (
     <header

@@ -1,8 +1,33 @@
 import { css } from "hono/css";
 import { useEffect, useRef } from "hono/jsx";
+import { useIntersectionObserver } from "../hooks";
 
 export default function AsciiArt() {
   const preRef = useRef<HTMLPreElement>(null);
+  const isIntersecting = useRef(false);
+
+  const intersectionObserverCallback = (
+    entries: Array<IntersectionObserverEntry>,
+    observer: IntersectionObserver,
+  ) => {
+    for (const element of entries) {
+      if (!preRef.current) {
+        continue;
+      }
+
+      if (element.isIntersecting) {
+        isIntersecting.current = true;
+        observer.unobserve(preRef.current);
+        observer.disconnect();
+      }
+    }
+  };
+
+  // As, apparently, `document` can't be accessed anywhere else than in
+  // useEffect, we need to store the elements in a ref to be able to access them
+  useIntersectionObserver(preRef, intersectionObserverCallback, {
+    rootMargin: "0px 0px -200px 0px",
+  });
 
   useEffect(() => {
     const pre = preRef.current;
@@ -10,12 +35,12 @@ export default function AsciiArt() {
       return;
     }
 
-    let isIntersecting = false;
+    // let isIntersecting = false;
     const observer = new IntersectionObserver(
       (entries) => {
         for (const element of entries) {
           if (element.isIntersecting) {
-            isIntersecting = true;
+            isIntersecting.current = true;
             observer.unobserve(pre);
             observer.disconnect();
           }
@@ -39,7 +64,7 @@ export default function AsciiArt() {
 
       pre.textContent = newMatrix;
 
-      if (isIntersecting) {
+      if (isIntersecting.current) {
         chance += 0.03;
       }
 
