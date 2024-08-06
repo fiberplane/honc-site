@@ -4,6 +4,7 @@ import type { Child } from "hono/jsx";
 import { Wrapper } from "../Wrapper";
 import { Citation } from "./Citation";
 import { HoncIcon } from "./HoncIcon";
+import { anchorIds } from "../../constants";
 
 type HeroProps = {
   citation: Child;
@@ -14,7 +15,7 @@ export function Hero({ citation, quote }: HeroProps) {
   return (
     <Wrapper className={wrapperClass} narrow>
       <div class={bentoGrid}>
-        <div class={iconContainer}>
+        <div class={iconContainer} id={anchorIds.intro}>
           <HoncIcon />
         </div>
 
@@ -22,6 +23,7 @@ export function Hero({ citation, quote }: HeroProps) {
 
         <blockquote class={quoteClass}>
           <q>{quote}</q>
+          <p>- Every developer out there</p>
         </blockquote>
       </div>
     </Wrapper>
@@ -36,6 +38,13 @@ const quoteClass = css`
   padding: 2rem;
   margin-inline: calc(var(--spacing-wrapper) * -2);
   padding-inline: calc(var(--spacing-wrapper) * 3);
+  display: grid;
+  gap: 1.5rem;
+
+  p {
+    margin: 0;
+    font: var(--font-body);
+  }
 `;
 
 const iconContainer = css`
