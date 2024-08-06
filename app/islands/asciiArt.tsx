@@ -81,18 +81,16 @@ const asciiArt = `
 |   JSON   |
 ╱╱┏┳┓╭╮┏┳┓╲╲
 ▔▏┗┻┛┃┃┗┻┛▕▔
-`;
+`.trim();
 
 const art = asciiArt.split("\n");
 const columnCount = art.reduce((a, r) => (r.length > a ? r.length : a), 0);
-const matrix = art
-  .map((row) => {
-    if (row.length < columnCount) {
-      return row + " ".repeat(columnCount - row.length);
-    }
-    return row;
-  })
-  .filter((row) => new Set(row).size > 1);
+const matrix = art.map((row) => {
+  if (row.length < columnCount) {
+    return row + " ".repeat(columnCount - row.length);
+  }
+  return row;
+});
 
 function getRandomChar() {
   const characters =
