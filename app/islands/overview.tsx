@@ -1,8 +1,9 @@
-import { css, keyframes } from "hono/css";
-import { useState, type PropsWithChildren } from "hono/jsx";
+import { css, cx, keyframes } from "hono/css";
+import { useRef, useState, type PropsWithChildren } from "hono/jsx";
 
 import { Wrapper } from "../components";
 import { anchorIds } from "../constants";
+import { useIntersectionObserver } from "../hooks";
 
 type OverviewProps = PropsWithChildren<{
   title: string;
@@ -10,14 +11,32 @@ type OverviewProps = PropsWithChildren<{
 
 export function Overview({ children, title }: OverviewProps) {
   const [isInView, setIsInView] = useState(false);
+  const ref = useRef<HTMLElement>(null);
+
+  const handler = (
+    entries: Array<IntersectionObserverEntry>,
+    observer: IntersectionObserver,
+  ) => {
+    for (const entry of entries) {
+      if (entry.isIntersecting) {
+        setIsInView(true);
+        observer.unobserve(entry.target);
+        observer.disconnect();
+      }
+    }
+  };
+
+  useIntersectionObserver(ref, handler, {
+    rootMargin: "0px 0px -60% 0px",
+  });
 
   return (
-    <Wrapper className={wrapperClass}>
-      <section class={sectionClass}>
+    <Wrapper className={cx(wrapperClass, isInView && "animate")}>
+      <section ref={ref} class={sectionClass}>
         <h1 id={anchorIds.overview}>{title}</h1>
 
-        <div class={stackContainer} data-stack-container>
-          <div class={overflowContainer} data-overflow-container />
+        <div class={stackContainer}>
+          <div class={overflowContainer} />
           <ul>{children}</ul>
         </div>
       </section>
@@ -101,9 +120,6 @@ const wrapperClass = css`
 
   @container (width >= 640px) {
     ${overflowContainer} {
-      animation: ${shadowAnimation} 0.7s forwards ease-out
-        var(--overview-shadow-animation-delay);
-
       &::before {
         content: "";
         display: block;
@@ -119,8 +135,6 @@ const wrapperClass = css`
         width: 200%;
         aspect-ratio: 1;
         scale: 0;
-        animation: ${scaleAnimation} var(--overview-scale-animation-duration)
-          forwards ease-out var(--overview-scale-animation-delay);
       }
     }
 
@@ -134,7 +148,6 @@ const wrapperClass = css`
         box-shadow: unset;
 
         & > li {
-          animation-name: ${cardAnimation};
           animation-duration: var(--overview-card-animation-duration);
           animation-fill-mode: forwards;
           animation-timing-function: cubic-bezier(0.83, 0.1, 0.12, 1);
@@ -161,6 +174,24 @@ const wrapperClass = css`
             border-bottom-right-radius: var(--overview-radius);
             animation-delay: calc(var(--overview-card-animation-delay) * 3);
           }
+        }
+      }
+    }
+
+    &.animate {
+      ${overflowContainer} {
+        animation: ${shadowAnimation} 0.7s forwards ease-out
+          var(--overview-shadow-animation-delay);
+
+        &::before {
+          animation: ${scaleAnimation} var(--overview-scale-animation-duration)
+            forwards ease-out var(--overview-scale-animation-delay);
+        }
+      }
+
+      ${sectionClass} {
+        ul > li {
+          animation-name: ${cardAnimation};
         }
       }
     }

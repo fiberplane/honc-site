@@ -1,7 +1,10 @@
 import { css } from "hono/css";
 import type { PropsWithChildren } from "hono/jsx";
 
-import * as Icon from "./icons";
+import cloudSvg from "./icons/cloud.svg?url";
+import dbSvg from "./icons/db.svg?url";
+import honoSvg from "./icons/hono.svg?url";
+import ormSvg from "./icons/orm.svg?url";
 
 type IconType = "hono" | "orm" | "db" | "cloud";
 
@@ -11,12 +14,12 @@ type OverviewItemProps = PropsWithChildren<{
 }>;
 
 export function OverviewItem({ iconType, title, children }: OverviewItemProps) {
-  const Icon = getIcon(iconType);
+  const iconPath = getIconPath(iconType);
 
   return (
     <li class={OverviewItemClass}>
       <header id={iconType}>
-        <Icon />
+        <img src={iconPath} alt={`${iconType} illustration icon`} />
         <h3>{title}</h3>
       </header>
 
@@ -25,16 +28,16 @@ export function OverviewItem({ iconType, title, children }: OverviewItemProps) {
   );
 }
 
-const getIcon = (iconType: IconType) => {
+const getIconPath = (iconType: IconType) => {
   switch (iconType) {
     case "hono":
-      return Icon.HonoIcon;
+      return honoSvg;
     case "orm":
-      return Icon.OrmIcon;
+      return ormSvg;
     case "db":
-      return Icon.DbIcon;
+      return dbSvg;
     case "cloud":
-      return Icon.CloudIcon;
+      return cloudSvg;
   }
 };
 

@@ -9,7 +9,7 @@ type TargetType =
 type UseIntersectionObserver = (
   target: TargetType,
   callback: IntersectionObserverCallback,
-  options: IntersectionObserverInit,
+  options?: IntersectionObserverInit,
 ) => void;
 
 export const useIntersectionObserver: UseIntersectionObserver =
