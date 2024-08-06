@@ -41,14 +41,20 @@ const getIcon = (iconType: IconType) => {
 const OverviewItemClass = css`
   display: grid;
   gap: 1rem;
+  align-content: start;
+  padding: 1.5rem 2rem;
+  font-size: 1rem;
 
   header {
+    line-height: 1;
     display: grid;
+    align-items: center;
     grid-template-columns: 48px 1fr;
     gap: 12px;
 
     & > svg {
       margin-inline: auto;
+      width: 1.5em;
     }
   }
 
