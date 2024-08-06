@@ -32,8 +32,8 @@ const cardAnimation = keyframes`
 const sectionClass = css`
   --overview-gap: 1px;
   --overview-radius: 2rem;
-  --overview-animation-duration: 0.5s;
-  --overview-animation-delay: 0.2s;
+  --overview-card-animation-duration: 0.7s;
+  --overview-card-animation-delay: 0.2s;
 
   h1 {
     text-align: center;
@@ -54,9 +54,9 @@ const sectionClass = css`
       width: 100%;
       background-color: var(--color-bg-elevated);
       animation-name: ${cardAnimation};
-      animation-duration: var(--overview-animation-duration);
+      animation-duration: var(--overview-card-animation-duration);
       animation-fill-mode: forwards;
-      animation-timing-function: ease-in;
+      animation-timing-function: cubic-bezier(0.83, 0.1, 0.12, 1);
 
       &:nth-child(1) {
         translate: -1rem -1rem;
@@ -66,19 +66,19 @@ const sectionClass = css`
       &:nth-child(2) {
         translate: 1rem -1rem;
         border-top-right-radius: var(--overview-radius);
-        animation-delay: var(--overview-animation-delay);
+        animation-delay: var(--overview-card-animation-delay);
       }
 
       &:nth-child(3) {
         translate: -1rem 1rem;
         border-bottom-left-radius: var(--overview-radius);
-        animation-delay: calc(var(--overview-animation-delay) * 2);
+        animation-delay: calc(var(--overview-card-animation-delay) * 2);
       }
 
       &:nth-child(4) {
         translate: 1rem 1rem;
         border-bottom-right-radius: var(--overview-radius);
-        animation-delay: calc(var(--overview-animation-delay) * 3);
+        animation-delay: calc(var(--overview-card-animation-delay) * 3);
       }
     }
   }
@@ -98,7 +98,7 @@ const scaleAnimation = keyframes`
 
 const shadowAnimation = keyframes`
   to {
-    box-shadow: 0 0 2rem 1.75rem rgb(from var(--color-bg-primary) r g b / 0.15);
+    box-shadow: 0 0 2rem 2rem rgb(from var(--color-bg-primary) r g b / 0.2);
   }
 `;
 
@@ -106,7 +106,8 @@ const overflowContainer = css`
   --overview-scale-animation-duration: 0.7s;
 
   --overview-scale-animation-delay: calc(
-    var(--overview-animation-delay) + calc(var(--overview-animation-delay) * 3)
+    calc(var(--overview-card-animation-delay) * 2) +
+      calc(var(--overview-card-animation-delay) * 3)
   );
 
   --overview-shadow-animation-delay: calc(
