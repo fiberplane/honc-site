@@ -38,7 +38,12 @@ export default jsxRenderer(({ children, title }) => {
         />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="The HONC stack" />
+        <meta property="twitter:domain" content="honc.dev" />
+        <meta property="twitter:url" content="https://honc.dev" />
+        <meta
+          name="twitter:title"
+          content="The HONC Stack: A Modular Collection of Choice Technologies"
+        />
         <meta
           name="twitter:description"
           content="Modular collection of choice technologies for building lightweight, type-safe, edge-enabled data apis that scale seamlessly to their demand."
