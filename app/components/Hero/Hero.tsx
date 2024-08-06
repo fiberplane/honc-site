@@ -4,6 +4,7 @@ import type { Child } from "hono/jsx";
 import { Wrapper } from "../Wrapper";
 import { Citation } from "./Citation";
 import { HoncIcon } from "./HoncIcon";
+import { anchorIds } from "../../constants";
 
 type HeroProps = {
   citation: Child;
@@ -14,7 +15,7 @@ export function Hero({ citation, quote }: HeroProps) {
   return (
     <Wrapper className={wrapperClass} narrow>
       <div class={bentoGrid}>
-        <div class={iconContainer}>
+        <div class={iconContainer} id={anchorIds.intro}>
           <HoncIcon />
         </div>
 
