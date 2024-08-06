@@ -1,4 +1,4 @@
-import { css } from "hono/css";
+import { css, cx } from "hono/css";
 import { type PropsWithChildren, useEffect, useRef, useState } from "hono/jsx";
 
 import { Wrapper } from "../components/Wrapper";
@@ -44,8 +44,13 @@ export function GetStarted({ children, title }: GetStartedProps) {
 
         <div ref={containerRef}>
           {children}
-          <button type="button" onClick={handleCopy}>
-            {isCopied ? "copied" : "copy"}
+          <button
+            type="button"
+            onClick={handleCopy}
+            class={cx(isCopied && "copied")}
+          >
+            <span>copy</span>
+            <span>copied!</span>
           </button>
         </div>
       </section>
@@ -86,6 +91,25 @@ const sectionClass = css`
       transition: box-shadow 0.2s ease-in-out;
       border-top-right-radius: var(--section-get-started-radius);
       border-bottom-right-radius: var(--section-get-started-radius);
+      position: relative;
+
+      span:nth-of-type(2) {
+        display: none;
+        position: absolute;
+        inset: 0;
+        margin: auto;
+      }
+
+      &.copied {
+        span:first-of-type {
+          visibility: hidden;
+        }
+
+        span:nth-of-type(2) {
+          display: grid;
+          align-content: center;
+        }
+      }
 
       &:hover {
         box-shadow: 0 0 2rem 0.5rem
