@@ -1,6 +1,7 @@
 import {
   Footer,
   Hero,
+  Intro,
   Overview,
   OverviewItem,
   Quickstart,
@@ -17,7 +18,17 @@ import { GetStarted } from "../islands/getStarted";
       seamlessly to their demand.
     </>
   }
->
+/>
+
+<GetStarted title="TL;DR">
+
+```shell
+npm create honc-app
+```
+
+</GetStarted>
+
+<Intro>
   <p>
     Most of the talk about the "best stack" in the TypeScript world is about
     "server components", "partial hydrations" and maybe SPAs. What if you need
@@ -33,16 +44,7 @@ import { GetStarted } from "../islands/getStarted";
     </ul>
 
   </p>
-
-</Hero>
-
-<GetStarted title="TL;DR">
-
-```shell
-npm create honc-app
-```
-
-</GetStarted>
+</Intro>
 
 <Overview title="Overview">
   <OverviewItem title="Hono" iconType="hono">
