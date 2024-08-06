@@ -28,7 +28,7 @@ export default function AsciiArt() {
   // As, apparently, `document` can't be accessed anywhere else than in
   // useEffect, we need to store the elements in a ref to be able to access them
   useIntersectionObserver(preRef, intersectionObserverCallback, {
-    rootMargin: "0px 0px -70% 0px",
+    rootMargin: "0px 0px -20px 0px",
   });
 
   useEffect(() => {
