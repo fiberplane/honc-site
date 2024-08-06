@@ -1,66 +1,32 @@
 import { css } from "hono/css";
-import type { Child, PropsWithChildren } from "hono/jsx";
+import type { Child } from "hono/jsx";
 
-import AsciiArt from "../../islands/asciiArt";
 import { Wrapper } from "../Wrapper";
 import { Citation } from "./Citation";
 import { HoncIcon } from "./HoncIcon";
 
-type HeroProps = PropsWithChildren<{
+type HeroProps = {
   citation: Child;
   quote: Child;
-}>;
+};
 
-export function Hero({ children, citation, quote }: HeroProps) {
+export function Hero({ citation, quote }: HeroProps) {
   return (
-    <div class={container}>
-      <Wrapper narrow>
-        <div class={bentoGrid}>
-          <div class={iconContainer}>
-            <HoncIcon />
-          </div>
-
-          <Citation>{citation}</Citation>
-
-          <blockquote class={quoteClass}>
-            <q>{quote}</q>
-          </blockquote>
+    <Wrapper className={wrapperClass} narrow>
+      <div class={bentoGrid}>
+        <div class={iconContainer}>
+          <HoncIcon />
         </div>
-      </Wrapper>
 
-      <Wrapper>
-        <div className={introGrid}>
-          <span>{children}</span>
-          <AsciiArt />
-        </div>
-      </Wrapper>
-    </div>
+        <Citation>{citation}</Citation>
+
+        <blockquote class={quoteClass}>
+          <q>{quote}</q>
+        </blockquote>
+      </div>
+    </Wrapper>
   );
 }
-
-const introGrid = css`
-  display: grid;
-  gap: 2rem;
-  margin-top: 4rem;
-  border-radius: 2rem;
-  overflow: hidden;
-
-  span p {
-    margin-block-start: 0;
-  }
-
-  & > * {
-    padding: 3rem 4rem;
-    padding-inline: calc(var(--spacing-wrapper) * 2);
-    background-color: var(--color-bg-elevated);
-  }
-
-  /* Center the ACII art element island in the DOM */
-  & > *:nth-child(2) {
-    display: grid;
-    place-content: center;
-  }
-`;
 
 const quoteClass = css`
   font: var(--font-headings-h2);
@@ -82,7 +48,7 @@ const bentoGrid = css`
   gap: 2rem;
 `;
 
-const container = css`
+const wrapperClass = css`
   container-type: inline-size;
 
   @container (width >= 720px) {
@@ -122,10 +88,6 @@ const container = css`
       font-style: italic;
       border-bottom-left-radius: 2rem;
       border-bottom-right-radius: 2rem;
-    }
-
-    ${introGrid} {
-      grid-template-columns: 1fr auto;
     }
   }
 `;

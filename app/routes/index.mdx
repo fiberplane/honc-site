@@ -1,11 +1,13 @@
 import {
   Footer,
   Hero,
+  Intro,
   Overview,
   OverviewItem,
   Quickstart,
   Wrapper,
 } from "../components";
+import { GetStarted } from "../islands/getStarted";
 
 <Hero
   quote="It's 2024, I'm building a data API and I'm using TypeScript. What do I use?"
@@ -16,7 +18,17 @@ import {
       seamlessly to their demand.
     </>
   }
->
+/>
+
+<GetStarted title="TL;DR">
+
+```shell
+npm create honc-app
+```
+
+</GetStarted>
+
+<Intro>
   <p>
     Most of the talk about the "best stack" in the TypeScript world is about
     "server components", "partial hydrations" and maybe SPAs. What if you need
@@ -32,8 +44,7 @@ import {
     </ul>
 
   </p>
-
-</Hero>
+</Intro>
 
 <Overview title="Overview">
   <OverviewItem title="Hono" iconType="hono">
