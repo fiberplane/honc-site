@@ -22,6 +22,7 @@ export function Hero({ citation, quote }: HeroProps) {
 
         <blockquote class={quoteClass}>
           <q>{quote}</q>
+          <p>- Every developer out there</p>
         </blockquote>
       </div>
     </Wrapper>
@@ -36,6 +37,13 @@ const quoteClass = css`
   padding: 2rem;
   margin-inline: calc(var(--spacing-wrapper) * -2);
   padding-inline: calc(var(--spacing-wrapper) * 3);
+  display: grid;
+  gap: 1.5rem;
+
+  p {
+    margin: 0;
+    font: var(--font-body);
+  }
 `;
 
 const iconContainer = css`
