@@ -1,13 +1,33 @@
-import type { PropsWithChildren } from "hono/jsx";
-
-import { Wrapper } from "./Wrapper";
 import { css } from "hono/css";
+import { useEffect, useState, type PropsWithChildren } from "hono/jsx";
+
+import { Wrapper } from "../components/Wrapper";
 
 type GetStartedProps = PropsWithChildren<{
   title: string;
 }>;
 
 export function GetStarted({ children, title }: GetStartedProps) {
+  const [isCopied, setIsCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText("h");
+      setIsCopied(true);
+    } catch (error) {
+      console.error("Failed to copy to clipboard: ", error);
+    }
+  };
+
+  useEffect(() => {
+    let timeout: ReturnType<typeof setTimeout>;
+    if (isCopied) {
+      timeout = setTimeout(() => setIsCopied(false), 3000);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [isCopied]);
+
   return (
     <Wrapper narrow>
       <section class={sectionClass}>
@@ -15,7 +35,9 @@ export function GetStarted({ children, title }: GetStartedProps) {
 
         <div>
           {children}
-          <button type="button">copy</button>
+          <button type="button" onClick={handleCopy}>
+            {isCopied ? "copied" : "copy"}
+          </button>
         </div>
       </section>
     </Wrapper>
