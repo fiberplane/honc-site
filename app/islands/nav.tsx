@@ -131,7 +131,7 @@ const anchorSelectors = Object.values(anchorIds)
   .join(", ");
 
 const menuItems: Array<{ anchorId: string; title: string }> = [
-  { anchorId: anchorIds.intro, title: "Intro" },
+  { anchorId: anchorIds.intro, title: "HONC?" },
   { anchorId: anchorIds.overview, title: "Overview" },
   { anchorId: anchorIds.quickstart, title: "Quickstart" },
 ];
