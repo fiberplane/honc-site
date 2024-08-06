@@ -50,8 +50,6 @@ const sectionClass = css`
     padding: 0;
 
     & > li {
-      padding: 3rem 2rem;
-      width: 100%;
       background-color: var(--color-bg-elevated);
       animation-name: ${cardAnimation};
       animation-duration: var(--overview-card-animation-duration);
