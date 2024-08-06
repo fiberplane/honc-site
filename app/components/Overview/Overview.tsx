@@ -33,7 +33,7 @@ const sectionClass = css`
   --overview-gap: 1px;
   --overview-radius: 2rem;
   --overview-animation-duration: 0.5s;
-  --overview-animation-delay: 0.3s;
+  --overview-animation-delay: 0.2s;
 
   h1 {
     text-align: center;
@@ -106,7 +106,7 @@ const overflowContainer = css`
   --overview-scale-animation-duration: 0.7s;
 
   --overview-scale-animation-delay: calc(
-      calc(var(--overview-animation-duration) * 3)
+    var(--overview-animation-delay) + calc(var(--overview-animation-delay) * 3)
   );
 
   --overview-shadow-animation-delay: calc(
