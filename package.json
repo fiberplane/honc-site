@@ -12,21 +12,21 @@
     "ci:format": "biome format"
   },
   "dependencies": {
-    "hono": "^4.4.2",
+    "hono": "^4.5.4",
     "honox": "^0.1.23"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.8.2",
-    "@cloudflare/workers-types": "^4.20240529.0",
-    "@hono/vite-cloudflare-pages": "^0.4.0",
-    "@hono/vite-dev-server": "^0.12.1",
+    "@biomejs/biome": "1.8.3",
+    "@cloudflare/workers-types": "^4.20240806.0",
+    "@hono/vite-cloudflare-pages": "^0.4.2",
+    "@hono/vite-dev-server": "^0.13.1",
     "@hono/vite-ssg": "^0.1.0",
     "@mdx-js/rollup": "^3.0.1",
-    "posthog-js": "^1.150.0",
+    "posthog-js": "^1.154.5",
     "rehype-external-links": "^3.0.0",
-    "typescript": "^5.5.2",
-    "vite": "^5.2.12",
-    "wrangler": "^3.57.2"
+    "typescript": "^5.5.4",
+    "vite": "^5.3.5",
+    "wrangler": "^3.69.1"
   },
   "packageManager": "pnpm@9.1.2"
 }
