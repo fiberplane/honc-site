@@ -30,11 +30,14 @@ export function GetStarted({ children, title }: GetStartedProps) {
 
   useEffect(() => {
     let timeout: ReturnType<typeof setTimeout>;
+
     if (isCopied) {
       timeout = setTimeout(() => setIsCopied(false), 3000);
     }
 
-    return () => clearTimeout(timeout);
+    return () => {
+      clearTimeout(timeout);
+    };
   }, [isCopied]);
 
   return (
@@ -112,7 +115,7 @@ const sectionClass = css`
       }
 
       &:hover {
-        box-shadow: 0 0 2rem 0.5rem
+        box-shadow: 0 0 1rem 0
           rgb(from var(--color-bg-secondary) r g b / 0.8);
       }
     }

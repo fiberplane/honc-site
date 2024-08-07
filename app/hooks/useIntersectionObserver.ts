@@ -3,8 +3,7 @@ import { type RefObject, useEffect } from "hono/jsx";
 type TargetType =
   | Element
   | NodeListOf<Element>
-  | RefObject<Element | NodeListOf<Element>>
-  | null;
+  | RefObject<Element | NodeListOf<Element>>;
 
 type UseIntersectionObserver = (
   target: TargetType,
@@ -15,10 +14,6 @@ type UseIntersectionObserver = (
 export const useIntersectionObserver: UseIntersectionObserver =
   function useIntersectionObserver(target, callback, options) {
     useEffect(() => {
-      if (!target) {
-        return;
-      }
-
       const observer = new IntersectionObserver(callback, options);
 
       const isList = isNodeList(target);
