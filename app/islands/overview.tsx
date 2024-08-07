@@ -10,8 +10,8 @@ type OverviewProps = PropsWithChildren<{
 }>;
 
 export function Overview({ children, title }: OverviewProps) {
-  const [shouldAnimate, setShouldAnimate] = useState(false);
   const ref = useRef<HTMLElement>(null);
+  const [shouldAnimate, setShouldAnimate] = useState(false);
 
   const handleIntersection = (
     entries: Array<IntersectionObserverEntry>,
