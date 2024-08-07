@@ -1,37 +1,31 @@
-import { css } from "hono/css";
-import { useEffect, useRef } from "hono/jsx";
+import { css, cx } from "hono/css";
+import { useEffect, useRef, useState } from "hono/jsx";
 
 import { useIntersectionObserver } from "../hooks";
 
 export default function AsciiArt() {
   const preRef = useRef<HTMLPreElement>(null);
-  const isIntersecting = useRef(false);
+  const [isIntersecting, setIsIntersecting] = useState(false);
 
-  const intersectionObserverCallback = (
+  const handleIntersection = (
     entries: Array<IntersectionObserverEntry>,
     observer: IntersectionObserver,
   ) => {
-    for (const element of entries) {
-      const refElement = element.target;
-      if (!refElement) {
-        continue;
-      }
-
-      if (element.isIntersecting) {
-        isIntersecting.current = true;
-        observer.unobserve(refElement);
+    for (const entry of entries) {
+      if (entry.isIntersecting) {
+        setIsIntersecting(true);
         observer.disconnect();
       }
     }
   };
 
-  // As, apparently, `document` can't be accessed anywhere else than in
-  // useEffect, we need to store the elements in a ref to be able to access them
-  useIntersectionObserver(preRef, intersectionObserverCallback, {
-    rootMargin: "0px 0px -20px 0px",
-  });
+  useIntersectionObserver(preRef, handleIntersection, { threshold: 0.3 });
 
   useEffect(() => {
+    if (!isIntersecting) {
+      return;
+    }
+
     const pre = preRef.current;
     if (!pre) {
       return;
@@ -43,16 +37,16 @@ export default function AsciiArt() {
       const newMatrix = matrix
         .map((row) =>
           [...row]
-            .map((char) => (Math.random() > chance ? getRandomChar() : char))
+            .map((character) =>
+              Math.random() > chance ? getRandomCharacter() : character,
+            )
             .join(""),
         )
         .join("\n");
 
       pre.textContent = newMatrix;
 
-      if (isIntersecting.current) {
-        chance += 0.03;
-      }
+      chance += 0.03;
 
       if (chance >= 1.05) {
         clearInterval(interval);
@@ -62,10 +56,10 @@ export default function AsciiArt() {
     return () => {
       clearInterval(interval);
     };
-  }, []);
+  }, [isIntersecting]);
 
   return (
-    <pre ref={preRef} class={preClass}>
+    <pre ref={preRef} class={cx(preClass, isIntersecting && "fade-in")}>
       <span>{asciiArt}</span>
     </pre>
   );
@@ -92,7 +86,7 @@ const matrix = art.map((row) => {
   return row;
 });
 
-function getRandomChar() {
+function getRandomCharacter() {
   const characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*()/\\|[]{}<>~`";
 
@@ -103,6 +97,12 @@ const preClass = css`
   white-space: pre;
   display: inline-block;
   margin-inline: auto;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+
+  &.fade-in {
+    opacity: 1;
+  }
 
   span {
     visibility: hidden;
