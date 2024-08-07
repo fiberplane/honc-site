@@ -1,5 +1,5 @@
 import { css, cx, keyframes } from "hono/css";
-import { useRef, useState, type PropsWithChildren } from "hono/jsx";
+import { type PropsWithChildren, useRef, useState } from "hono/jsx";
 
 import { Wrapper } from "../components";
 import { anchorIds } from "../constants";
@@ -11,7 +11,7 @@ type OverviewProps = PropsWithChildren<{
 
 export function Overview({ children, title }: OverviewProps) {
   const ref = useRef<HTMLElement>(null);
-  const [shouldAnimate, setShouldAnimate] = useState(false);
+  const [isIntersecting, setIsIntersecting] = useState(false);
 
   const handleIntersection = (
     entries: Array<IntersectionObserverEntry>,
@@ -19,8 +19,7 @@ export function Overview({ children, title }: OverviewProps) {
   ) => {
     for (const entry of entries) {
       if (entry.isIntersecting) {
-        setShouldAnimate(true);
-        observer.unobserve(entry.target);
+        setIsIntersecting(true);
         observer.disconnect();
       }
     }
@@ -31,7 +30,7 @@ export function Overview({ children, title }: OverviewProps) {
   });
 
   return (
-    <Wrapper className={cx(wrapperClass, shouldAnimate && "animate")}>
+    <Wrapper className={cx(wrapperClass, isIntersecting && "animate")}>
       <section ref={ref} class={sectionClass}>
         <h1 id={anchorIds.overview}>{title}</h1>
 

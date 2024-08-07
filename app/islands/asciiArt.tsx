@@ -14,7 +14,6 @@ export default function AsciiArt() {
     for (const entry of entries) {
       if (entry.isIntersecting) {
         setIsIntersecting(true);
-        observer.unobserve(entry.target);
         observer.disconnect();
       }
     }
@@ -38,7 +37,9 @@ export default function AsciiArt() {
       const newMatrix = matrix
         .map((row) =>
           [...row]
-            .map((char) => (Math.random() > chance ? getRandomChar() : char))
+            .map((character) =>
+              Math.random() > chance ? getRandomCharacter() : character,
+            )
             .join(""),
         )
         .join("\n");
@@ -58,7 +59,7 @@ export default function AsciiArt() {
   }, [isIntersecting]);
 
   return (
-    <pre ref={preRef} class={cx(preClass, isIntersecting && "is-visible")}>
+    <pre ref={preRef} class={cx(preClass, isIntersecting && "fade-in")}>
       <span>{asciiArt}</span>
     </pre>
   );
@@ -85,7 +86,7 @@ const matrix = art.map((row) => {
   return row;
 });
 
-function getRandomChar() {
+function getRandomCharacter() {
   const characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*()/\\|[]{}<>~`";
 
@@ -99,7 +100,7 @@ const preClass = css`
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
 
-  &.is-visible {
+  &.fade-in {
     opacity: 1;
   }
 
