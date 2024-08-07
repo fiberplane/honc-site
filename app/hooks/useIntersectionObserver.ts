@@ -63,5 +63,5 @@ function isNodeList(target: TargetType): target is NodeListOf<Element> {
 function isRefObject(
   target: TargetType,
 ): target is RefObject<Element | NodeListOf<Element>> {
-  return (target as RefObject<Element>)?.current !== undefined;
+  return !!(target as RefObject<Element>)?.current;
 }

@@ -10,28 +10,28 @@ type OverviewProps = PropsWithChildren<{
 }>;
 
 export function Overview({ children, title }: OverviewProps) {
-  const [isInView, setIsInView] = useState(false);
+  const [shouldAnimate, setShouldAnimate] = useState(false);
   const ref = useRef<HTMLElement>(null);
 
-  const handler = (
+  const handleIntersection = (
     entries: Array<IntersectionObserverEntry>,
     observer: IntersectionObserver,
   ) => {
     for (const entry of entries) {
       if (entry.isIntersecting) {
-        setIsInView(true);
+        setShouldAnimate(true);
         observer.unobserve(entry.target);
         observer.disconnect();
       }
     }
   };
 
-  useIntersectionObserver(ref, handler, {
-    rootMargin: "0px 0px -60% 0px",
+  useIntersectionObserver(ref, handleIntersection, {
+    threshold: 0.9,
   });
 
   return (
-    <Wrapper className={cx(wrapperClass, isInView && "animate")}>
+    <Wrapper className={cx(wrapperClass, shouldAnimate && "animate")}>
       <section ref={ref} class={sectionClass}>
         <h1 id={anchorIds.overview}>{title}</h1>
 
