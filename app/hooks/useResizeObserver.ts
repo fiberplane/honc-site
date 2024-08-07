@@ -1,20 +1,23 @@
 import { type RefObject, useEffect } from "hono/jsx";
 
-type UseResizeObserver = {
-  target: RefObject<HTMLElement>;
-  handleResize: (entries: Array<ResizeObserverEntry>) => void;
-};
+type UseResizeObserver = (
+  target: RefObject<Element>,
+  handleResize: (entries: Array<ResizeObserverEntry>) => void,
+) => void;
 
-export function useResizeObserver({ handleResize, target }: UseResizeObserver) {
+export const useResizeObserver: UseResizeObserver = function useResizeObserver(
+  target,
+  callback,
+) {
   useEffect(() => {
     if (!target.current) {
       return;
     }
-    const resizeObserver = new ResizeObserver(handleResize);
+    const resizeObserver = new ResizeObserver(callback);
     resizeObserver.observe(target.current);
 
     return () => {
       resizeObserver.disconnect();
     };
   }, []);
-}
+};

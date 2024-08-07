@@ -1,10 +1,10 @@
 import { css } from "hono/css";
 import type { Child } from "hono/jsx";
 
+import { anchorIds } from "../../constants";
 import { Wrapper } from "../Wrapper";
 import { Citation } from "./Citation";
 import { HoncIcon } from "./HoncIcon";
-import { anchorIds } from "../../constants";
 
 type HeroProps = {
   citation: Child;
@@ -35,7 +35,7 @@ const quoteClass = css`
   font-style: italic;
   background-color: var(--color-bg-elevated);
   font-size: 1.5rem;
-  padding: 2rem;
+  padding-block: 2rem;
   margin-inline: calc(var(--spacing-wrapper) * -2);
   padding-inline: calc(var(--spacing-wrapper) * 3);
   display: grid;
@@ -62,8 +62,9 @@ const wrapperClass = css`
 
   @container (width >= 720px) {
     ${quoteClass} {
-      padding: 4rem;
+      padding: 3rem 4rem 2.5rem;
       font: var(--font-headings-h2);
+      font-style: italic;
     }
   }
 

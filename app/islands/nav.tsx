@@ -25,9 +25,10 @@ import {
 
 export function Nav() {
   const navRef = useRef<HTMLElement>(null);
+  const anchorElements = useRef<NodeListOf<Element>>(null);
+
   const [activeId, setActiveId] = useState<string>(anchorIds.intro);
   const [showMenu, setShowMenu] = useState(false);
-  const elements = useRef<NodeListOf<Element>>(null);
 
   const { handleAnimationEnd, shouldAnimateExit, shouldShow } =
     useAnimationState(showMenu);
@@ -54,15 +55,16 @@ export function Nav() {
     }
   };
 
-  // As, apparently, `document` can't be accessed anywhere else than in
-  // useEffect, we need to store the elements in a ref to be able to access them
+  // As `document` can't be accessed anywhere else than in useEffect, we need to
+  // call the querySelector in a useEffect hook, to then store the result in a
+  // ref
   useEffect(() => {
-    elements.current = document.querySelectorAll(anchorSelectors);
+    anchorElements.current = document.querySelectorAll(anchorSelectors);
   }, []);
 
-  useResizeObserver({ handleResize, target: navRef });
+  useResizeObserver(navRef, handleResize);
   useIntersectionObserver(
-    elements,
+    anchorElements,
     handleIntersection,
     intersectionObserverOptions,
   );
