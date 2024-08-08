@@ -11,8 +11,8 @@ export function HoncIcon() {
       viewBox="0 0 156 180"
       fill="none"
       id={honcIconId}
+      aria-hidden="true"
     >
-      <title>Honc icon logo</title>
       <rect
         x="0.558105"
         width="154.884"
