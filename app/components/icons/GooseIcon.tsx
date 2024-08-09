@@ -12,8 +12,8 @@ export function GooseIcon({ width = 131 }: GooseIconProps) {
       height={Math.round(width * (161 / 131))}
       width={width}
       class={svgStyle}
+      aria-hidden="true"
     >
-      <title>Goose visual</title>
       <switch>
         <g>
           <path

@@ -14,8 +14,8 @@ export function SplashIcon({ className, width = 200 }: SplashIconProps) {
       height={Math.round(width * (164 / 278))}
       fill="none"
       class={className}
+      aria-hidden="true"
     >
-      <title>Splash icon</title>
       <path
         fill="#1C6289"
         d="M24 68h24v24H24V68Zm24 24h24v24H48V92ZM0 92h24v24H0V92Z"
