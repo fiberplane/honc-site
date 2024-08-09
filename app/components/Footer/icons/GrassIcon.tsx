@@ -14,8 +14,8 @@ export function GrassLeftIcon({ width = 280, className }: GrassIconProps) {
       height={Math.round(width * (170 / 621))}
       fill="none"
       class={className}
+      aria-hidden="true"
     >
-      <title>Grass icon</title>
       <path
         fill="#00A010"
         d="M525 180h24v-24h-24zm-48 0h24v-24h-24zm72-24h24v-24h-24zm24-24h24V84h-24zm24-48h24V36h-24zm-144 51h24V84h-24z"
@@ -51,8 +51,8 @@ export function GrassRightIcon({ width = 240, className }: GrassIconProps) {
       height={Math.round(width * (158 / 552))}
       fill="none"
       className={className}
+      aria-hidden="true"
     >
-      <title>Grass icon</title>
       <path
         fill="#024B0A"
         d="M288 168h-24v-24h24zm120 0h-24v-24h24zm-72 0h-24v-24h24zm120 0h-24v-24h24zm-192-24h-24v-24h24zm0-24h-24V96h24zm0-24h-24V72h24zm24-24h-24V48h24zm72 24h-24V72h24zm0 48h-24v-24h24zm120 0h-24v-24h24zM288 48h-24V24h24zM48 168H24v-24h24zm120 0h-24v-24h24zm-72 0H72v-24h24zm120 0h-24v-24h24zM24 144H0v-24h24zm0-24H0V96h24zm0-24H0V72h24zm24-24H24V48h24zm0-24H24V24h24zm144 120h-24v-24h24zm0-24h-24v-24h24zm0-24h-24V96h24zm-24-24h-24V72h24zm0-24h-24V48h24zm-48 72H96v-24h24zm120 0h-24v-24h24z"
