@@ -6,9 +6,13 @@ import {
   Quickstart,
   Wrapper,
 } from "../components";
+import { Nav } from "../islands/nav";
 import { GetStarted } from "../islands/getStarted";
 import { Overview } from "../islands/overview";
 
+<Nav />
+
+<main>
 <Hero
   quote="It's 2024, I'm building a data API and I'm using TypeScript. What do I use?"
   citation={
@@ -88,5 +92,6 @@ npm create honc-app@latest
 
   </Quickstart>
 </Wrapper>
+</main>
 
 <Footer />
