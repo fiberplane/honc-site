@@ -10,8 +10,8 @@
   font-family: "Silkscreen";
   font-style: bold;
   font-weight: 700;
-  src: local("Silkscreen"),
-    url("/static/fonts/Silkscreen-Bold.woff2") format("woff2");
+  src: local("Silkscreen"), url("/static/fonts/Silkscreen-Bold.woff2")
+    format("woff2");
   font-display: swap;
 }
 
