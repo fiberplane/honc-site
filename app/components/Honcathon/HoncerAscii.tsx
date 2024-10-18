@@ -15,7 +15,15 @@ const preClass = css`
   margin-inline: auto;
   text-align: center;
   color: transparent;
-  background-image: linear-gradient(yellow, orange);
+  background-image: radial-gradient(
+      circle at center 45em,
+      white 5em,
+      transparent 17%
+    ),
+    linear-gradient(
+      hsl(from var(--color-fg-primary) 35deg s l) 10%,
+      var(--color-fg-primary)
+    );
   background-clip: text;
 `;
 
