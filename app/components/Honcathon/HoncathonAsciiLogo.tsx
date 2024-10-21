@@ -47,5 +47,5 @@ const HoncathonAsciiLogoClass = css`
   letter-spacing: -0.09em;
   text-align: center;
   container: inline-size;
-  font-size: clamp(0.4rem, 1.3cqw, 1.3rem);
+  font-size: clamp(0.4rem, 1.6cqw, 1.3rem);
 `;

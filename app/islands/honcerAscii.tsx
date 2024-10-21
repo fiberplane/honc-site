@@ -38,7 +38,7 @@ const preClass = css`
   color: transparent;
   background-image: radial-gradient(
       circle at center 44em,
-      white 4em,
+      var(--radial-color) 4em,
       transparent var(--radial-range)
     ),
     linear-gradient(
@@ -48,7 +48,7 @@ const preClass = css`
   background-clip: text;
 
   &.fade-in {
-    animation: radial-range 3s forwards ease-in-out;
+    animation: radial-entry 3s forwards ease-in-out;
   }
 `;
 

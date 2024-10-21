@@ -123,14 +123,26 @@ code {
   font: var(--font-code);
 }
 
+/* Custom animated properties for honcerAscii.tsx =========================== */
 @property --radial-range {
   syntax: "<percentage>";
   initial-value: 8%;
   inherits: false;
 }
 
-@keyframes radial-range {
-  to {
+@property --radial-color {
+  syntax: "<color>";
+  initial-value: transparent;
+  inherits: false;
+}
+
+@keyframes radial-entry {
+  50%,
+  100% {
+    --radial-color: rgb(255 253 222);
+  }
+  100% {
     --radial-range: 18%;
   }
 }
+/* ========================================================================== */
