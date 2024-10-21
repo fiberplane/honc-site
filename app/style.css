@@ -10,8 +10,8 @@
   font-family: "Silkscreen";
   font-style: bold;
   font-weight: 700;
-  src: local("Silkscreen"), url("/static/fonts/Silkscreen-Bold.woff2")
-    format("woff2");
+  src: local("Silkscreen"),
+    url("/static/fonts/Silkscreen-Bold.woff2") format("woff2");
   font-display: swap;
 }
 
@@ -137,6 +137,12 @@ code {
   inherits: false;
 }
 
+@property --radial-glow {
+  syntax: "<percentage>";
+  initial-value: 30%;
+  inherits: false;
+}
+
 @keyframes radial-entry {
   50%,
   100% {
@@ -144,6 +150,7 @@ code {
   }
   100% {
     --radial-range: 18%;
+    --radial-glow: 60%;
   }
 }
 /* ========================================================================== */

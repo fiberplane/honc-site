@@ -42,19 +42,35 @@ const preClass = css`
   margin-inline: auto;
   text-align: center;
   color: transparent;
-  background-image: radial-gradient(
+  background-clip: text;
+  background-image:
+    /* laptop geese glow */
+    radial-gradient(
       circle at center 44em,
       var(--radial-color) 4em,
       transparent var(--radial-range)
     ),
+    /* gradient mask */
+    linear-gradient(
+      to top,
+      hsl(from var(--color-fg-primary) 35deg s l),
+      rgb(239 114 37) 24em,
+      transparent 24em
+    ),
+    /* screen glow */
+    radial-gradient(
+      circle at center 32em,
+      hsl(from var(--radial-color) h s 90%) 12em,
+      transparent var(--radial-glow)
+    ),
+    /* background gradient */
     linear-gradient(
       hsl(from var(--color-fg-primary) 35deg s l) 10%,
       var(--color-fg-primary)
     );
-  background-clip: text;
 
   &.fade-in {
-    animation: radial-entry 3s forwards ease-in-out;
+    animation: radial-entry 3.5s forwards ease-in;
   }
 `;
 
