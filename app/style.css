@@ -65,6 +65,7 @@
   margin: 0;
 }
 
+html,
 body {
   font: var(--font-body);
   background-color: var(--color-bg-default);

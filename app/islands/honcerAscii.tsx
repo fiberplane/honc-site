@@ -1,6 +1,7 @@
 import { css, cx } from "hono/css";
 import { Wrapper } from "../components";
 import { useRef, useState } from "hono/jsx";
+
 import { useIntersectionObserver } from "../hooks";
 
 export function HoncerAscii() {
@@ -18,7 +19,12 @@ export function HoncerAscii() {
 
   return (
     <Wrapper>
-      <pre ref={preRef} class={cx(preClass, isIntersecting && "fade-in")}>
+      <pre
+        role="img"
+        aria-label="ASCII art of a person working behind a computer"
+        ref={preRef}
+        class={cx(preClass, isIntersecting && "fade-in")}
+      >
         {/*
           We can't trim the ASCII art as it otherwise removes all whitespace
           from the first line. To prevent a layout shift after hydrating we're
@@ -31,7 +37,7 @@ export function HoncerAscii() {
 }
 
 const preClass = css`
-  font-size: 0.75rem;
+  font-size: clamp(0.25rem, 1.5cqw, 0.75rem);
   line-height: 1;
   margin-inline: auto;
   text-align: center;
