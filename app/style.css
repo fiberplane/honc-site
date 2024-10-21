@@ -122,3 +122,15 @@ pre,
 code {
   font: var(--font-code);
 }
+
+@property --radial-range {
+  syntax: "<percentage>";
+  initial-value: 8%;
+  inherits: false;
+}
+
+@keyframes radial-range {
+  to {
+    --radial-range: 18%;
+  }
+}
