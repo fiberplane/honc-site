@@ -10,8 +10,8 @@
   font-family: "Silkscreen";
   font-style: bold;
   font-weight: 700;
-  src: local("Silkscreen"),
-    url("/static/fonts/Silkscreen-Bold.woff2") format("woff2");
+  src: local("Silkscreen"), url("/static/fonts/Silkscreen-Bold.woff2")
+    format("woff2");
   font-display: swap;
 }
 
@@ -65,7 +65,6 @@
   margin: 0;
 }
 
-html,
 body {
   font: var(--font-body);
   background-color: var(--color-bg-default);
@@ -125,32 +124,47 @@ code {
 }
 
 /* Custom animated properties for honcerAscii.tsx =========================== */
-@property --radial-range {
+@property --geese-radial-range {
   syntax: "<percentage>";
   initial-value: 8%;
   inherits: false;
 }
 
-@property --radial-color {
+@property --geese-radial-color {
   syntax: "<color>";
   initial-value: transparent;
   inherits: false;
 }
 
-@property --radial-glow {
+@property --screen-radial-range {
   syntax: "<percentage>";
   initial-value: 30%;
   inherits: false;
 }
 
-@keyframes radial-entry {
+@property --screen-radial-color {
+  syntax: "<color>";
+  initial-value: transparent;
+  inherits: false;
+}
+
+@keyframes screen-entry {
   50%,
   100% {
-    --radial-color: rgb(255 253 222);
+    --screen-radial-color: rgb(255 253 222);
   }
   100% {
-    --radial-range: 18%;
-    --radial-glow: 60%;
+    --screen-radial-range: 60%;
+  }
+}
+
+@keyframes geese-entry {
+  50%,
+  100% {
+    --geese-radial-color: rgb(255 253 222);
+  }
+  100% {
+    --geese-radial-range: 18%;
   }
 }
 /* ========================================================================== */
