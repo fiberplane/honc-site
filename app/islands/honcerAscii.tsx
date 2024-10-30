@@ -30,6 +30,7 @@ export function HoncerAscii() {
           from the first line. To prevent a layout shift after hydrating we're
           adding a whitespace character at the beginning of the ASCII art.
         */}
+        {" "}
         {HONCER_ASCII}
       </pre>
     </Wrapper>

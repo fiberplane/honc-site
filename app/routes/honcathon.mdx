@@ -1,4 +1,5 @@
 import {
+  Footer,
   HoncathonAsciiLogo,
   HoncathonContentBlock,
   HoncathonHeader,
@@ -14,11 +15,13 @@ import { HoncerAscii } from "../islands/honcerAscii";
 <HoncerAscii />
 
 <HoncathonHeader
+  emoji="📅"
+  preheader="Sign up today and get started with your HONC project. The deadline to submit your project is December 15th. You receive more information how to submit after registering."
   title="December 15th, 2024"
   subtitle="The Honcathon is a wild, fun online challenge where solo developers or teams come together to build and ship apps using (but not limited to) the HONC stack: Hono, Drizzle, Neon, Cloudflare, and Fiberplane. It’s the perfect place to let your creativity soar and ruffle a few feathers!"
 />
 
-<HoncathonHeader title="virtual" />
+<HoncathonHeader emoji="📍" title="virtual"  />
 
 <HoncathonContentBlock>
 ### How to participate
@@ -33,7 +36,7 @@ import { HoncerAscii } from "../islands/honcerAscii";
 
 </HoncathonContentBlock>
 
-<HoncathonHeader title="Prizes" />
+<HoncathonHeader emoji="🏆" title="Prizes"  />
 
 <HoncathonContentBlock>
   🏅 Category Winners: $500 Amazon voucher each.
@@ -44,6 +47,7 @@ import { HoncerAscii } from "../islands/honcerAscii";
 <HoncathonContentBlock>🏅 And more...</HoncathonContentBlock>
 
 <HoncathonHeader
+  emoji="🗂️"
   title="Categories"
   subtitle="Pick your favorite goose-approved category (or come up with an own idea, just make sure it uses HONC):"
 />
@@ -64,12 +68,14 @@ import { HoncerAscii } from "../islands/honcerAscii";
   categories above will enter this category
 </HoncathonContentBlock>
 
-<HoncathonHeader title="Sponsors" />
+<HoncathonHeader emoji="🏢" title="Sponsors" />
 <HoncathonSponsors />
 
-<HoncathonHeader title="Sign up" />
+<HoncathonHeader emoji="📋" title="Sign up" />
 
 <HoncathonHeader
   title="Get your goose on!"
   subtitle="We're so excited to see what you'll build with HONC! Let's build, have fun, and make the geese proud!"
 />
+
+<Footer />

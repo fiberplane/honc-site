@@ -97,6 +97,7 @@ h1,
 h2,
 h3 {
   margin-block: 1.25em 0.75em;
+  text-wrap: balance;
 }
 
 h1 {
