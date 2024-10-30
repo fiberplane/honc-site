@@ -29,6 +29,10 @@ const HONCATHON_ASCII = `
 const h2Class = css`
   position: relative;
 
+  pre {
+    font-family: Departure Mono, monospace;
+  }
+
   .logo-sr-text {
     position: absolute;
     width: 1px;

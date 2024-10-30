@@ -31,6 +31,7 @@ const sectionClass = css`
     padding: 3rem 2rem;
 
     pre {
+      font: var(--font-code);
       background: var(--mid-background);
       padding: 1rem 2rem;
       overflow-x: auto;

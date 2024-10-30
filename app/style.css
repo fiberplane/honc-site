@@ -122,11 +122,6 @@ a {
   }
 }
 
-pre,
-code {
-  font: var(--font-code);
-}
-
 /* Custom animated properties for honcerAscii.tsx =========================== */
 @property --geese-radial-range {
   syntax: "<percentage>";

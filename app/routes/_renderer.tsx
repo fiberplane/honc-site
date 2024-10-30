@@ -92,6 +92,13 @@ export default jsxRenderer(({ children, title }) => {
           type="font/woff2"
           crossorigin=""
         />
+        <link
+          rel="preload"
+          href="/static/fonts/DepartureMono-Regular.woff2"
+          as="font"
+          type="font/woff2"
+          crossorigin=""
+        />
 
         <title>{title ?? "HONC.dev"}</title>
 

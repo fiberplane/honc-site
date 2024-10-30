@@ -41,23 +41,21 @@ export function GetStarted({ children, title }: GetStartedProps) {
   }, [isCopied]);
 
   return (
-    <Wrapper narrow>
-      <section class={sectionClass}>
-        <h1>{title}</h1>
+    <section class={sectionClass}>
+      <h1>{title}</h1>
 
-        <div ref={containerRef}>
-          {children}
-          <button
-            type="button"
-            onClick={handleCopy}
-            class={cx(isCopied && "copied")}
-          >
-            <span>copy</span>
-            <span>copied!</span>
-          </button>
-        </div>
-      </section>
-    </Wrapper>
+      <div ref={containerRef}>
+        {children}
+        <button
+          type="button"
+          onClick={handleCopy}
+          class={cx(isCopied && "copied")}
+        >
+          <span>copy</span>
+          <span>copied!</span>
+        </button>
+      </div>
+    </section>
   );
 }
 
@@ -74,6 +72,7 @@ const sectionClass = css`
     grid-template-columns: 1fr auto;
 
     pre {
+      font: var(--font-code);
       background: var(--color-border-secondary);
       outline: 1px solid var(--color-border);
       display: grid;
