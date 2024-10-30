@@ -8,12 +8,15 @@ type HoncathonHeaderProps = {
 
 export function HoncathonHeader({ subtitle, title }: HoncathonHeaderProps) {
   return (
-    <Wrapper center>
-      <header>
+    <header>
+      <Wrapper center>
         <h2 class={h2Class}>{title}</h2>
+      </Wrapper>
+
+      <Wrapper center narrow>
         {subtitle && <p>{subtitle}</p>}
-      </header>
-    </Wrapper>
+      </Wrapper>
+    </header>
   );
 }
 
