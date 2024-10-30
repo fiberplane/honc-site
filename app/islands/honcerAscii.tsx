@@ -29,7 +29,7 @@ export function HoncerAscii() {
           We can't trim the ASCII art as it otherwise removes all whitespace
           from the first line. To prevent a layout shift after hydrating we're
           adding a whitespace character at the beginning of the ASCII art.
-        */}{" "}
+        */}
         {HONCER_ASCII}
       </pre>
     </Wrapper>

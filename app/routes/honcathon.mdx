@@ -1,5 +1,62 @@
-import { HoncathonAsciiLogo } from "../components";
+import {
+  HoncathonAsciiLogo,
+  HoncathonHeader,
+  Wrapper,
+  HoncathonContentBlock,
+} from "../components";
 import { HoncerAscii } from "../islands/honcerAscii";
 
 <HoncathonAsciiLogo />
+
+<HoncathonHeader title="Let's get goosy!" />
+
 <HoncerAscii />
+
+<HoncathonHeader
+  title="December 15th, 2024"
+  subtitle="The Honcathon is a wild, fun online challenge where solo developers or teams come together to build and ship apps using (but not limited to) the HONC stack: Hono, Drizzle, Neon, Cloudflare, and Fiberplane. It’s the perfect place to let your creativity soar and ruffle a few feathers!"
+/>
+
+<HoncathonHeader title="virtual" />
+
+<HoncathonContentBlock>
+### How to participate
+1. Sign-up: Fill out the form at the bottom of this page. You can participate as a solo developer or in a team.
+2. Pick one of the categorize below for your application or come up with an own idea
+3. Build: Create a project using HONC.
+4. Submit: You get the details how to submit your project when signing up
+
+\*For teams, make sure all team members are signed up.
+
+</HoncathonContentBlock>
+
+<HoncathonHeader title="Prizes" />
+
+<HoncathonContentBlock>
+  🏅 Category Winners: $500 Amazon voucher each.
+</HoncathonContentBlock>
+<HoncathonContentBlock>
+  🏅 Every Successful Submission: A honking-awesome swag bag!
+</HoncathonContentBlock>
+<HoncathonContentBlock>🏅 And more...</HoncathonContentBlock>
+
+<HoncathonHeader
+  title="Categories"
+  subtitle="Pick your favorite goose-approved category (or come up with an own idea, just make sure it uses HONC):"
+/>
+
+<HoncathonContentBlock>
+  - Webhook Integration: as an example.: create a Goose Chat Bot, that leverages
+  Telegram's Webhook API. Here is a list with other awesome webhook APIs to look
+  into.
+
+- Cloudflare Workers AI: as an example: Create AI images of Geese and
+  store them in Cloudflare R2 (their version of Amazon S3). Other AI cases are
+  also welcome
+
+- Retrieval Augmented Goose : use Neon’s vector search capabilities to create
+  a semantic search app or chatbot for a knowledgebase
+
+- Wild Goose: All other projects built with HONC and don’t fall into the three
+  categories above will enter this category
+</HoncathonContentBlock>
