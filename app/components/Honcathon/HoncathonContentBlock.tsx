@@ -1,5 +1,6 @@
 import { css } from "hono/css";
 import type { PropsWithChildren } from "hono/jsx";
+
 import { Wrapper } from "../Wrapper";
 
 export function HoncathonContentBlock({ children }: PropsWithChildren) {
