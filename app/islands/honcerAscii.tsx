@@ -8,14 +8,18 @@ export function HoncerAscii() {
   const preRef = useRef<HTMLPreElement>(null);
   const [isIntersecting, setIsIntersecting] = useState(false);
 
-  useIntersectionObserver(preRef, (entries, observer) => {
-    for (const entry of entries) {
-      if (entry.isIntersecting) {
-        setIsIntersecting(true);
-        observer.disconnect();
+  useIntersectionObserver(
+    preRef,
+    (entries, observer) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          setIsIntersecting(true);
+          observer.disconnect();
+        }
       }
-    }
-  });
+    },
+    { threshold: 0.9 },
+  );
 
   return (
     <Wrapper>
