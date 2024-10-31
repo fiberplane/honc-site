@@ -23,7 +23,7 @@ export function Wrapper({ center, children, className, narrow }: WrapperProps) {
 const wrapperClass = css`
   --spacing-wrapper: 2rem;
 
-  width: min(calc(100% - var(--spacing-wrapper) * 2), 75rem);
+  width: min(100% - var(--spacing-wrapper) * 2, 75rem);
   margin-inline: auto;
 
   @media screen and (width <= 480px) {
@@ -31,7 +31,7 @@ const wrapperClass = css`
   }
 
   &[data-narrow="true"] {
-    width: min(calc(100% - var(--spacing-wrapper) * 2), 55rem)
+    width: min(100% - var(--spacing-wrapper) * 2, 55rem)
   }
 
   &[data-center="true"] {
