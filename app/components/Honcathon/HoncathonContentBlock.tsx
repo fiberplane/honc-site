@@ -16,6 +16,14 @@ const contentBlockClass = css`
   padding: 3rem;
   border-radius: 30px;
 
+  /*
+    ol list items don't get rendered with a nested <p> element, hence we'll have
+    to add them manually here.
+  */
+  &:has(ol > li) li {
+    margin-block: 1em;
+  }
+
   & > *:first-child {
     margin-top: 0;
   }
