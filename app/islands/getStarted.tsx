@@ -1,8 +1,6 @@
 import { css, cx } from "hono/css";
 import { type PropsWithChildren, useEffect, useRef, useState } from "hono/jsx";
 
-import { Wrapper } from "../components/Wrapper";
-
 type GetStartedProps = PropsWithChildren<{
   title: string;
 }>;
