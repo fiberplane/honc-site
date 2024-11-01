@@ -78,6 +78,12 @@ body {
   font: var(--font-body);
   background-color: var(--color-bg-default);
   color: var(--color-fg-default);
+
+  &:has([data-announcement]) {
+    [data-nav] {
+      top: 2rem;
+    }
+  }
 }
 
 p {

@@ -18,7 +18,7 @@ export function HoncathonNav() {
           rel="noopener noreferrer"
         >
           <GithubIcon />
-          sample API
+          Sample API
         </a>
       </Wrapper>
     </nav>
@@ -33,7 +33,7 @@ const wrapperClassName = css`
   padding-block: 1.5rem;
 
   h1 {
-    font-size: 1.5rem;
+    font-size: 2.5rem;
     line-height: 1;
     margin: 0;
     color: var(--color-fg-default);

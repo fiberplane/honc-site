@@ -71,7 +71,7 @@ export function Nav() {
 
   return (
     <>
-      <nav class={navClass} ref={navRef}>
+      <nav class={navClass} ref={navRef} data-nav>
         <Wrapper>
           <ul
             class={cx(shouldShow && "open", shouldAnimateExit && "close")}
