@@ -4,8 +4,14 @@ import { Link, Script } from "honox/server";
 
 import PostHog from "../islands/postHog";
 
-export default jsxRenderer(({ children, title }) => {
+export default jsxRenderer(({ children, frontmatter }) => {
   const posthogProjectKey = import.meta.env.VITE_POSTHOG_PROJECT_KEY;
+
+  const title = frontmatter?.title || "HONC.dev";
+  const socialImage = frontmatter?.image || "/static/images/social.jpg";
+  const description =
+    frontmatter?.description ||
+    "HONC is a modular collection of choice technologies for building lightweight, type-safe, edge-enabled data apis that scale seamlessly to their demand.";
 
   return (
     <html lang="en">
@@ -15,26 +21,17 @@ export default jsxRenderer(({ children, title }) => {
           name="viewport"
           content="width=device-width, initial-scale=1.0, viewport-fit=cover"
         />
-        <meta
-          name="description"
-          content="HONC is an modular collection of choice technologies for building lightweight, type-safe, edge-enabled data apis that scale seamlessly to their demand."
-        />
+        <meta name="description" content={description} />
         <link rel="canonical" href="https://honc.dev" />
 
         <meta
           property="og:title"
           content="The HONC Stack: A Modular Collection of Choice Technologies"
         />
-        <meta
-          name="og:description"
-          content="Modular collection of choice technologies for building lightweight, type-safe, edge-enabled data apis that scale seamlessly to their demand."
-        />
+        <meta name="og:description" content={description} />
         <meta property="og:url" content="https://honc.dev" />
         <meta property="og:site_name" content="HONC.dev" />
-        <meta
-          property="og:image"
-          content="https://honc.dev/static/images/social.jpg"
-        />
+        <meta property="og:image" content={`https://honc.dev${socialImage}`} />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta property="twitter:domain" content="honc.dev" />
@@ -43,14 +40,8 @@ export default jsxRenderer(({ children, title }) => {
           name="twitter:title"
           content="The HONC Stack: A Modular Collection of Choice Technologies"
         />
-        <meta
-          name="twitter:description"
-          content="Modular collection of choice technologies for building lightweight, type-safe, edge-enabled data apis that scale seamlessly to their demand."
-        />
-        <meta
-          name="twitter:image"
-          content="https://honc.dev/static/images/social.jpg"
-        />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={`https://honc.dev${socialImage}`} />
 
         <link
           rel="apple-touch-icon"
