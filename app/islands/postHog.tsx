@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from "hono/jsx";
+import { useEffect } from "hono/jsx";
 import posthog from "posthog-js";
 
 type PostHogProps = {
@@ -22,5 +22,5 @@ export default function PostHog({ projectKey }: PostHogProps) {
     });
   }, [projectKey]);
 
-  return <Fragment />;
+  return null;
 }

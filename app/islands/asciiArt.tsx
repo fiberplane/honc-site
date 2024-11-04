@@ -99,6 +99,7 @@ const preClass = css`
   margin-inline: auto;
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
+  font: var(--font-code);
 
   &.fade-in {
     opacity: 1;

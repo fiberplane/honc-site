@@ -3,6 +3,8 @@ import ssg from "@hono/vite-ssg";
 import mdx from "@mdx-js/rollup";
 import honox from "honox/vite";
 import rehypeExternalLinks, { type Options } from "rehype-external-links";
+import remarkFrontmatter from "remark-frontmatter";
+import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 import { defineConfig } from "vite";
 
 const entry = "./app/server.ts";
@@ -31,6 +33,7 @@ export default defineConfig({
     mdx({
       jsxImportSource: "hono/jsx",
       rehypePlugins: [[rehypeExternalLinks, rehypeExternalLinksOptions]],
+      remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter],
     }),
   ],
 });

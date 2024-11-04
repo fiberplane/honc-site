@@ -1,5 +1,6 @@
 export * from "./Footer";
 export * from "./Hero";
+export * from "./Honcathon";
 export * from "./icons";
 export * from "./Intro";
 export * from "./Nav";

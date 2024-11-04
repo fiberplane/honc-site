@@ -1,14 +1,21 @@
 import {
   Footer,
   Hero,
+  HoncathonAnnouncementBanner,
   Intro,
   OverviewItem,
   Quickstart,
   Wrapper,
 } from "../components";
 import { GetStarted } from "../islands/getStarted";
+import { Nav } from "../islands/nav";
 import { Overview } from "../islands/overview";
 
+<HoncathonAnnouncementBanner />
+
+<Nav />
+
+<main>
 <Hero
   quote="It's 2024, I'm building a data API and I'm using TypeScript. What do I use?"
   citation={
@@ -20,13 +27,15 @@ import { Overview } from "../islands/overview";
   }
 />
 
-<GetStarted title="TL;DR">
+<Wrapper narrow>
+  <GetStarted title="TL;DR">
 
-```shell
-npm create honc-app@latest
-```
+  ```shell
+  npm create honc-app@latest
+  ```
 
-</GetStarted>
+  </GetStarted>
+</Wrapper>
 
 <Intro>
   <p>
@@ -88,5 +97,6 @@ npm create honc-app@latest
 
   </Quickstart>
 </Wrapper>
+</main>
 
 <Footer />
