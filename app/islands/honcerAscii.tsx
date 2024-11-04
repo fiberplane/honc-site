@@ -43,7 +43,7 @@ export function HoncerAscii() {
 const preClass = css`
   text-rendering: optimizeSpeed;
   font-family: Departure Mono, monospace;
-  font-size: clamp(0.5rem, 1.4cqw, 0.75rem);
+  font-size: clamp(0.2rem, 1.4cqw, 0.75rem);
   line-height: 1;
   margin-inline: auto;
   text-align: center;
