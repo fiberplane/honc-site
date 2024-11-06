@@ -22,16 +22,18 @@ const asideClass = css`
   display: grid;
   align-items: center;
   height: 2rem;
-  
+
   [data-wrapper] {
     text-align: center;
   }
-  
+
   a {
     text-transform: uppercase;
     font-family: Departure Mono, monospace;
+    display: inline-block;
     line-height: 1;
     margin: 0;
-    color: var(--color-text-primary);
+    color: var(--color-fg-default);
+    font-size: clamp(0.75rem, 2.5vw, 1rem);
   }
 `;
