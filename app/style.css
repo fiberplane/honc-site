@@ -173,3 +173,11 @@ a {
   }
 }
 /* ========================================================================== */
+
+/* Custom property for HoncathonSponsors.tsx ================================ */
+@property --spacing-shadow-length {
+  syntax: "<length>";
+  initial-value: 0px;
+  inherits: false;
+}
+/* ========================================================================== */
