@@ -124,13 +124,15 @@ export function HoncathonSponsors() {
 }
 
 const sponsorFlexClass = css`
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(176px, 1fr));
+  place-items: center;
   gap: 2.5rem;
-  justify-content: center;
   margin-block: 5rem;
 
+
   a {
-    color: white;
+    color: var(--color-fg-default);
 
     svg {
       filter: drop-shadow(
