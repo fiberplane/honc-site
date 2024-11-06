@@ -126,10 +126,10 @@ export function HoncathonSponsors() {
 const sponsorFlexClass = css`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(176px, 1fr));
+  grid-template-rows: repeat(auto-fit, 128px);
   place-items: center;
   gap: 2.5rem;
   margin-block: 5rem;
-
 
   a {
     color: var(--color-fg-default);
@@ -140,6 +140,8 @@ const sponsorFlexClass = css`
           hsl(from var(--color-bg-primary) h s l / 0.7)
       );
       transition: 0.2s;
+      height: 100%;
+      width: 100%;
 
       &:hover {
         --spacing-shadow-length: 20px;
