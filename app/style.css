@@ -128,6 +128,20 @@ a {
   }
 }
 
+/* Custom properties for bento.tsx ========================================== */
+@property --bento-conic-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes bento {
+  to {
+    --bento-conic-angle: 360deg;
+  }
+}
+/* ========================================================================== */
+
 /* Custom animated properties for honcerAscii.tsx =========================== */
 @property --geese-radial-range {
   syntax: "<percentage>";
