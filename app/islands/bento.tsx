@@ -1,5 +1,7 @@
 import { css, keyframes } from "hono/css";
-import { useRef } from "hono/jsx";
+import { useRef, useState } from "hono/jsx";
+
+import { SvgTwoElements } from "./svg1";
 
 export function Bento() {
   return (
@@ -16,6 +18,7 @@ export function Bento() {
 
 function BentoItem() {
   const ref = useRef<HTMLDivElement>(null);
+  const [shouldAnimate, setShouldAnimate] = useState(false);
 
   const onMouseMove = (event: MouseEvent) => {
     const el = ref.current;
@@ -32,6 +35,8 @@ function BentoItem() {
   };
 
   const onMouseOut = () => {
+    setShouldAnimate(false);
+
     const el = ref.current;
     if (!el) {
       return;
@@ -48,7 +53,10 @@ function BentoItem() {
       onMouseMove={onMouseMove}
       // biome-ignore lint/a11y/useKeyWithMouseEvents: <explanation>
       onMouseOut={onMouseOut}
-    />
+      onMouseEnter={() => setShouldAnimate(true)}
+    >
+      <SvgTwoElements shouldAnimate={shouldAnimate} />
+    </div>
   );
 }
 
@@ -73,6 +81,8 @@ const bentoGridClass = css`
 `;
 
 const bentoItemClass = css`
+  padding: 1rem;
+
   position: relative;
   border: 1px solid transparent;
   border-radius: var(--corner-radius);
