@@ -141,7 +141,19 @@ a {
   inherits: true;
 }
 
-@keyframes bento {
+@property --bento-radial-x {
+  syntax: "<percentage>";
+  initial-value: 0%;
+  inherits: false;
+}
+
+@property --bento-radial-y {
+  syntax: "<percentage>";
+  initial-value: 0%;
+  inherits: false;
+}
+
+@keyframes bento-conic {
   to {
     --bento-conic-angle: 360deg;
   }

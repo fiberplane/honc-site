@@ -1,10 +1,12 @@
 import { css } from "hono/css";
+import { useRef } from "hono/jsx";
 
 export function Bento() {
   return (
     <section class={sectionClass}>
       <div class={gridClass}>
         {Array.from({ length: 4 }).map((_, i) => (
+          // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
           <BentoItem key={i} />
         ))}
       </div>
@@ -13,8 +15,40 @@ export function Bento() {
 }
 
 function BentoItem() {
-  // TODO: Add hover mouse tracking for gradient & skew
-  return <div />;
+  const ref = useRef<HTMLDivElement>(null);
+
+  const onMouseMove = (event: MouseEvent) => {
+    const el = ref.current;
+    if (!el) {
+      return;
+    }
+
+    const rect = el.getBoundingClientRect();
+    const xPercent = Math.round((event.layerX / rect.width) * 100);
+    const yPercent = Math.round((event.layerY / rect.height) * 100);
+
+    el.style.setProperty("--bento-radial-x", `${xPercent}%`);
+    el.style.setProperty("--bento-radial-y", `${yPercent}%`);
+  };
+
+  const onMouseOut = () => {
+    const el = ref.current;
+    if (!el) {
+      return;
+    }
+
+    el.style.removeProperty("--bento-radial-x");
+    el.style.removeProperty("--bento-radial-y");
+  };
+
+  return (
+    <div
+      ref={ref}
+      onMouseMove={onMouseMove}
+      onMouseOut={onMouseOut}
+      onBlur={() => {}}
+    />
+  );
 }
 
 const sectionClass = css`
@@ -43,8 +77,8 @@ const gridClass = css`
     background-clip: padding-box, border-box;
     background-origin: border-box;
     background-image: radial-gradient(
-        circle at top left,
-        hsl(from var(--color-bg-default) h 40% 6%) 0%,
+        circle at var(--bento-radial-x) var(--bento-radial-y),
+        hsl(from var(--color-bg-default) h 32% 10%) 0%,
         var(--color-bg-default)
       ),
       conic-gradient(
@@ -57,7 +91,7 @@ const gridClass = css`
       );
 
     box-shadow: inset 0 0 16px 0 hsl(from var(--color-fg-default) h s 30% / 8%);
-    animation: bento 8s linear infinite;
+    animation: bento-conic 8s linear infinite;
 
     position: relative;
 
@@ -78,12 +112,10 @@ const gridClass = css`
       z-index: -1;
       filter: blur(16px);
       opacity: 0.25;
-      animation: bento 4s linear infinite;
+      animation: bento-conic 8s linear infinite;
     }
 
-    transition: 0.2s;
     &:hover {
-      /* --bento-conic-color: var(--color-fg-primary); */
       animation: bento-color 0.5s linear forwards;
     }
   }
