@@ -135,9 +135,21 @@ a {
   inherits: false;
 }
 
+@property --bento-conic-color {
+  syntax: "<color>";
+  initial-value: hsl(20, 13%, 15%);
+  inherits: true;
+}
+
 @keyframes bento {
   to {
     --bento-conic-angle: 360deg;
+  }
+}
+
+@keyframes bento-color {
+  to {
+    --bento-conic-color: hsl(16, 88%, 55%);
   }
 }
 /* ========================================================================== */

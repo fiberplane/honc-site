@@ -4,13 +4,17 @@ export function Bento() {
   return (
     <section class={sectionClass}>
       <div class={gridClass}>
-        <div />
-        <div />
-        <div />
-        <div />
+        {Array.from({ length: 4 }).map((_, i) => (
+          <BentoItem key={i} />
+        ))}
       </div>
     </section>
   );
+}
+
+function BentoItem() {
+  // TODO: Add hover mouse tracking for gradient & skew
+  return <div />;
 }
 
 const sectionClass = css`
@@ -20,15 +24,6 @@ const sectionClass = css`
 const gridClass = css`
   --corner-radius: 20px;
   --color-accent-default: var(--color-fg-default);
-
-  --background-conic: conic-gradient(
-    from var(--bento-conic-angle),
-    transparent,
-    var(--color-fg-primary),
-    transparent,
-    var(--color-fg-primary),
-    transparent
-  );
 
   display: grid;
   gap: 0.5rem;
@@ -55,13 +50,13 @@ const gridClass = css`
       conic-gradient(
         from var(--bento-conic-angle),
         transparent,
-        var(--color-fg-primary),
+        var(--bento-conic-color),
         transparent,
-        var(--color-fg-primary),
+        var(--bento-conic-color),
         transparent
       );
 
-    box-shadow: inset 0 0 16px 0 rgb(from var(--color-fg-default) r g b / 4%);
+    box-shadow: inset 0 0 16px 0 hsl(from var(--color-fg-default) h s 30% / 8%);
     animation: bento 8s linear infinite;
 
     position: relative;
@@ -70,13 +65,13 @@ const gridClass = css`
       content: "";
       display: block;
       position: absolute;
-      inset: -16px;
+      inset: -8px;
       background-image: conic-gradient(
         from var(--bento-conic-angle),
         transparent,
-        var(--color-fg-primary),
+        var(--bento-conic-color),
         transparent,
-        var(--color-fg-primary),
+        var(--bento-conic-color),
         transparent
       );
       border-radius: var(--corner-radius);
@@ -84,6 +79,12 @@ const gridClass = css`
       filter: blur(16px);
       opacity: 0.25;
       animation: bento 4s linear infinite;
+    }
+
+    transition: 0.2s;
+    &:hover {
+      /* --bento-conic-color: var(--color-fg-primary); */
+      animation: bento-color 0.5s linear forwards;
     }
   }
 `;
