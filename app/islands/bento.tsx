@@ -2,6 +2,7 @@ import { css, keyframes } from "hono/css";
 import { useRef, useState } from "hono/jsx";
 
 import { SvgTwoElements } from "./svg1";
+import { SvgThreeElements } from "./svg2";
 
 export function Bento() {
   return (
@@ -56,12 +57,13 @@ function BentoItem() {
       onMouseEnter={() => setShouldAnimate(true)}
     >
       <SvgTwoElements shouldAnimate={shouldAnimate} />
+      <SvgThreeElements shouldAnimate={shouldAnimate} />
     </div>
   );
 }
 
 const sectionClass = css`
-  margin-block: 5rem;
+  margin-block: 8rem 5rem;
 `;
 
 const bentoConic = keyframes`
@@ -87,6 +89,23 @@ const bentoItemClass = css`
   border: 1px solid transparent;
   border-radius: var(--corner-radius);
   grid-column: span 2;
+
+
+  /* DEMO */
+  svg {
+    position: absolute;
+    pointer-events: none;
+
+    &:first-of-type {
+      top: 1rem;
+      left: 1rem;
+    }
+
+    &:last-of-type {
+      bottom: 1rem;
+      right: 1rem;
+    }
+  }
 
   &:nth-child(1),
   &:nth-child(4) {
