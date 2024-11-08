@@ -152,18 +152,6 @@ a {
   initial-value: 0%;
   inherits: false;
 }
-
-@keyframes bento-conic {
-  to {
-    --bento-conic-angle: 360deg;
-  }
-}
-
-@keyframes bento-color {
-  to {
-    --bento-conic-color: hsl(16, 88%, 55%);
-  }
-}
 /* ========================================================================== */
 
 /* Custom animated properties for honcerAscii.tsx =========================== */

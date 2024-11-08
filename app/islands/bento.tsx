@@ -1,10 +1,10 @@
-import { css } from "hono/css";
+import { css, keyframes } from "hono/css";
 import { useRef } from "hono/jsx";
 
 export function Bento() {
   return (
     <section class={sectionClass}>
-      <div class={gridClass}>
+      <div class={bentoGridClass}>
         {Array.from({ length: 4 }).map((_, i) => (
           // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
           <BentoItem key={i} />
@@ -43,10 +43,11 @@ function BentoItem() {
 
   return (
     <div
+      class={bentoItemClass}
       ref={ref}
       onMouseMove={onMouseMove}
+      // biome-ignore lint/a11y/useKeyWithMouseEvents: <explanation>
       onMouseOut={onMouseOut}
-      onBlur={() => {}}
     />
   );
 }
@@ -55,7 +56,13 @@ const sectionClass = css`
   margin-block: 5rem;
 `;
 
-const gridClass = css`
+const bentoConic = keyframes`
+  to {
+    --bento-conic-angle: 360deg;
+  }
+`;
+
+const bentoGridClass = css`
   --corner-radius: 20px;
   --color-accent-default: var(--color-fg-default);
 
@@ -63,60 +70,65 @@ const gridClass = css`
   gap: 0.5rem;
   grid-template: repeat(2, 1fr) / repeat(5, 1fr);
   height: 600px;
+`;
 
-  div {
-    border: 1px solid transparent;
+const bentoItemClass = css`
+  position: relative;
+  border: 1px solid transparent;
+  border-radius: var(--corner-radius);
+  grid-column: span 2;
+
+  &:nth-child(1),
+  &:nth-child(4) {
+    grid-column: span 3;
+  }
+
+  box-shadow: inset 0 0 32px 0 hsl(from var(--color-bg-default) h s 8% / 25%);
+  background-clip: padding-box, border-box;
+  background-origin: border-box;
+  background-image: radial-gradient(
+      circle at var(--bento-radial-x) var(--bento-radial-y),
+      hsl(from var(--color-bg-default) h 32% 10%) 0%,
+      var(--color-bg-default)
+    ),
+    conic-gradient(
+      from var(--bento-conic-angle),
+      transparent,
+      var(--bento-conic-color),
+      transparent,
+      var(--bento-conic-color),
+      transparent
+    );
+
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    inset: 0;
+    /*
+      Needs to be the exact same radial-gradient as parent, doesn't work here
+      when put in custom property
+    */
+    background-image: conic-gradient(
+      from var(--bento-conic-angle),
+      transparent,
+      var(--bento-conic-color),
+      transparent,
+      var(--bento-conic-color),
+      transparent
+    );
     border-radius: var(--corner-radius);
-    grid-column: span 2;
+    z-index: -1;
+    filter: blur(16px);
+    opacity: 0.5;
+  }
 
-    &:nth-child(1),
-    &:nth-child(4) {
-      grid-column: span 3;
-    }
+  &,
+  &::before {
+    animation: ${bentoConic} 8s linear infinite;
+  }
 
-    background-clip: padding-box, border-box;
-    background-origin: border-box;
-    background-image: radial-gradient(
-        circle at var(--bento-radial-x) var(--bento-radial-y),
-        hsl(from var(--color-bg-default) h 32% 10%) 0%,
-        var(--color-bg-default)
-      ),
-      conic-gradient(
-        from var(--bento-conic-angle),
-        transparent,
-        var(--bento-conic-color),
-        transparent,
-        var(--bento-conic-color),
-        transparent
-      );
-
-    box-shadow: inset 0 0 16px 0 hsl(from var(--color-fg-default) h s 30% / 8%);
-    animation: bento-conic 8s linear infinite;
-
-    position: relative;
-
-    &::before {
-      content: "";
-      display: block;
-      position: absolute;
-      inset: -8px;
-      background-image: conic-gradient(
-        from var(--bento-conic-angle),
-        transparent,
-        var(--bento-conic-color),
-        transparent,
-        var(--bento-conic-color),
-        transparent
-      );
-      border-radius: var(--corner-radius);
-      z-index: -1;
-      filter: blur(16px);
-      opacity: 0.25;
-      animation: bento-conic 8s linear infinite;
-    }
-
-    &:hover {
-      animation: bento-color 0.5s linear forwards;
-    }
+  &:hover {
+    --bento-conic-color: hsl(16, 88%, 55%);
   }
 `;
