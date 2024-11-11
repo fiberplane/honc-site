@@ -6,6 +6,8 @@ import { SvgGraphicsSymbol } from "./SvgGraphicsSymbol";
 export function Bento() {
   return (
     <section class={sectionClass}>
+      <h1>Examples</h1>
+
       <div class={bentoGridClass}>
         {Array.from({ length: 4 }).map((_, i) => (
           // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
@@ -58,6 +60,37 @@ function BentoItem() {
       onMouseMove={onMouseMove}
       onMouseOut={onMouseOut}
     >
+      <article class={cardContent}>
+        <header>
+          <h3>Angry goose PR reviewer</h3>
+          <p>
+            Have a goose judging your Github pull request. Warning: they're not
+            holding back!
+          </p>
+        </header>
+
+        <ul>
+          <li>
+            <a
+              href="http://github.com/fiberplane/create-honc-app"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Github repo
+            </a>
+          </li>
+          <li>
+            <a
+              href="http://fiberplane.com/blog"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Read the article
+            </a>
+          </li>
+        </ul>
+      </article>
+
       {Array.from({ length: 2 }).map((_, i) => (
         // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
         <SvgGraphicsSymbol key={i} variant={i} shouldAnimate={shouldAnimate} />
@@ -68,6 +101,10 @@ function BentoItem() {
 
 const sectionClass = css`
   margin-block: 8rem 5rem;
+
+  h1 {
+    text-align: center;
+  }
 `;
 
 const bentoConic = keyframes`
@@ -87,7 +124,7 @@ const bentoGridClass = css`
 `;
 
 const bentoItemClass = css`
-  padding: 1rem;
+  padding: 2rem;
 
   position: relative;
   border: 1px solid transparent;
@@ -162,5 +199,11 @@ const bentoItemClass = css`
     &::before {
       animation: ${bentoConic} 8s linear infinite;
     }
+  }
+`;
+
+const cardContent = css`
+  * {
+    margin: 0;
   }
 `;
