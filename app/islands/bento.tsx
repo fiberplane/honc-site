@@ -1,8 +1,7 @@
 import { css, keyframes } from "hono/css";
 import { useRef, useState } from "hono/jsx";
 
-import { SvgTwoElements } from "./svg1";
-import { SvgThreeElements } from "./svg2";
+import { SvgGraphicsSymbol } from "./SvgGraphicsSymbol";
 
 export function Bento() {
   return (
@@ -21,7 +20,7 @@ function BentoItem() {
   const ref = useRef<HTMLDivElement>(null);
   const [shouldAnimate, setShouldAnimate] = useState(false);
 
-  const onMouseMove = (event: MouseEvent) => {
+  const handleMouseMove = (event: MouseEvent) => {
     const el = ref.current;
     if (!el) {
       return;
@@ -34,6 +33,9 @@ function BentoItem() {
     el.style.setProperty("--bento-radial-x", `${xPercent}%`);
     el.style.setProperty("--bento-radial-y", `${yPercent}%`);
   };
+
+  const onMouseMove = (event: MouseEvent) =>
+    requestAnimationFrame(() => handleMouseMove(event));
 
   const onMouseOut = () => {
     setShouldAnimate(false);
@@ -49,15 +51,17 @@ function BentoItem() {
 
   return (
     <div
+      // biome-ignore lint/a11y/useKeyWithMouseEvents: <explanation>
       class={bentoItemClass}
       ref={ref}
-      onMouseMove={onMouseMove}
-      // biome-ignore lint/a11y/useKeyWithMouseEvents: <explanation>
-      onMouseOut={onMouseOut}
       onMouseEnter={() => setShouldAnimate(true)}
+      onMouseMove={onMouseMove}
+      onMouseOut={onMouseOut}
     >
-      <SvgTwoElements shouldAnimate={shouldAnimate} />
-      <SvgThreeElements shouldAnimate={shouldAnimate} />
+      {Array.from({ length: 2 }).map((_, i) => (
+        // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+        <SvgGraphicsSymbol key={i} variant={i} shouldAnimate={shouldAnimate} />
+      ))}
     </div>
   );
 }
@@ -89,7 +93,6 @@ const bentoItemClass = css`
   border: 1px solid transparent;
   border-radius: var(--corner-radius);
   grid-column: span 2;
-
 
   /* DEMO */
   svg {
@@ -152,12 +155,12 @@ const bentoItemClass = css`
     opacity: 0.5;
   }
 
-  &,
-  &::before {
-    animation: ${bentoConic} 8s linear infinite;
-  }
-
   &:hover {
     --bento-conic-color: hsl(16, 88%, 55%);
+
+    &,
+    &::before {
+      animation: ${bentoConic} 8s linear infinite;
+    }
   }
 `;
