@@ -39,26 +39,24 @@ function BentoItem() {
   const onMouseMove = (event: MouseEvent) =>
     requestAnimationFrame(() => handleMouseMove(event));
 
-  const onMouseOut = () => {
-    setShouldAnimate(false);
-
+  const onMouseLeave = () => {
     const el = ref.current;
     if (!el) {
       return;
     }
 
+    setShouldAnimate(false);
     el.style.removeProperty("--bento-radial-x");
     el.style.removeProperty("--bento-radial-y");
   };
 
   return (
     <div
-      // biome-ignore lint/a11y/useKeyWithMouseEvents: <explanation>
       class={bentoItemClass}
       ref={ref}
       onMouseEnter={() => setShouldAnimate(true)}
       onMouseMove={onMouseMove}
-      onMouseOut={onMouseOut}
+      onMouseLeave={onMouseLeave}
     >
       <article class={cardContent}>
         <header>
