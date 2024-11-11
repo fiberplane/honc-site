@@ -61,11 +61,12 @@ function BentoItem() {
       <article class={cardContent}>
         <header>
           <h3>Angry goose PR reviewer</h3>
-          <p>
-            Have a goose judging your Github pull request. Warning: they're not
-            holding back!
-          </p>
         </header>
+
+        <p>
+          Have a goose judging your Github pull request. Warning: they're not
+          holding back!
+        </p>
 
         <ul>
           <li>
@@ -118,16 +119,14 @@ const bentoGridClass = css`
   display: grid;
   gap: 0.5rem;
   grid-template: repeat(2, 1fr) / repeat(5, 1fr);
-  height: 600px;
 `;
 
 const bentoItemClass = css`
-  padding: 2rem;
-
   position: relative;
   border: 1px solid transparent;
   border-radius: var(--corner-radius);
   grid-column: span 2;
+  padding: 3rem;
 
   /* DEMO */
   svg {
@@ -204,4 +203,11 @@ const cardContent = css`
   * {
     margin: 0;
   }
+
+  header h3 {
+    margin-block-end: 0.5em;
+  }
+
+  display: grid;
+  gap: 0.5rem;
 `;
