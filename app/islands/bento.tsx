@@ -88,10 +88,16 @@ function BentoItem() {
         </li>
       </ul>
 
-      {Array.from({ length: 2 }).map((_, i) => (
-        // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-        <SvgGraphicsSymbol key={i} variant={i} shouldAnimate={shouldAnimate} />
-      ))}
+      {Array.from({ length: 4 }).map((_, i) => {
+        return (
+          <SvgGraphicsSymbol
+            // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+            key={i}
+            variant={i}
+            shouldAnimate={shouldAnimate}
+          />
+        );
+      })}
     </article>
   );
 }
@@ -158,13 +164,23 @@ const bentoItemClass = css`
     pointer-events: none;
     z-index: 0;
 
-    &:first-of-type {
+    &:nth-of-type(1) {
       top: 1rem;
       left: 1rem;
     }
 
-    &:last-of-type {
+    &:nth-of-type(2) {
       bottom: 1rem;
+      right: 1rem;
+    }
+
+    &:nth-of-type(3) {
+      bottom: 1rem;
+      left: 1rem;
+    }
+
+    &:nth-of-type(4) {
+      top: 1rem;
       right: 1rem;
     }
   }

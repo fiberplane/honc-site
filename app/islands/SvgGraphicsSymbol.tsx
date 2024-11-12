@@ -1,14 +1,29 @@
 import { keyframes, css } from "hono/css";
-import { useRef, useEffect } from "hono/jsx";
+import { useRef, useEffect, useMemo } from "hono/jsx";
 
 type SvgGraphicSymbolProps = {
   shouldAnimate: boolean;
   variant: number;
 };
 
-const variant1Points = "50,0 50,100 100,100 100,50 0,50 0,0 50.5,0";
-const variant2Points =
-  "0,0 0,50 100,50 100,150 150,150 150,100 50,100 50,0 0,0";
+const svgPolyLineElements = [
+  {
+    points: "0,0 0,50 100,50 100,150 150,150 150,100 50,100 50,0 -0.5,0",
+    dimension: { x: 3, y: 3 },
+  },
+  {
+    points: "50,0 50,100 100,100 100,50 0,50 0,0 50.5,0",
+    dimension: { x: 2, y: 2 },
+  },
+  {
+    points: "0,0 0,50 50,50 50,0 -0.5,0",
+    dimension: { x: 1, y: 1 },
+  },
+  {
+    points: "0,0 0,50 150,50 150,0 100,0 100,100 50,100 50,0 -0.5,0",
+    dimension: { x: 3, y: 2 },
+  },
+] as const;
 
 export function SvgGraphicsSymbol({
   shouldAnimate,
@@ -28,40 +43,41 @@ export function SvgGraphicsSymbol({
     el.style.setProperty("stroke-dashoffset", `${length}`);
   }, []);
 
-  if (variant === 0) {
-    return (
-      <svg
-        viewBox="0 0 100 100"
-        xmlns="http://www.w3.org/2000/svg"
-        height="60"
-        width="60"
-        class={svgClass}
-        role="graphics-symbol"
-      >
-        <polyline points={variant1Points} />
-        <polyline
-          ref={polyLineRef}
-          data-should-animate={shouldAnimate}
-          points={variant1Points}
-        />
-      </svg>
-    );
-  }
+  const { height, points, width, viewBox } = useMemo(() => {
+    const safeIndex = Math.min(variant, svgPolyLineElements.length - 1);
+    const svgPolyLineElement = svgPolyLineElements[safeIndex];
+
+    const viewBoxRootValue = 50;
+    const viewBox = `0 0 ${svgPolyLineElement.dimension.x * viewBoxRootValue} ${
+      svgPolyLineElement.dimension.y * viewBoxRootValue
+    }`;
+
+    const sizeRootValue = 24;
+    const height = svgPolyLineElement.dimension.y * sizeRootValue;
+    const width = svgPolyLineElement.dimension.x * sizeRootValue;
+
+    return {
+      height,
+      points: svgPolyLineElement.points,
+      viewBox,
+      width,
+    };
+  }, [variant, svgPolyLineElements]);
 
   return (
     <svg
-      viewBox="0 0 150 150"
+      viewBox={viewBox}
       xmlns="http://www.w3.org/2000/svg"
-      height="90"
-      width="90"
+      height={height}
+      width={width}
       class={svgClass}
       role="graphics-symbol"
     >
-      <polyline points={variant2Points} />
+      <polyline points={points} />
       <polyline
         ref={polyLineRef}
         data-should-animate={shouldAnimate}
-        points={variant2Points}
+        points={points}
       />
     </svg>
   );
@@ -82,6 +98,7 @@ const svgClass = css`
 
     &:first-of-type {
       stroke: rgb(from var(--color-bg-default) r g b / 0.6);
+      stroke: hsl(20, 13%, 15%);
     }
 
     &[data-should-animate] {
