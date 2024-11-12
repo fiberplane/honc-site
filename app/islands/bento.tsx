@@ -51,50 +51,48 @@ function BentoItem() {
   };
 
   return (
-    <div
+    <article
       class={bentoItemClass}
       ref={ref}
       onMouseEnter={() => setShouldAnimate(true)}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
     >
-      <article class={cardContent}>
-        <header>
-          <h3>Angry goose PR reviewer</h3>
-        </header>
+      <header>
+        <h3>Angry goose PR reviewer</h3>
+      </header>
 
-        <p>
-          Have a goose judging your Github pull request. Warning: they're not
-          holding back!
-        </p>
+      <p>
+        Have a goose judging your Github pull request. Warning: you might get
+        bamgoosled!
+      </p>
 
-        <ul>
-          <li>
-            <a
-              href="http://github.com/fiberplane/create-honc-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Github repo
-            </a>
-          </li>
-          <li>
-            <a
-              href="http://fiberplane.com/blog"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Read the article
-            </a>
-          </li>
-        </ul>
-      </article>
+      <ul>
+        <li>
+          <a
+            href="http://github.com/fiberplane/create-honc-app"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Github repo
+          </a>
+        </li>
+        <li>
+          <a
+            href="http://fiberplane.com/blog"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Read the article
+          </a>
+        </li>
+      </ul>
 
       {Array.from({ length: 2 }).map((_, i) => (
         // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
         <SvgGraphicsSymbol key={i} variant={i} shouldAnimate={shouldAnimate} />
       ))}
-    </div>
+    </article>
   );
 }
 
@@ -122,16 +120,43 @@ const bentoGridClass = css`
 `;
 
 const bentoItemClass = css`
-  position: relative;
+  h3,
+  p,
+  ul {
+    margin: 0;
+    z-index: 1;
+    position: relative;
+    text-shadow: 1px 1px 2px black, 0 0 0.25em var(--color-bg-default),
+      0px 0px 0.1em var(--color-bg-default);
+  }
+
+  h3 {
+    margin-block-end: 0.25em;
+  }
+
+  p {
+    color: var(--color-fg-muted);
+  }
+
+  ul {
+    padding-inline-start: 1em;
+  }
+
+  grid-column: span 2;
+
+  display: grid;
+  gap: 0.75rem;
+
   border: 1px solid transparent;
   border-radius: var(--corner-radius);
-  grid-column: span 2;
-  padding: 3rem;
+  padding: 1.5rem 3rem;
+  position: relative;
 
   /* DEMO */
   svg {
     position: absolute;
     pointer-events: none;
+    z-index: 0;
 
     &:first-of-type {
       top: 1rem;
@@ -197,17 +222,4 @@ const bentoItemClass = css`
       animation: ${bentoConic} 8s linear infinite;
     }
   }
-`;
-
-const cardContent = css`
-  * {
-    margin: 0;
-  }
-
-  header h3 {
-    margin-block-end: 0.5em;
-  }
-
-  display: grid;
-  gap: 0.5rem;
 `;

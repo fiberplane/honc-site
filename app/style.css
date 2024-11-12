@@ -59,6 +59,7 @@
   --color-fg-default: var(--color);
   --color-fg-primary: var(--prime);
   --color-fg-secondary: var(--secondary);
+  --color-fg-muted: hsl(from var(--color-fg-default) h s 70%);
 
   --color-anchor: var(--color-fg-primary);
 

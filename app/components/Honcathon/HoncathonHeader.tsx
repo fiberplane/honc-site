@@ -56,7 +56,7 @@ const headerClass = css`
   }
 
   [data-preheader] {
-    color: hsl(from var(--color-fg-default) h s 70%);
+    color: var(--color-fg-muted);
   }
 
   [data-wrapper] p {
