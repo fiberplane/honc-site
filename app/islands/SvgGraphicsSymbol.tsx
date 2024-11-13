@@ -88,8 +88,8 @@ const svgClass = css`
     }
 
     &:last-of-type {
-      stroke: var(--bento-color-primary);
-      filter: drop-shadow(0 0 8px var(--color-bg-primary));
+      stroke: hsl(from var(--bento-color-primary) h s l / 0.5);
+      mix-blend-mode: multiply;
     }
   }
 `;
