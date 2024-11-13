@@ -3,22 +3,66 @@ import { useRef } from "hono/jsx";
 
 import { SvgGraphicsSymbol, svgAnimation } from "./SvgGraphicsSymbol";
 
-export function Bento() {
+type BentoProps = {
+  title?: string;
+};
+
+export function Bento({ title }: BentoProps) {
   return (
     <section class={sectionClass}>
-      <h1>Examples</h1>
-
+      {title && <h1>{title}</h1>}
       <div class={bentoGridClass}>
-        {Array.from({ length: 4 }).map((_, i) => (
-          // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-          <BentoItem key={i} />
+        {content.map((item) => (
+          <BentoItem key={item.title} {...item} />
         ))}
       </div>
     </section>
   );
 }
 
-function BentoItem() {
+const content: Array<BentoItemProps> = [
+  {
+    title: "Agitated goose PR reviewer",
+    description:
+      "Have a goose judging your Github pull requests. Warning: you might get bamgoosled!",
+    githubUrl:
+      "https://github.com/fiberplane/create-honc-app/tree/main/examples/goose-review-bot",
+  },
+  {
+    title: "The Honcanator",
+    description: "Generate images of geese. Rest assured, you'll be back.",
+    githubUrl:
+      "https://github.com/fiberplane/create-honc-app/tree/main/examples/honcanator",
+  },
+  {
+    title: "Strava calories converter",
+    description:
+      "Using webhooks, convert Strava activities to calories. Watch those calogeese fly off!",
+    githubUrl:
+      "https://github.com/fiberplane/create-honc-app/tree/main/examples/webhook-strava-calories-converter",
+  },
+  {
+    title: "Retrieval Augmented Goose",
+    description:
+      "Cloudflare Edition: some witty description but the README is not really helpful.",
+    githubUrl:
+      "https://github.com/fiberplane/create-honc-app/tree/main/examples/cf-retrieval-augmented-goose",
+  },
+];
+
+type BentoItemProps = {
+  articleUrl?: string;
+  description: string;
+  githubUrl: string;
+  title: string;
+};
+
+export function BentoItem({
+  articleUrl,
+  description,
+  githubUrl,
+  title,
+}: BentoItemProps) {
   const ref = useRef<HTMLElement>(null);
 
   const handleMouseMove = ({ clientX, clientY }: MouseEvent) => {
@@ -55,54 +99,54 @@ function BentoItem() {
       onMouseLeave={onMouseLeave}
     >
       <header>
-        <h3>Angry goose PR reviewer</h3>
+        <h3>{title}</h3>
       </header>
 
-      <p>
-        Have a goose judging your Github pull request. Warning: you might get
-        bamgoosled!
-      </p>
+      <p>{description}</p>
 
       <ul>
         <li>
-          <a
-            href="http://github.com/fiberplane/create-honc-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href={githubUrl} target="_blank" rel="noopener noreferrer">
             Github repo
           </a>
         </li>
-        <li>
-          <a
-            href="http://fiberplane.com/blog"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read the article
-          </a>
-        </li>
+
+        {articleUrl && (
+          <li>
+            <a href={articleUrl} target="_blank" rel="noopener noreferrer">
+              Read the article
+            </a>
+          </li>
+        )}
       </ul>
 
-      {Array.from({ length: 4 }).map((_, i) => {
-        // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-        return <SvgGraphicsSymbol key={i} index={i} />;
-      })}
+      {Array.from({ length: 4 })
+        .map((_, index) => index)
+        .toSorted(() => 0.5 - Math.random())
+        .map((i) => (
+          <SvgGraphicsSymbol key={i} index={i} />
+        ))}
     </article>
   );
 }
+
+const bentoConic = keyframes`
+  to {
+    --bento-conic-angle: 360deg;
+  }
+`;
+
+const bentoColor = keyframes`
+  to {
+    --bento-color-primary: hsl(16, 88%, 55%);
+  }
+`;
 
 const sectionClass = css`
   margin-block: 8rem 5rem;
 
   h1 {
     text-align: center;
-  }
-`;
-
-const bentoConic = keyframes`
-  to {
-    --bento-conic-angle: 360deg;
   }
 `;
 
@@ -138,17 +182,22 @@ const bentoItemClass = css`
     padding-inline-start: 1em;
   }
 
-  grid-column: span 2;
-
   display: grid;
   gap: 0.75rem;
-
-  border: 1px solid transparent;
-  border-radius: var(--corner-radius);
-  padding: 1.5rem 3rem;
   position: relative;
 
-  /* DEMO */
+  padding: 1.5rem 3rem;
+  border: 1px solid transparent;
+  border-radius: var(--corner-radius);
+
+  grid-column: span 2;
+
+  &:nth-child(4n + 1),
+  &:nth-child(4n) {
+    grid-column: span 3;
+  }
+
+  /* SVG positions, this could be nicer but works for now  */
   svg {
     position: absolute;
     pointer-events: none;
@@ -173,11 +222,6 @@ const bentoItemClass = css`
       top: 1rem;
       right: 1rem;
     }
-  }
-
-  &:nth-child(1),
-  &:nth-child(4) {
-    grid-column: span 3;
   }
 
   box-shadow: inset 0 0 32px 0 hsl(from var(--color-bg-default) h s 8% / 25%);
@@ -225,7 +269,7 @@ const bentoItemClass = css`
     &,
     &::before {
       animation: ${bentoConic} 8s linear infinite,
-        bento-color 0.3s ease-in forwards;
+        ${bentoColor} 0.3s ease-in forwards;
     }
 
     svg polyline[data-should-animate] {
