@@ -22,17 +22,11 @@ export function Bento({ title }: BentoProps) {
 
 const content: Array<BentoItemProps> = [
   {
-    title: "Agitated goose PR reviewer",
+    title: "Retrieval Augmented Goose",
     description:
-      "Have a goose judging your Github pull requests. Warning: you might get bamgoosled!",
+      "Cloudflare Edition: some witty description but the README is not really helpful.",
     githubUrl:
-      "https://github.com/fiberplane/create-honc-app/tree/main/examples/goose-review-bot",
-  },
-  {
-    title: "The Honcanator",
-    description: "Generate images of geese. Rest assured, you'll be back.",
-    githubUrl:
-      "https://github.com/fiberplane/create-honc-app/tree/main/examples/honcanator",
+      "https://github.com/fiberplane/create-honc-app/tree/main/examples/cf-retrieval-augmented-goose",
   },
   {
     title: "Strava calories converter",
@@ -42,11 +36,17 @@ const content: Array<BentoItemProps> = [
       "https://github.com/fiberplane/create-honc-app/tree/main/examples/webhook-strava-calories-converter",
   },
   {
-    title: "Retrieval Augmented Goose",
-    description:
-      "Cloudflare Edition: some witty description but the README is not really helpful.",
+    title: "The Honcanator",
+    description: "Generate images of geese. Rest assured, you'll be back.",
     githubUrl:
-      "https://github.com/fiberplane/create-honc-app/tree/main/examples/cf-retrieval-augmented-goose",
+      "https://github.com/fiberplane/create-honc-app/tree/main/examples/honcanator",
+  },
+  {
+    title: "Agitated goose PR reviewer",
+    description:
+      "Have a goose judging your Github pull requests. Warning: you might get bamgoosled!",
+    githubUrl:
+      "https://github.com/fiberplane/create-honc-app/tree/main/examples/goose-review-bot",
   },
 ];
 
@@ -156,7 +156,7 @@ const bentoGridClass = css`
 
   display: grid;
   gap: 0.5rem;
-  grid-template: repeat(2, 1fr) / repeat(5, 1fr);
+  grid-template: repeat(2, auto) / repeat(5, 1fr);
 `;
 
 const bentoItemClass = css`
@@ -186,7 +186,7 @@ const bentoItemClass = css`
   gap: 0.75rem;
   position: relative;
 
-  padding: 1.5rem 3rem;
+  padding: 1.5rem;
   border: 1px solid transparent;
   border-radius: var(--corner-radius);
 
