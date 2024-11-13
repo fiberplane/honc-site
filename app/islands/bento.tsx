@@ -1,7 +1,7 @@
-import { css, keyframes } from "hono/css";
+import { css, cx, keyframes } from "hono/css";
 import { useRef } from "hono/jsx";
 
-import { SvgGraphicsSymbol, svgAnimation } from "./SvgGraphicsSymbol";
+import { SvgGraphicsSymbol, svgAnimation } from "./svgGraphicsSymbol";
 
 type BentoProps = {
   title?: string;
@@ -93,7 +93,12 @@ export function BentoItem({
 
   return (
     <article
-      class={bentoItemClass}
+      class={cx(
+        bentoItemClass,
+        bentoItemContentClass,
+        bentoItemBackgroundClass,
+        bentoItemSvgClass
+      )}
       ref={ref}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
@@ -160,30 +165,6 @@ const bentoGridClass = css`
 `;
 
 const bentoItemClass = css`
-  h3,
-  p,
-  ul {
-    margin: 0;
-    z-index: 1;
-    position: relative;
-    text-shadow: 1px 1px 2px black, 0 0 0.25em var(--color-bg-default),
-      0px 0px 0.1em var(--color-bg-default);
-  }
-
-  h3 {
-    margin-block-end: 0.25em;
-  }
-
-  p {
-    color: var(--color-fg-muted);
-  }
-
-  ul {
-    padding-inline-start: 1em;
-  }
-
-  display: grid;
-  gap: 0.75rem;
   position: relative;
 
   padding: 1.5rem;
@@ -197,33 +178,21 @@ const bentoItemClass = css`
     grid-column: span 3;
   }
 
-  /* SVG positions, this could be nicer but works for now  */
-  svg {
-    position: absolute;
-    pointer-events: none;
-    z-index: 0;
-
-    &:nth-of-type(1) {
-      top: 1rem;
-      left: 1rem;
+  &:hover,
+  &:focus-within {
+    &,
+    &::before {
+      animation: ${bentoConic} 8s linear infinite,
+        ${bentoColor} 0.3s ease-in forwards;
     }
 
-    &:nth-of-type(2) {
-      bottom: 1rem;
-      right: 1rem;
-    }
-
-    &:nth-of-type(3) {
-      bottom: 1rem;
-      left: 1rem;
-    }
-
-    &:nth-of-type(4) {
-      top: 1rem;
-      right: 1rem;
+    svg polyline[data-should-animate] {
+      animation: ${svgAnimation} 1.5s ease-in-out forwards;
     }
   }
+`;
 
+const bentoItemBackgroundClass = css`
   box-shadow: inset 0 0 32px 0 hsl(from var(--color-bg-default) h s 8% / 25%);
   background-clip: padding-box, border-box;
   background-origin: border-box;
@@ -263,17 +232,61 @@ const bentoItemClass = css`
     filter: blur(16px);
     opacity: 0.5;
   }
+`;
 
-  &:hover,
-  &:focus-within {
-    &,
-    &::before {
-      animation: ${bentoConic} 8s linear infinite,
-        ${bentoColor} 0.3s ease-in forwards;
+const bentoItemContentClass = css`
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 0.75rem;
+
+  h3,
+  p,
+  ul {
+    margin: 0;
+    z-index: 1;
+    position: relative;
+    text-shadow: 1px 1px 2px var(--color-bg-default),
+      0 0 0.25em var(--color-bg-default), 0px 0px 0.1em var(--color-bg-default);
+  }
+
+  h3 {
+    margin-block-end: 0.25em;
+  }
+
+  p {
+    color: var(--color-fg-muted);
+  }
+
+  ul {
+    padding-inline-start: 1em;
+  }
+`;
+
+const bentoItemSvgClass = css`
+  /* SVG positions, this could be nicer but works for now  */
+  svg {
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+
+    &:nth-of-type(1) {
+      top: 1rem;
+      left: 1rem;
     }
 
-    svg polyline[data-should-animate] {
-      animation: ${svgAnimation} 1.5s ease-in-out forwards;
+    &:nth-of-type(2) {
+      bottom: 1rem;
+      right: 1rem;
+    }
+
+    &:nth-of-type(3) {
+      bottom: 1rem;
+      left: 1rem;
+    }
+
+    &:nth-of-type(4) {
+      top: 1rem;
+      right: 1rem;
     }
   }
 `;
