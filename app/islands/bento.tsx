@@ -1,7 +1,7 @@
 import { css, keyframes } from "hono/css";
-import { useRef, useState } from "hono/jsx";
+import { useRef } from "hono/jsx";
 
-import { SvgGraphicsSymbol } from "./SvgGraphicsSymbol";
+import { SvgGraphicsSymbol, svgAnimation } from "./SvgGraphicsSymbol";
 
 export function Bento() {
   return (
@@ -19,42 +19,38 @@ export function Bento() {
 }
 
 function BentoItem() {
-  const ref = useRef<HTMLDivElement>(null);
-  const [shouldAnimate, setShouldAnimate] = useState(false);
+  const ref = useRef<HTMLElement>(null);
 
-  const handleMouseMove = (event: MouseEvent) => {
-    const el = ref.current;
-    if (!el) {
+  const handleMouseMove = ({ clientX, clientY }: MouseEvent) => {
+    const bentoElement = ref.current;
+    if (!bentoElement) {
       return;
     }
 
-    const rect = el.getBoundingClientRect();
-    const xPercent = Math.round((event.layerX / rect.width) * 100);
-    const yPercent = Math.round((event.layerY / rect.height) * 100);
-
-    el.style.setProperty("--bento-radial-x", `${xPercent}%`);
-    el.style.setProperty("--bento-radial-y", `${yPercent}%`);
+    const rect = bentoElement.getBoundingClientRect();
+    const xPercent = Math.round(((clientX - rect.left) / rect.width) * 100);
+    const yPercent = Math.round(((clientY - rect.top) / rect.height) * 100);
+    bentoElement.style.setProperty("--bento-radial-x", `${xPercent}%`);
+    bentoElement.style.setProperty("--bento-radial-y", `${yPercent}%`);
   };
 
   const onMouseMove = (event: MouseEvent) =>
     requestAnimationFrame(() => handleMouseMove(event));
 
   const onMouseLeave = () => {
-    const el = ref.current;
-    if (!el) {
+    const bentoElement = ref.current;
+    if (!bentoElement) {
       return;
     }
 
-    setShouldAnimate(false);
-    el.style.removeProperty("--bento-radial-x");
-    el.style.removeProperty("--bento-radial-y");
+    bentoElement.style.removeProperty("--bento-radial-x");
+    bentoElement.style.removeProperty("--bento-radial-y");
   };
 
   return (
     <article
       class={bentoItemClass}
       ref={ref}
-      onMouseEnter={() => setShouldAnimate(true)}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
     >
@@ -89,14 +85,8 @@ function BentoItem() {
       </ul>
 
       {Array.from({ length: 4 }).map((_, i) => {
-        return (
-          <SvgGraphicsSymbol
-            // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-            key={i}
-            variant={i}
-            shouldAnimate={shouldAnimate}
-          />
-        );
+        // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+        return <SvgGraphicsSymbol key={i} index={i} />;
       })}
     </article>
   );
@@ -201,9 +191,9 @@ const bentoItemClass = css`
     conic-gradient(
       from var(--bento-conic-angle),
       transparent,
-      var(--bento-conic-color),
+      var(--bento-color-primary),
       transparent,
-      var(--bento-conic-color),
+      var(--bento-color-primary),
       transparent
     );
 
@@ -214,14 +204,14 @@ const bentoItemClass = css`
     inset: 0;
     /*
       Needs to be the exact same radial-gradient as parent, doesn't work here
-      when put in custom property
+      when put in custom property ¯\_(ツ)_/¯
     */
     background-image: conic-gradient(
       from var(--bento-conic-angle),
       transparent,
-      var(--bento-conic-color),
+      var(--bento-color-primary),
       transparent,
-      var(--bento-conic-color),
+      var(--bento-color-primary),
       transparent
     );
     border-radius: var(--corner-radius);
@@ -230,12 +220,16 @@ const bentoItemClass = css`
     opacity: 0.5;
   }
 
-  &:hover {
-    --bento-conic-color: hsl(16, 88%, 55%);
-
+  &:hover,
+  &:focus-within {
     &,
     &::before {
-      animation: ${bentoConic} 8s linear infinite;
+      animation: ${bentoConic} 8s linear infinite,
+        bento-color 0.3s ease-in forwards;
+    }
+
+    svg polyline[data-should-animate] {
+      animation: ${svgAnimation} 1.5s ease-in-out forwards;
     }
   }
 `;

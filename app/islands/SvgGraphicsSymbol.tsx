@@ -2,8 +2,7 @@ import { keyframes, css } from "hono/css";
 import { useRef, useEffect, useMemo } from "hono/jsx";
 
 type SvgGraphicSymbolProps = {
-  shouldAnimate: boolean;
-  variant: number;
+  index: number;
 };
 
 const svgPolyLineElements = [
@@ -25,44 +24,36 @@ const svgPolyLineElements = [
   },
 ] as const;
 
-export function SvgGraphicsSymbol({
-  shouldAnimate,
-  variant,
-}: SvgGraphicSymbolProps) {
+export function SvgGraphicsSymbol({ index }: SvgGraphicSymbolProps) {
   const polyLineRef = useRef<SVGPolylineElement>(null);
 
   useEffect(() => {
-    const el = polyLineRef.current;
-    if (!el) {
+    const lineElement = polyLineRef.current;
+    if (!lineElement) {
       return;
     }
 
-    const length = el.getTotalLength();
-
-    el.style.setProperty("stroke-dasharray", `${length}`);
-    el.style.setProperty("stroke-dashoffset", `${length}`);
+    const length = lineElement.getTotalLength();
+    lineElement.style.setProperty("stroke-dasharray", `${length}`);
+    lineElement.style.setProperty("stroke-dashoffset", `${length}`);
   }, []);
 
   const { height, points, width, viewBox } = useMemo(() => {
-    const safeIndex = Math.min(variant, svgPolyLineElements.length - 1);
+    const safeIndex = Math.min(index, svgPolyLineElements.length - 1);
     const svgPolyLineElement = svgPolyLineElements[safeIndex];
 
     const viewBoxRootValue = 50;
-    const viewBox = `0 0 ${svgPolyLineElement.dimension.x * viewBoxRootValue} ${
-      svgPolyLineElement.dimension.y * viewBoxRootValue
-    }`;
-
     const sizeRootValue = 24;
-    const height = svgPolyLineElement.dimension.y * sizeRootValue;
-    const width = svgPolyLineElement.dimension.x * sizeRootValue;
 
     return {
-      height,
+      height: svgPolyLineElement.dimension.y * sizeRootValue,
+      width: svgPolyLineElement.dimension.x * sizeRootValue,
       points: svgPolyLineElement.points,
-      viewBox,
-      width,
+      viewBox: `0 0 ${svgPolyLineElement.dimension.x * viewBoxRootValue} ${
+        svgPolyLineElement.dimension.y * viewBoxRootValue
+      }`,
     };
-  }, [variant, svgPolyLineElements]);
+  }, [index, svgPolyLineElements]);
 
   return (
     <svg
@@ -74,16 +65,12 @@ export function SvgGraphicsSymbol({
       role="graphics-symbol"
     >
       <polyline points={points} />
-      <polyline
-        ref={polyLineRef}
-        data-should-animate={shouldAnimate}
-        points={points}
-      />
+      <polyline ref={polyLineRef} points={points} data-should-animate />
     </svg>
   );
 }
 
-const svgAnimation = keyframes`
+export const svgAnimation = keyframes`
   to {
     stroke-dashoffset: 0;
   }
@@ -97,13 +84,11 @@ const svgClass = css`
     fill: none;
 
     &:first-of-type {
-      stroke: rgb(from var(--color-bg-default) r g b / 0.6);
       stroke: hsl(20, 13%, 15%);
     }
 
-    &[data-should-animate] {
-      animation: ${svgAnimation} 1.5s ease-in-out forwards;
-      stroke: var(--color-fg-primary);
+    &:last-of-type {
+      stroke: var(--bento-color-primary);
       filter: drop-shadow(0 0 8px var(--color-bg-primary));
     }
   }
