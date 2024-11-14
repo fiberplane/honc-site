@@ -89,7 +89,44 @@ import { Bento } from "../islands/bento";
 </Overview>
 
 <Wrapper>
-  <Bento title="Examples" />
+  {/*
+    I know, it's not optimal to write the content like this, but Honox has a
+    quirk that forces us to write it like this. A small price to pay for some
+    shiny visuals on your screen ✨
+  */}
+  <Bento
+    title="Examples"
+    content={[
+      {
+        title: "Retrieval Augmented Goose",
+        description:
+          "Cloudflare Edition: some witty description but the README is not really helpful.",
+        githubUrl:
+          "https://github.com/fiberplane/create-honc-app/tree/main/examples/cf-retrieval-augmented-goose",
+      },
+      {
+        title: "Strava calories converter",
+        description:
+          "Using webhooks, convert Strava activities to calories. Watch those calogeese fly off!",
+        githubUrl:
+          "https://github.com/fiberplane/create-honc-app/tree/main/examples/webhook-strava-calories-converter",
+      },
+      {
+        title: "The Honcanator",
+        description: "Generate images of geese. Rest assured, you'll be back.",
+        githubUrl:
+          "https://github.com/fiberplane/create-honc-app/tree/main/examples/honcanator",
+        articleUrl: "https://fiberplane.com/blog/ai-goose-generator",
+      },
+      {
+        title: "Agitated goose PR reviewer",
+        description:
+          "Have a goose judging your Github pull requests. Warning: you might get bamgoosled!",
+        githubUrl:
+          "https://github.com/fiberplane/create-honc-app/tree/main/examples/goose-review-bot",
+      },
+    ]}
+  />
 </Wrapper>
 
 <Wrapper>

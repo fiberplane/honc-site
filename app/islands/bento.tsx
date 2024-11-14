@@ -5,10 +5,11 @@ import { SvgGraphicsSymbol, svgAnimation } from "./svgGraphicsSymbol";
 import { useIntersectionObserver } from "../hooks";
 
 type BentoProps = {
-  title?: string;
+  title: string;
+  content: Array<BentoItemProps>;
 };
 
-export function Bento({ title }: BentoProps) {
+export function Bento({ content, title }: BentoProps) {
   return (
     <section class={sectionClass}>
       {title && <h1>{title}</h1>}
@@ -21,36 +22,6 @@ export function Bento({ title }: BentoProps) {
     </section>
   );
 }
-
-const content: Array<BentoItemProps> = [
-  {
-    title: "Retrieval Augmented Goose",
-    description:
-      "Cloudflare Edition: some witty description but the README is not really helpful.",
-    githubUrl:
-      "https://github.com/fiberplane/create-honc-app/tree/main/examples/cf-retrieval-augmented-goose",
-  },
-  {
-    title: "Strava calories converter",
-    description:
-      "Using webhooks, convert Strava activities to calories. Watch those calogeese fly off!",
-    githubUrl:
-      "https://github.com/fiberplane/create-honc-app/tree/main/examples/webhook-strava-calories-converter",
-  },
-  {
-    title: "The Honcanator",
-    description: "Generate images of geese. Rest assured, you'll be back.",
-    githubUrl:
-      "https://github.com/fiberplane/create-honc-app/tree/main/examples/honcanator",
-  },
-  {
-    title: "Agitated goose PR reviewer",
-    description:
-      "Have a goose judging your Github pull requests. Warning: you might get bamgoosled!",
-    githubUrl:
-      "https://github.com/fiberplane/create-honc-app/tree/main/examples/goose-review-bot",
-  },
-];
 
 type BentoItemProps = {
   articleUrl?: string;
@@ -79,7 +50,7 @@ export function BentoItem({
         entry.target.removeAttribute("data-intersecting");
       }
     },
-    { threshold: 0.5 },
+    { threshold: 0.9 }
   );
 
   const handleMouseMove = ({ clientX, clientY }: MouseEvent) => {
@@ -114,7 +85,7 @@ export function BentoItem({
         bentoItemClass,
         bentoItemContentClass,
         bentoItemBackgroundClass,
-        bentoItemSvgClass,
+        bentoItemSvgClass
       )}
       ref={ref}
       onMouseMove={onMouseMove}
@@ -174,11 +145,11 @@ const bentoGridClass = css`
 `;
 
 const sectionClass = css`
-  margin-block: 8rem 5rem;
   container-type: inline-size;
 
   h1 {
     text-align: center;
+    font-size: clamp(2.5rem, 13lvw, 5rem);
   }
 
   @container (width >= 620px) {
