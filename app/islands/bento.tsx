@@ -103,6 +103,7 @@ export function BentoItem({
       ref={ref}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
+      data-bento-item
     >
       <header>
         <h3>{title}</h3>
@@ -148,21 +149,12 @@ const bentoColor = keyframes`
   }
 `;
 
-const sectionClass = css`
-  margin-block: 8rem 5rem;
-
-  h1 {
-    text-align: center;
-  }
-`;
-
 const bentoGridClass = css`
   --corner-radius: 20px;
   --color-accent-default: var(--color-fg-default);
 
   display: grid;
   gap: 0.5rem;
-  grid-template: repeat(2, auto) / repeat(5, 1fr);
 `;
 
 const bentoItemClass = css`
@@ -171,13 +163,6 @@ const bentoItemClass = css`
   padding: 1.5rem;
   border: 1px solid transparent;
   border-radius: var(--corner-radius);
-
-  grid-column: span 2;
-
-  &:nth-child(4n + 1),
-  &:nth-child(4n) {
-    grid-column: span 3;
-  }
 
   &:hover,
   &:focus-within {
@@ -189,6 +174,40 @@ const bentoItemClass = css`
 
     svg polyline[data-should-animate] {
       animation: ${svgAnimation} 1.5s ease-in-out forwards;
+    }
+  }
+`;
+
+const sectionClass = css`
+  margin-block: 8rem 5rem;
+  container-type: inline-size;
+
+  h1 {
+    text-align: center;
+  }
+
+  @container (width >= 620px) {
+    ${bentoGridClass} {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @container (width >= 740px) {
+    ${bentoGridClass} {
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    /*
+      Using a data attr here as Hono's cx function merges all class names into a
+      single string, preventing targeting it with a known selector ¯\_(ツ)_/¯
+    */
+    article[data-bento-item] {
+      grid-column: span 2;
+
+      &:nth-child(4n + 1),
+      &:nth-child(4n) {
+        grid-column: span 3;
+      }
     }
   }
 `;
