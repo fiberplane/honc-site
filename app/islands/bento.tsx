@@ -2,6 +2,7 @@ import { css, cx, keyframes } from "hono/css";
 import { useRef } from "hono/jsx";
 
 import { SvgGraphicsSymbol, svgAnimation } from "./svgGraphicsSymbol";
+import { useIntersectionObserver } from "../hooks";
 
 type BentoProps = {
   title?: string;
@@ -66,6 +67,21 @@ export function BentoItem({
 }: BentoItemProps) {
   const ref = useRef<HTMLElement>(null);
 
+  useIntersectionObserver(
+    ref,
+    (entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          entry.target.setAttribute("data-intersecting", "true");
+          continue;
+        }
+
+        entry.target.removeAttribute("data-intersecting");
+      }
+    },
+    { threshold: 0.5 },
+  );
+
   const handleMouseMove = ({ clientX, clientY }: MouseEvent) => {
     const bentoElement = ref.current;
     if (!bentoElement) {
@@ -98,7 +114,7 @@ export function BentoItem({
         bentoItemClass,
         bentoItemContentClass,
         bentoItemBackgroundClass,
-        bentoItemSvgClass
+        bentoItemSvgClass,
       )}
       ref={ref}
       onMouseMove={onMouseMove}
@@ -157,27 +173,6 @@ const bentoGridClass = css`
   gap: 0.5rem;
 `;
 
-const bentoItemClass = css`
-  position: relative;
-
-  padding: 1.5rem;
-  border: 1px solid transparent;
-  border-radius: var(--corner-radius);
-
-  &:hover,
-  &:focus-within {
-    &,
-    &::before {
-      animation: ${bentoConic} 8s linear infinite,
-        ${bentoColor} 0.3s ease-in forwards;
-    }
-
-    svg polyline[data-should-animate] {
-      animation: ${svgAnimation} 1.5s ease-in-out forwards;
-    }
-  }
-`;
-
 const sectionClass = css`
   margin-block: 8rem 5rem;
   container-type: inline-size;
@@ -208,6 +203,38 @@ const sectionClass = css`
       &:nth-child(4n) {
         grid-column: span 3;
       }
+    }
+  }
+`;
+
+const bentoItemClass = css`
+  position: relative;
+
+  padding: 1.5rem;
+  border: 1px solid transparent;
+  border-radius: var(--corner-radius);
+
+  @media (any-hover: none) {
+    &[data-intersecting] {
+      animation: ${bentoConic} 8s linear infinite,
+        ${bentoColor} 0.3s ease-in forwards;
+
+      svg polyline[data-should-animate] {
+        animation: ${svgAnimation} 1.5s ease-in-out forwards;
+      }
+    }
+  }
+
+  &:hover,
+  &:focus-within {
+    &,
+    &::before {
+      animation: ${bentoConic} 8s linear infinite,
+        ${bentoColor} 0.3s ease-in forwards;
+    }
+
+    svg polyline[data-should-animate] {
+      animation: ${svgAnimation} 1.5s ease-in-out forwards;
     }
   }
 `;
