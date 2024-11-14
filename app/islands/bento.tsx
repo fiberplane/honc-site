@@ -11,6 +11,7 @@ export function Bento({ title }: BentoProps) {
   return (
     <section class={sectionClass}>
       {title && <h1>{title}</h1>}
+
       <div class={bentoGridClass}>
         {content.map((item) => (
           <BentoItem key={item.title} {...item} />
