@@ -50,7 +50,7 @@ export function BentoItem({
         entry.target.removeAttribute("data-intersecting");
       }
     },
-    { threshold: 0.9 }
+    { threshold: 0.9 },
   );
 
   const handleMouseMove = ({ clientX, clientY }: MouseEvent) => {
@@ -85,7 +85,7 @@ export function BentoItem({
         bentoItemClass,
         bentoItemContentClass,
         bentoItemBackgroundClass,
-        bentoItemSvgClass
+        bentoItemSvgClass,
       )}
       ref={ref}
       onMouseMove={onMouseMove}
@@ -138,7 +138,6 @@ const bentoColor = keyframes`
 
 const bentoGridClass = css`
   --corner-radius: 20px;
-  --color-accent-default: var(--color-fg-default);
 
   display: grid;
   gap: 0.5rem;
