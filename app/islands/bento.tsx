@@ -24,17 +24,17 @@ export function Bento({ content, title }: BentoProps) {
 }
 
 type BentoItemProps = {
-  articleUrl?: string;
   description: string;
   githubUrl: string;
   title: string;
+  tutorialUrl?: string;
 };
 
 export function BentoItem({
-  articleUrl,
   description,
   githubUrl,
   title,
+  tutorialUrl,
 }: BentoItemProps) {
   const ref = useRef<HTMLElement>(null);
 
@@ -105,9 +105,9 @@ export function BentoItem({
           </a>
         </li>
 
-        {articleUrl && (
+        {tutorialUrl && (
           <li>
-            <a href={articleUrl} target="_blank" rel="noopener noreferrer">
+            <a href={tutorialUrl} target="_blank" rel="noopener noreferrer">
               Read the article
             </a>
           </li>
