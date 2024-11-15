@@ -59,6 +59,7 @@
   --color-fg-default: var(--color);
   --color-fg-primary: var(--prime);
   --color-fg-secondary: var(--secondary);
+  --color-fg-muted: hsl(from var(--color-fg-default) h s 70%);
 
   --color-anchor: var(--color-fg-primary);
 
@@ -127,6 +128,32 @@ a {
     text-decoration: underline;
   }
 }
+
+/* Custom properties for bento.tsx ========================================== */
+@property --bento-conic-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@property --bento-color-primary {
+  syntax: "<color>";
+  initial-value: hsl(20, 13%, 15%);
+  inherits: true;
+}
+
+@property --bento-radial-x {
+  syntax: "<percentage>";
+  initial-value: 0%;
+  inherits: false;
+}
+
+@property --bento-radial-y {
+  syntax: "<percentage>";
+  initial-value: 0%;
+  inherits: false;
+}
+/* ========================================================================== */
 
 /* Custom animated properties for honcerAscii.tsx =========================== */
 @property --geese-radial-range {

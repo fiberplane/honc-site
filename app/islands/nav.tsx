@@ -162,7 +162,7 @@ const navClass = css`
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   position: fixed;
-  z-index: 1;
+  z-index: 10;
   width: 100%;
   border-bottom: 1px solid var(--color-bg-default);
   display: grid;
