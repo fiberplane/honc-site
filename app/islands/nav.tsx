@@ -135,6 +135,7 @@ const anchorSelectors = Object.values(anchorIds)
 const menuItems: Array<{ anchorId: string; title: string }> = [
   { anchorId: anchorIds.intro, title: "HONC?" },
   { anchorId: anchorIds.overview, title: "Overview" },
+  { anchorId: anchorIds.examples, title: "Examples" },
   { anchorId: anchorIds.quickstart, title: "Quickstart" },
 ];
 
@@ -193,7 +194,7 @@ const navClass = css`
   }
 
   container-type: inline-size;
-  @container (width <= 720px) {
+  @container (width <= 800px) {
     div[data-wrapper] {
       display: grid;
       grid-template-columns: 2rem 1fr 2rem;
