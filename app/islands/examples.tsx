@@ -3,15 +3,16 @@ import { useRef } from "hono/jsx";
 
 import { SvgGraphicsSymbol, svgAnimation } from "./svgGraphicsSymbol";
 import { useIntersectionObserver } from "../hooks";
+import { anchorIds } from "../constants";
 
 type BentoProps = {
   title: string;
   content: Array<BentoItemProps>;
 };
 
-export function Bento({ content, title }: BentoProps) {
+export function Examples({ content, title }: BentoProps) {
   return (
-    <section class={sectionClass}>
+    <section class={sectionClass} id={anchorIds.examples}>
       {title && <h1>{title}</h1>}
 
       <div class={bentoGridClass}>
