@@ -109,7 +109,7 @@ export function BentoItem({
         {tutorialUrl && (
           <li>
             <a href={tutorialUrl} target="_blank" rel="noopener noreferrer">
-              Read the article
+              Read the tutorial
             </a>
           </li>
         )}
