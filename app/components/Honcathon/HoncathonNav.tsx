@@ -11,7 +11,7 @@ export function HoncathonNav() {
           <h1>HONC</h1>
         </a>
 
-        {/* <a
+        <a
           class={anchorClass}
           href="https://github.com/fiberplane/goose-quotes"
           target="_blank"
@@ -19,7 +19,7 @@ export function HoncathonNav() {
         >
           <GithubIcon />
           Sample API
-        </a> */}
+        </a>
       </Wrapper>
     </nav>
   );
