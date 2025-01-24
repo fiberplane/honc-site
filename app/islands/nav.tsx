@@ -3,8 +3,6 @@ import { Fragment, useEffect, useRef, useState } from "hono/jsx";
 
 import {
   CtaMenuItem,
-  CtaMenuItemGhost,
-  GithubIcon,
   DiscordIcon,
   HamburgerIcon,
   MenuItem,
