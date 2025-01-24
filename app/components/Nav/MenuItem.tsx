@@ -71,3 +71,17 @@ const ctaClass = css`
     width: 1.25em;
   }
 `;
+
+export function CtaMenuItemGhost({ children, href }: CtaMenuItemProps) {
+  return (
+    <li class={cx(menuItemClass, ctaGhostClass)} role="presentation">
+      <a href={href} target="_blank" rel="noreferrer noopener" role="menuitem">
+        {children}
+      </a>
+    </li>
+  );
+}
+
+export const ctaGhostClass = css`
+  background-color: var(--color-bg-transparent);
+`;
