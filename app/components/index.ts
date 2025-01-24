@@ -3,6 +3,7 @@ export * from "./Hero";
 export * from "./Honcathon";
 export * from "./icons";
 export * from "./Intro";
+export * from "./Livestream";
 export * from "./Nav";
 export * from "./Overview";
 export * from "./Quickstart";
