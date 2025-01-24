@@ -3,7 +3,7 @@ import { Fragment, useEffect, useRef, useState } from "hono/jsx";
 
 import {
   CtaMenuItem,
-  GithubIcon,
+  DiscordIcon,
   HamburgerIcon,
   MenuItem,
   Overlay,
@@ -92,9 +92,9 @@ export function Nav() {
               </Fragment>
             ))}
 
-            <CtaMenuItem href="https://github.com/fiberplane/goose-quotes">
-              Sample API
-              <GithubIcon />
+            <CtaMenuItem href="https://discord.gg/ugAwAK6Yzm">
+              Honc Along
+              <DiscordIcon />
             </CtaMenuItem>
           </ul>
 
