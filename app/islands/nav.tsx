@@ -96,11 +96,6 @@ export function Nav() {
               Honc Along
               <DiscordIcon />
             </CtaMenuItem>
-
-            {/* <CtaMenuItem href="https://github.com/fiberplane/create-honc-app/tree/main/examples">
-              Sample APIs
-              <GithubIcon />
-            </CtaMenuItem> */}
           </ul>
 
           <div data-icon />
