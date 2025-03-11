@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "testingsss",
+  "name": "honc-site",
   "main": "./dist/index.js",
   "compatibility_date": "2025-03-11",
   "compatibility_flags": ["nodejs_compat"],
