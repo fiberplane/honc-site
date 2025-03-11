@@ -12,23 +12,25 @@
     "ci:format": "biome format"
   },
   "dependencies": {
-    "hono": "^4.6.5",
-    "honox": "^0.1.26",
+    "hono": "^4.7.4",
+    "honox": "^0.1.38",
     "remark-frontmatter": "^5.0.0",
     "remark-mdx-frontmatter": "^5.0.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.9.3",
-    "@cloudflare/workers-types": "^4.20241011.0",
+    "@biomejs/biome": "1.9.4",
+    "@cloudflare/workers-types": "^4.20250311.0",
     "@hono/vite-cloudflare-pages": "^0.4.2",
-    "@hono/vite-dev-server": "^0.16.0",
-    "@hono/vite-ssg": "^0.1.0",
-    "@mdx-js/rollup": "^3.0.1",
-    "posthog-js": "^1.172.0",
+    "@hono/vite-dev-server": "^0.18.3",
+    "@mdx-js/rollup": "^3.1.0",
+    "posthog-js": "^1.230.1",
     "rehype-external-links": "^3.0.0",
-    "typescript": "^5.6.3",
-    "vite": "^5.4.9",
-    "wrangler": "^3.80.5"
+    "typescript": "^5.8.2",
+    "vite": "^6.2.1",
+    "wrangler": "^3.112.0"
   },
-  "packageManager": "pnpm@9.1.2"
+  "packageManager": "pnpm@10.4.1",
+  "pnpm": {
+    "onlyBuiltDependencies": ["esbuild", "sharp", "workerd"]
+  }
 }
