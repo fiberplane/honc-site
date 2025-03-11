@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build --mode client && vite build",
-    "preview": "wrangler dev",
+    "preview": "pnpm run build && wrangler dev",
     "deploy": "pnpm run build && wrangler deploy",
     "lint": "biome lint",
     "format": "biome format --write",

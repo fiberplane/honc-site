@@ -1,10 +1,10 @@
 import { css } from "hono/css";
 import type { PropsWithChildren } from "hono/jsx";
 
-import cloudSvg from "./icons/cloud.svg?url";
-import dbSvg from "./icons/db.svg?url";
-import honoSvg from "./icons/hono.svg?url";
-import ormSvg from "./icons/orm.svg?url";
+import cloudSvg from "./icons/cloud.svg?inline";
+import dbSvg from "./icons/db.svg?inline";
+import honoSvg from "./icons/hono.svg?inline";
+import ormSvg from "./icons/orm.svg?inline";
 
 type IconType = "hono" | "orm" | "db" | "cloud";
 
