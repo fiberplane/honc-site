@@ -1,4 +1,4 @@
-import build from "@hono/vite-cloudflare-pages";
+import build from "@hono/vite-build/cloudflare-workers";
 import adapter from "@hono/vite-dev-server/cloudflare";
 import mdx from "@mdx-js/rollup";
 import honox from "honox/vite";
@@ -14,12 +14,15 @@ const rehypeExternalLinksOptions: Options = {
 
 export default defineConfig({
   plugins: [
-    honox({ devServer: { adapter } }),
-    build(),
+    honox({
+      devServer: { adapter },
+      client: { input: ["./app/style.css", "./app/honacthon.css"] },
+    }),
     mdx({
       jsxImportSource: "hono/jsx",
       rehypePlugins: [[rehypeExternalLinks, rehypeExternalLinksOptions]],
       remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter],
     }),
+    build(),
   ],
 });
