@@ -6,7 +6,13 @@
   "compatibility_flags": ["nodejs_compat"],
   "assets": {
     "directory": "./dist"
-  }
+  },
+  "routes": [
+    {
+      "pattern": "honc.dev",
+      "custom_domain": true
+    }
+  ]
   // "vars": {
   //   "MY_VAR": "my-variable"
   // },
