@@ -26,7 +26,7 @@
     "posthog-js": "^1.230.1",
     "rehype-external-links": "^3.0.0",
     "typescript": "^5.8.2",
-    "vite": "^6.2.1",
+    "vite": "^6.2.3",
     "wrangler": "^3.112.0"
   },
   "packageManager": "pnpm@10.4.1",
