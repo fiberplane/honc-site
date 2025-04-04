@@ -30,7 +30,7 @@ export function Citation({ children }: PropsWithChildren) {
 
         <li>
           <a href="#db">
-            <b>N</b>: <span class={emphasisClass}>N</span>eon
+            <b>N</b>: <span class={emphasisClass}>N</span>ameyourdatabase
           </a>
         </li>
 
