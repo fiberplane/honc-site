@@ -6,6 +6,7 @@ import {
   DiscordIcon,
   HamburgerIcon,
   MenuItem,
+  MenuLink,
   Overlay,
   Title,
   Wrapper,
@@ -91,6 +92,13 @@ export function Nav() {
                 </MenuItem>
               </Fragment>
             ))}
+
+            <MenuLink
+              href="https://docs.honc.dev/get-started/"
+              onClickHandler={() => setShowMenu(false)}
+            >
+              Docs
+            </MenuLink>
 
             <CtaMenuItem href="https://discord.gg/ugAwAK6Yzm">
               Honc Along

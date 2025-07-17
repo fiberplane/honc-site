@@ -22,6 +22,27 @@ export function MenuItem({
   );
 }
 
+type MenuLinkProps = PropsWithChildren<{
+  href: string;
+  onClickHandler: () => void;
+}>;
+
+export function MenuLink({ children, href, onClickHandler }: MenuLinkProps) {
+  return (
+    <li class={cx(menuItemClass)} role="presentation">
+      <a
+        href={href}
+        onClick={onClickHandler}
+        target="_blank"
+        rel="noreferrer noopener"
+        role="menuitem"
+      >
+        {children}
+      </a>
+    </li>
+  );
+}
+
 type CtaMenuItemProps = PropsWithChildren<{
   href: string;
 }>;
