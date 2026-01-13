@@ -12,7 +12,7 @@
     "ci:format": "biome format"
   },
   "dependencies": {
-    "hono": "^4.7.4",
+    "hono": "^4.11.4",
     "honox": "^0.1.38",
     "remark-frontmatter": "^5.0.0",
     "remark-mdx-frontmatter": "^5.0.0"
